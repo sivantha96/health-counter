@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <mat-card class="col-12 col-md-6 col-sm-6 card-container">
+            <div class="justify-content-center">
+                <div class="header-container">
+
+                </div>
+                <mat-horizontal-stepper linear='true'>
+                    <mat-card-content>
+                        
+                       
+
+
+                        <form [formGroup]="dataForm" (ngSubmit)="onFormSubmit()" class="form-container">
+                           
+
+
+                            
+
+                            <!-- noOfFamily -->
+                            <mat-step [stepControl]="dataForm.get('noOfFamily')">
+                                <div class="image-container">
+                                    <img src="../../../assets/landing/family.jpg" alt="">
+                                </div>
+                                <mat-form-field class="field-container" style="width:60%">
+                                    <label>How many family members in your family?</label>
+                                    <input  matInput formControlName="noOfFamily"  placeholder="" NumberOnly>
+                                    
+                                        <mat-hint>enter a number</mat-hint>
+  
+                                        <mat-error *ngIf="dataForm.get('noOfFamily').invalid && (dataForm.get('noOfFamily').dirty || dataForm.get('noOfFamily').touched)  && (dataForm.get('noOfFamily').errors.required)">
+                                            this field is required
+                                        </mat-error>
+                                        <mat-error *ngIf="dataForm.get('noOfFamily').invalid && (dataForm.get('noOfFamily').dirty || dataForm.get('noOfFamily').touched)  && (dataForm.get('noOfFamily').errors.numberOnly)">
+                                            please enter a nummeric value
+                                        </mat-error>
+                                 
+                                    
+
+                                    <!-- <mat-error>This field is required</mat-error> -->
+                                    
+                                    
+                                </mat-form-field>
+                                <mat-card-actions class="button-container">
+                                    <button type="button"  [disabled]="!dataForm.get('noOfFamily').valid" class="btn btn-secondary btn-sm button-style" mat-button
+                                        matStepperNext>Next</button>
+                                </mat-card-actions>
+                            </mat-step>
+
+                            <!-- youForeign -->
+                            <mat-step [stepControl]="dataForm.get('foreignContact')" >
+                                <div class="image-container">
+                                    <img src="../../../assets/landing/familyAbroad.jpg" alt="">
+                                </div>
+                                <div class="field-container">
+                                    <label>You or any of your family member recently travelled overseas ?</label>
+                                    <mat-radio-group aria-labelledby="example-radio-group-label"
+                                        class="example-radio-group" formControlName="foreignContact">
+                                        <mat-radio-button class="example-radio-button" *ngFor="let ans of booleanGroups"
+                                            [value]="ans.value">
+                                            {{ans.viewValue}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <mat-card-actions class="button-container">
+                                    <button type="button" mat-button matStepperPrevious
+                                        class="btn btn-secondary btn-sm button-style">Previous</button>
+                                    <button type="button"  [disabled]="!dataForm.get('foreignContact').valid" class="btn btn-secondary btn-sm button-style" mat-button
+                                        matStepperNext>Continue</button>
+                                </mat-card-actions>
+                            </mat-step>
+
+                            <!-- closContact -->
+                            <mat-step [stepControl]="dataForm.get('closeContact')" >
+                                <div class="image-container">
+                                    <img src="../../../assets/landing/maleAbroad.jpg" alt="">
+                                    <!-- <img src="../../../assets/landing/femaleAbroad.jpg" *ngIf="!isGender()" alt=""> -->
+                                </div>
+                                <div class="field-container">
+                                    <label>Have you had any close contact with COVID 19 patient?</label>
+                                    <mat-radio-group aria-labelledby="example-radio-group-label"
+                                        class="example-radio-group" formControlName="closeContact">
+                                        <mat-radio-button class="example-radio-button" *ngFor="let ans of booleanGroups"
+                                            [value]="ans.value">
+                                            {{ans.viewValue}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <mat-card-actions class="button-container">
+                                    <button type="button" mat-button matStepperPrevious
+                                        class="btn btn-secondary btn-sm button-style">Previous</button>
+                                    <button type="button" type="submit" class="btn btn-secondary btn-sm button-style"
+                                    [disabled]="!dataForm.get('closeContact').valid" type="submit" (click)="onFormSubmit()" mat-raised-button matSteppeNext>Continue</button>
+                                </mat-card-actions>
+                            </mat-step>
+                        </form>
+                    </mat-card-content>
+                </mat-horizontal-stepper>
+            </div>
+        </mat-card>
+    </div>
+</div>
