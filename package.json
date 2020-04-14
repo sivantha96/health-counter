@@ -1,0 +1,19 @@
+{
+  "name": "health-counter",
+  "version": "1.0.0",
+  "description": "A health information gathering web app designed for COVID-19 pandemic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sivantha96/health-counter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sivantha96/health-counter/issues"
+  },
+  "homepage": "https://github.com/sivantha96/health-counter#readme"
+}
