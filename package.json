@@ -4,7 +4,7 @@
   "description": "A health information gathering web app designed for COVID-19 pandemic",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "frontend": "cd frontend && ng serve --host 0.0.0.0 --disable-host-check"
   },
   "repository": {
     "type": "git",
