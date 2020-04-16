@@ -1,0 +1,10 @@
+.symptom {
+  margin: 2%;
+  cursor: move;
+}
+
+.carousel-container {
+  width: 100%;
+  padding-left: 8%;
+  background-color: blue;
+}
