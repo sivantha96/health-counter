@@ -73,7 +73,7 @@ export class LandingComponent implements OnInit {
       is_had_close_contact: submitData.closeContact,
     };
 
-    this.router.navigate(['./'], {
+    this.router.navigate(['./bucket'], {
       queryParams: {
         postData: JSON.stringify(postQuery),
       },
