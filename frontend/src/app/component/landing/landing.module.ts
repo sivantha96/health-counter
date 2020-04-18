@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [LandingComponent, StrictNumberOnlyDirective],
@@ -25,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatStepperModule,
     FormsModule,
     ReactiveFormsModule,
+    MatChipsModule
   ],
 })
 export class LandingModule {}
