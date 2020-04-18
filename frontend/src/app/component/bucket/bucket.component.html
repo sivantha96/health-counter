@@ -10,13 +10,14 @@
                             <div class="carousel-item" *ngFor="let symptoms of symptomsArray; first as isFirst" [ngClass]="isFirst ? 'active':'true'">
                                 <div 
                                     class="row carousel-container" 
-                                    cdkDropList id="symptomList"
+                                    cdkDropList 
+                                    id="symptomList"
                                     [cdkDropListConnectedTo]="['bucketList']" 
                                     cdkDropListOrientation="horizontal"
                                     [cdkDropListData]='symptoms'
                                     cdkDropListSortingDisabled
                                     (cdkDropListDropped)="drop($event)">
-                                    <div class="column symptom" *ngFor="let symptom of symptoms" cdkDrag>
+                                    <div class="col symptom" *ngFor="let symptom of symptoms" cdkDrag>
                                         <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
                                         {{ symptom }}
                                     </div>
