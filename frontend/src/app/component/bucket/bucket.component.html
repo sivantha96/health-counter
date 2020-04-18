@@ -1,7 +1,13 @@
 <div class="container">
     <mat-card class="d-block">
-        <mat-horizontal-stepper linear='true'>
-            <mat-step>
+        <!-- <h1>{{postData.family_members}}</h1> -->
+        <mat-horizontal-stepper linear='true' #stepper>
+            <mat-step *ngFor="let item of members; let i = index;">
+               
+                    
+              
+
+
                 <div cdkDropListGroup>
 
                     <!-- symptoms -->
@@ -52,8 +58,8 @@
 
                 <!-- next/previous bucket] -->
                 <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                    <button mat-button (click)="goBack(stepper)" >Back</button>
+                    <button mat-button (click)="goForward(stepper)">Next</button>
                 </div>
             </mat-step>
         </mat-horizontal-stepper>
