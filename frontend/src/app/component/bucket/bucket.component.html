@@ -3,39 +3,41 @@
         <mat-horizontal-stepper linear='true'>
             <mat-step>
                 <div cdkDropListGroup>
+
                     <!-- symptoms -->
                     <div class="carousel slide" id="symptomsCarousel" data-pause="true">
                         <div class="carousel-inner">
-                            <div class="carousel-item" *ngFor="let symptoms of symptomsArray; first as isFirst"
-                                [ngClass]="isFirst ? 'active':'true'">
-                                <div class="row carousel-container justify-content-around" cdkDropList id="symptomList"
-                                    [cdkDropListConnectedTo]="['bucketList']" cdkDropListOrientation="horizontal"
-                                    [cdkDropListData]='symptoms' cdkDropListSortingDisabled
+                            <div class="carousel-item" *ngFor="let symptoms of symptomsArray; first as isFirst" [ngClass]="isFirst ? 'active':'true'">
+                                <div 
+                                    class="row carousel-container" 
+                                    cdkDropList id="symptomList"
+                                    [cdkDropListConnectedTo]="['bucketList']" 
+                                    cdkDropListOrientation="horizontal"
+                                    [cdkDropListData]='symptoms'
+                                    cdkDropListSortingDisabled
                                     (cdkDropListDropped)="drop($event)">
                                     <div class="column symptom" *ngFor="let symptom of symptoms" cdkDrag>
+                                        <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
                                         {{ symptom }}
                                     </div>
                                 </div>
-
                             </div>
-                            
                         </div>
                         <a class="carousel-control-prev" href="#symptomsCarousel" role="button" data-slide="prev"
-                                (click)="onClick('Previous')">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#symptomsCarousel" role="button" data-slide="next"
-                                (click)="onClick('Next')">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                            (click)="onClick('Previous')">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#symptomsCarousel" role="button" data-slide="next"
+                            (click)="onClick('Next')">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
-
                 </div>
 
                 <!-- empty spacer -->
-                <div style="height: 100px;">
+                <div style="height: 100px;" cdkDropList>
                 </div>
 
                 <!-- bucket header-->
