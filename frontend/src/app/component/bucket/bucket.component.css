@@ -1,5 +1,8 @@
 .symptom {
   margin: 2%;
+  width: 25%;
+  height: 2em;
+  background: red;
   cursor: move;
 }
 
@@ -7,4 +10,12 @@
   width: 100%;
   padding-left: 8%;
   background-color: blue;
+}
+
+.cdkPlaceholder {
+  margin: 2%;
+  width: 25%;
+  height: 2em;
+  background: #ccc;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
