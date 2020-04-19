@@ -20,7 +20,7 @@ export class BucketComponent implements OnInit {
   
   members:any[]
 
-  sysptomsTemplate:any[]= [
+  symptomsTemplate:any[]= [
     ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
     ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
     ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
@@ -30,14 +30,14 @@ export class BucketComponent implements OnInit {
   bucket: string[];
   bucketStates:any[]
 
-  sysptomsSates:any[]
+  symptomsSates:any[]
   symptomsArray: any;
 
   constructor(private route: ActivatedRoute) {
     this.symptomNo = 0;
     this.bucketIndex=0;
 
-    this.sysptomsSates=[]
+    this.symptomsSates=[]
     this.bucket = [];
     this.bucketStates=[]
   }
@@ -57,8 +57,8 @@ export class BucketComponent implements OnInit {
     this.members =this.range(this.noOfBuckets)
 
   
-    this.sysptomsSates[0]=  JSON.parse(JSON.stringify(this.sysptomsTemplate))
-    this.symptomsArray= JSON.parse(JSON.stringify(this.sysptomsTemplate))
+    this.symptomsSates[0]=  JSON.parse(JSON.stringify(this.symptomsTemplate))
+    this.symptomsArray= JSON.parse(JSON.stringify(this.symptomsTemplate))
    
    
   }
@@ -80,7 +80,7 @@ export class BucketComponent implements OnInit {
         event.currentIndex
       );
       
-      this.sysptomsSates[this.bucketIndex]= JSON.parse(JSON.stringify(this.symptomsArray))
+      this.symptomsSates[this.bucketIndex]= JSON.parse(JSON.stringify(this.symptomsArray))
       this.bucketStates[this.bucketIndex]=JSON.parse(JSON.stringify(this.bucket))
       
     }
@@ -91,12 +91,12 @@ export class BucketComponent implements OnInit {
   onClick(button) {
     if (button === 'Previous') {
       if (this.symptomNo === 0) {
-        this.symptomNo = this.sysptomsSates[this.bucketIndex].length;
+        this.symptomNo = this.symptomsSates[this.bucketIndex].length;
       }
       this.symptomNo = this.symptomNo - 1;
     } else {
       this.symptomNo = this.symptomNo + 1;
-      if (this.symptomNo === this.sysptomsSates[this.bucketIndex].length) {
+      if (this.symptomNo === this.symptomsSates[this.bucketIndex].length) {
         this.symptomNo = 0;
       }
     }
@@ -105,22 +105,22 @@ export class BucketComponent implements OnInit {
   //navigation
   goForward(stepper: MatStepper) {
     if(this.bucketIndex<this.noOfBuckets){
-      if(this.sysptomsSates[this.bucketIndex+1]===undefined){
+      if(this.symptomsSates[this.bucketIndex+1]===undefined){
         console.log('undefined')
-        this.sysptomsSates[this.bucketIndex+1]=JSON.parse(JSON.stringify(this.sysptomsTemplate))
-        console.log('before state - '+this.sysptomsSates[this.bucketIndex+1] )
+        this.symptomsSates[this.bucketIndex+1]=JSON.parse(JSON.stringify(this.symptomsTemplate))
+        console.log('before state - '+this.symptomsSates[this.bucketIndex+1] )
         this.bucketStates[this.bucketIndex+1]=[]
         
         
       }
       this.bucket=this.bucketStates[this.bucketIndex+1] 
-      this.symptomsArray= this.sysptomsSates[++this.bucketIndex]
-      console.log(this.sysptomsSates[this.bucketIndex]) 
+      this.symptomsArray= this.symptomsSates[++this.bucketIndex]
+      console.log(this.symptomsSates[this.bucketIndex]) 
       console.log('bucketNo '+ this.bucketIndex)
 
 
       stepper.next();
-      this.sysptomsSates.forEach((state)=>{
+      this.symptomsSates.forEach((state)=>{
         console.log(state)
       })
     }
@@ -130,7 +130,7 @@ export class BucketComponent implements OnInit {
 
   goBack(stepper: MatStepper) {
     if(this.bucketIndex>0){
-      this.symptomsArray= this.sysptomsSates[--this.bucketIndex]
+      this.symptomsArray= this.symptomsSates[--this.bucketIndex]
       console.log('bucketNo '+this.bucketIndex)
       stepper.previous();
     }
