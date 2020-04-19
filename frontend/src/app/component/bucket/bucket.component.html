@@ -1,51 +1,51 @@
 <div class="container">
     <mat-card class="d-block">
+
         <!-- <h1>{{postData.family_members}}</h1> -->
-        <mat-horizontal-stepper linear='true' #stepper>
-            <mat-step *ngFor="let item of members; let i = index;">
 
-                <div cdkDropListGroup>
 
-                    <!-- symptoms -->
-                    <div class="carousel slide" id="symptomsCarousel" data-pause="true">
-                        <div class="carousel-inner">
-                            <div class="carousel-item" *ngFor="let symptoms of symptomsArray; first as isFirst" [ngClass]="isFirst ? 'active':'true'">
-                                <h1>Fever</h1>
-                                <div 
-                                    class="row carousel-container"
-                                    cdkDropList 
-                                    id="symptomList"
-                                    [cdkDropListConnectedTo]="['bucketList']" 
-                                    cdkDropListOrientation="horizontal"
-                                    [cdkDropListData]='symptoms'
-                                    cdkDropListSortingDisabled
-                                    (cdkDropListDropped)="drop($event)">
-                                    <div class="col symptom" *ngFor="let symptom of symptoms" cdkDrag>
-                                        <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
-                                        {{ symptom }}
-                                    </div>
-                                </div>
+        <div cdkDropListGroup>
+
+            <!-- symptoms -->
+            <div class="carousel slide" id="symptomsCarousel" data-pause="true">
+                <div class="carousel-inner">
+                    <div class="carousel-item" *ngFor="let symptoms of symptomsArray; first as isFirst"
+                        [ngClass]="isFirst ? 'active':'true'">
+                        <h1>Fever</h1>
+                        <div class="row carousel-container" cdkDropList id="symptomList"
+                            [cdkDropListConnectedTo]="['bucketList']" cdkDropListOrientation="horizontal"
+                            [cdkDropListData]='symptoms' cdkDropListSortingDisabled (cdkDropListDropped)="drop($event)">
+                            <div class="col symptom" *ngFor="let symptom of symptoms" cdkDrag>
+                                <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
+                                {{ symptom }}
                             </div>
                         </div>
-                        <a class="carousel-control-prev" href="#symptomsCarousel" role="button" data-slide="prev"
-                            (click)="onClick('Previous')">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#symptomsCarousel" role="button" data-slide="next"
-                            (click)="onClick('Next')">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
                 </div>
+                <a class="carousel-control-prev" href="#symptomsCarousel" role="button" data-slide="prev"
+                    (click)="onClick('Previous')">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#symptomsCarousel" role="button" data-slide="next"
+                    (click)="onClick('Next')">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
 
-                <!-- empty spacer -->
-                <div style="height: 50px;" >
-                </div>
+        <!-- empty spacer -->
+        <div style="height: 50px;">
+        </div>
 
-                <!-- bucket header-->
-                <h1>Family member No:1 Bucket</h1>
+        <mat-progress-bar class="example-margin" color="primary" mode="'determinate'" [value]="progressValue">
+        </mat-progress-bar>
+        <!-- bucket header-->
+        <mat-horizontal-stepper linear='true' #stepper>
+
+            <mat-step *ngFor="let item of members; let i = index;">
+                <h1>Family member No: {{bucketIndex+1}} Bucket</h1>
 
                 <!-- bucket -->
                 <div class="row" cdkDropList id="bucketList" [cdkDropListConnectedTo]="['symptomList']"
@@ -56,7 +56,7 @@
 
                 <!-- next/previous bucket] -->
                 <div>
-                    <button mat-button (click)="goBack(stepper)" >Back</button>
+                    <button mat-button (click)="goBack(stepper)">Back</button>
                     <button mat-button (click)="goForward(stepper)">Next</button>
                 </div>
             </mat-step>
