@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { transferArrayItem } from '@angular/cdk/drag-drop';
 import { PostData } from '../../models/bucket';
 import { ActivatedRoute } from '@angular/router';
-import { MatStepper} from '@angular/material/stepper';
+import { MatStepper } from '@angular/material/stepper';
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 
 @Component({
   selector: 'app-bucket',
@@ -11,17 +12,16 @@ import { MatStepper} from '@angular/material/stepper';
 })
 export class BucketComponent implements OnInit {
 
-  bucketIndex:number
-  noOfBuckets:number
-
   postData: PostData;
+  members: any[]
+
+  bucketIndex: number
+  noOfBuckets: number
+
   symptomNo: number;
-  
-  
-  members:any[]
 
   // array for holding carousel items
-  symptomsTemplate:any[]= [
+  symptomsTemplate: any[] = [
     ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
     ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
     ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
@@ -29,18 +29,22 @@ export class BucketComponent implements OnInit {
 
 
   bucket: string[];
-  bucketStates:any[]
+  bucketStates: any[]
 
-  symptomsSates:any[]
   symptomsArray: any;
+  symptomsSates: any[]
+
+  progressValue=0
+  progressStepCost=0
+  
 
   constructor(private route: ActivatedRoute) {
     this.symptomNo = 0;
-    this.bucketIndex=0;
+    this.bucketIndex = 0;
 
-    this.symptomsSates=[]
-    this.bucket = [];
-    this.bucketStates=[]
+    this.symptomsSates = []
+
+    this.bucketStates = []
   }
 
   ngOnInit(): void {
@@ -52,16 +56,20 @@ export class BucketComponent implements OnInit {
         console.log(error);
       }
     });
-   
-    this.noOfBuckets=+this.postData.family_members
-    
-    this.members =this.range(this.noOfBuckets)
 
-  
-    this.symptomsSates[0]=  JSON.parse(JSON.stringify(this.symptomsTemplate))
-    this.symptomsArray= JSON.parse(JSON.stringify(this.symptomsTemplate))
-   
-   
+    this.noOfBuckets = +this.postData.family_members
+
+    this.members = this.range(this.noOfBuckets)
+
+    this.progressStepCost=100/this.noOfBuckets;
+    this.progressValue=this.progressStepCost
+    this.symptomsSates[0] = JSON.parse(JSON.stringify(this.symptomsTemplate))
+    this.bucketStates[0] = []
+
+    this.symptomsArray = this.symptomsSates[0]
+    this.bucket = this.bucketStates[0];
+
+
   }
 
   //range for *ngFor
@@ -80,24 +88,24 @@ export class BucketComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      
-      this.symptomsSates[this.bucketIndex]= JSON.parse(JSON.stringify(this.symptomsArray))
-      this.bucketStates[this.bucketIndex]=JSON.parse(JSON.stringify(this.bucket))
-      
+
+      this.symptomsSates[this.bucketIndex] = JSON.parse(JSON.stringify(this.symptomsArray))
+      this.bucketStates[this.bucketIndex] = JSON.parse(JSON.stringify(this.bucket))
+
     }
- 
+
     // this.bucket = [];
   }
 
   onClick(button) {
     if (button === 'Previous') {
       if (this.symptomNo === 0) {
-        this.symptomNo = this.symptomsSates[this.bucketIndex].length;
+        this.symptomNo = this.symptomsArray.length;
       }
       this.symptomNo = this.symptomNo - 1;
     } else {
       this.symptomNo = this.symptomNo + 1;
-      if (this.symptomNo === this.symptomsSates[this.bucketIndex].length) {
+      if (this.symptomNo === this.symptomsArray.length) {
         this.symptomNo = 0;
       }
     }
@@ -105,37 +113,52 @@ export class BucketComponent implements OnInit {
 
   //navigation
   goForward(stepper: MatStepper) {
-    if(this.bucketIndex<this.noOfBuckets){
-      if(this.symptomsSates[this.bucketIndex+1]===undefined){
+    if (this.bucketIndex < this.noOfBuckets-1) {  
+      if (this.symptomsSates[this.bucketIndex + 1] === undefined) {
         console.log('undefined')
-        this.symptomsSates[this.bucketIndex+1]=JSON.parse(JSON.stringify(this.symptomsTemplate))
-        console.log('before state - '+this.symptomsSates[this.bucketIndex+1] )
-        this.bucketStates[this.bucketIndex+1]=[]
+        this.symptomsSates[this.bucketIndex + 1] = JSON.parse(JSON.stringify(this.symptomsTemplate))
+        this.bucketStates[this.bucketIndex + 1] = []
+
         
-        
+       
+
+
       }
-      this.bucket=this.bucketStates[this.bucketIndex+1] 
-      this.symptomsArray= this.symptomsSates[++this.bucketIndex]
-      console.log(this.symptomsSates[this.bucketIndex]) 
-      console.log('bucketNo '+ this.bucketIndex)
 
-
+      this.symptomsArray = JSON.parse(JSON.stringify(this.symptomsSates[++this.bucketIndex])) 
+      this.bucket = JSON.parse(JSON.stringify(this.bucketStates[this.bucketIndex])) 
+      console.log('before state - ' + this.symptomsSates[this.bucketIndex])
       stepper.next();
-      this.symptomsSates.forEach((state)=>{
-        console.log(state)
-      })
+
+      this.progressValue+=this.progressStepCost
+      console.log(this.progressValue)
+      // console.log('bucketNo ' + (this.bucketIndex+1))
+
+
+
+      // console.log(this.symptomsSates[this.bucketIndex]) 
+      
+
+      
+      // this.symptomsSates.forEach((state) => {
+      //   console.log(state)
+      // })
     }
 
-   
+
   }
 
   goBack(stepper: MatStepper) {
-    if(this.bucketIndex>0){
-      this.symptomsArray= this.symptomsSates[--this.bucketIndex]
-      console.log('bucketNo '+this.bucketIndex)
+    if (this.bucketIndex > 0) {
+      this.symptomsArray = this.symptomsSates[--this.bucketIndex]
+      this.bucket = this.bucketStates[this.bucketIndex]
+      console.log('bucketNo ' + this.bucketIndex)
       stepper.previous();
+
+      this.progressValue-=this.progressStepCost
+      console.log(this.progressValue)
     }
-   
+
   }
 
 
