@@ -21,9 +21,9 @@ export class BucketComponent implements OnInit {
   members:any[]
 
   sysptomsTemplate:any[]= [
-    ['symptoms 0', 'symptoms 0', 'symptoms 0'],
-    ['symptoms 1', 'symptoms 1', 'symptoms 1'],
-    ['symptoms 2', 'symptoms 2', 'symptoms 2'],
+    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
+    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
+    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
   ];
 
 

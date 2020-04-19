@@ -3,10 +3,6 @@
         <!-- <h1>{{postData.family_members}}</h1> -->
         <mat-horizontal-stepper linear='true' #stepper>
             <mat-step *ngFor="let item of members; let i = index;">
-               
-                    
-              
-
 
                 <div cdkDropListGroup>
 
@@ -14,8 +10,9 @@
                     <div class="carousel slide" id="symptomsCarousel" data-pause="true">
                         <div class="carousel-inner">
                             <div class="carousel-item" *ngFor="let symptoms of symptomsArray; first as isFirst" [ngClass]="isFirst ? 'active':'true'">
+                                <h1>Fever</h1>
                                 <div 
-                                    class="row carousel-container" 
+                                    class="row carousel-container"
                                     cdkDropList 
                                     id="symptomList"
                                     [cdkDropListConnectedTo]="['bucketList']" 
@@ -44,7 +41,7 @@
                 </div>
 
                 <!-- empty spacer -->
-                <div style="height: 100px;" cdkDropList>
+                <div style="height: 50px;" >
                 </div>
 
                 <!-- bucket header-->
@@ -53,7 +50,7 @@
                 <!-- bucket -->
                 <div class="row" cdkDropList id="bucketList" [cdkDropListConnectedTo]="['symptomList']"
                     [cdkDropListData]='bucket' (cdkDropListDropped)="drop($event)"
-                    style="height: 200px; border: 1px solid black;">
+                    style="height: 100px; border: 1px solid black;">
                     <div class="column" *ngFor="let bucketItem of bucket" cdkDrag>{{ bucketItem }}</div>
                 </div>
 
