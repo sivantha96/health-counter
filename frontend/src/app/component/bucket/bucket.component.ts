@@ -20,6 +20,7 @@ export class BucketComponent implements OnInit {
   
   members:any[]
 
+  // array for holding carousel items
   symptomsTemplate:any[]= [
     ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
     ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
