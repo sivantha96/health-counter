@@ -62,7 +62,7 @@ export class BucketComponent implements OnInit {
     this.members = this.range(this.noOfBuckets)
 
     this.progressStepCost=100/this.noOfBuckets;
-    this.progressValue=this.progressStepCost
+    this.progressValue=0;
     this.symptomsSates[0] = JSON.parse(JSON.stringify(this.symptomsTemplate))
     this.bucketStates[0] = []
 
