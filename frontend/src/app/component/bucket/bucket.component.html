@@ -20,7 +20,7 @@
                             (cdkDropListDropped)="drop($event)">
                             <div class="col slide-item" *ngFor="let slideItem of slide.slideItems" cdkDrag>
                                 <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
-                                {{ slideItem }}
+                                {{ slideItem.slice(1) }}
                             </div>
                         </div>
                     </div>
