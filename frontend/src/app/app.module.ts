@@ -23,6 +23,8 @@ import { LandingModule } from './component/landing/landing.module';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { BucketComponent } from './component/bucket/bucket.component';
+import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
+import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { BucketComponent } from './component/bucket/bucket.component';
     HeaderComponent,
     FooterComponent,
     BucketComponent,
+    BucketStepperComponent,
+    BucketDialogComponent,
   ],
   imports: [
     BrowserModule,

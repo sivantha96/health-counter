@@ -1,0 +1,31 @@
+<div class="container">
+
+    <!-- card -->
+    <mat-card class="d-block">
+
+        <!-- stepper -->
+        <mat-horizontal-stepper linear='true' #stepper>
+
+            <!-- step -->
+            <mat-step *ngFor="let item of members; let i = index;">
+
+                <!-- bucket component -->
+                <app-bucket [indexBucket] = "this.indexBucket" [noOfBuckets]="this.noOfBuckets"></app-bucket>
+
+            </mat-step>
+
+        </mat-horizontal-stepper>
+
+        <!-- progress bar -->
+        <mat-progress-bar color="primary" mode="'determinate'" [value]="progressValue">
+        </mat-progress-bar>
+
+        <!-- next/previous bucket] -->
+        <div>
+            <button mat-button (click)="goBack(stepper)">Back</button>
+            <button mat-button (click)="goForward(stepper)">Next</button>
+        </div>
+
+    </mat-card>
+
+</div>

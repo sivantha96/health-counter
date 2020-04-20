@@ -1,107 +1,59 @@
-<div class="container">
+<!-- drag&drop connected areas -->
+<div cdkConnectedGroup>
+    <!-- carousel -->
+    <div class="carousel" id="slideCarousel" data-pause="true">
 
-    <!-- card -->
-    <mat-card class="d-block">
-
-        <!-- drag&drop connected areas -->
-        <div cdkDropListGroup>
-
-            <!-- carousel -->
-            <div class="carousel slide" id="slideCarousel" data-pause="true">
-
-                <!-- carousel container -->
-                <div class="carousel-inner">
-                    <div class="carousel-item" *ngFor="let slide of carouselArray; first as isFirst"
-                        [ngClass]="isFirst ? 'active':'true'">
-                        <h1>{{ slide.name }}</h1>
-                        <div class="row carousel-container" cdkDropList id="symptomList"
-                            [cdkDropListConnectedTo]="['currentBucket']" cdkDropListOrientation="horizontal"
-                            [cdkDropListData]='slide.slideItems' cdkDropListSortingDisabled
-                            (cdkDropListDropped)="drop($event)">
-                            <div class="col slide-item" *ngFor="let slideItem of slide.slideItems" cdkDrag>
-                                <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
-                                {{ slideItem.slice(1) }}
-                            </div>
-                        </div>
+        <!-- carousel container -->
+        <div class="carousel-inner">
+            <div 
+                class="carousel-item" 
+                *ngFor="let slide of carouselArray; first as isFirst"
+                [ngClass]="isFirst ? 'active':'true'">
+                <h1>{{ slide.name }}</h1>
+                <div 
+                    class="row carousel-container" 
+                    cdkDropList 
+                    id="carousel-container"
+                    [cdkDropListConnectedTo]="['bucket-container']" 
+                    cdkDropListOrientation="horizontal"
+                    [cdkDropListData]='slide.slideItems' 
+                    cdkDropListSortingDisabled 
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="col slide-item" *ngFor="let slideItem of slide.slideItems" cdkDrag>
+                        <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
+                        {{ slideItem.slice(1) }}
                     </div>
                 </div>
-
-                <!-- carousel arrows -->
-                <a class="carousel-control-prev" href="#slideCarousel" role="button" data-slide="prev"
-                    (click)="onClick('Previous')">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#slideCarousel" role="button" data-slide="next"
-                    (click)="onClick('Next')">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-
             </div>
         </div>
 
-        <!-- empty spacer -->
-        <div style="height: 50px;">
-        </div>
+        <!-- carousel arrows -->
+        <a class="carousel-control-prev" href="#slideCarousel" role="button" data-slide="prev"
+            (click)="onClick('Previous')">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#slideCarousel" role="button" data-slide="next"
+            (click)="onClick('Next')">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
 
-        <!-- bucket header -->
-        <div class="bucket-header">
+    </div>
 
-            <span>
-                <h1 style="margin-top: 2em; margin-left: 0.5em;">Bucket {{ indexBucket+1 }} <span style="float: right; margin-right: 0.5em;">{{ indexBucket+1 }}/{{ noOfBuckets }}</span></h1>
-            </span>
+    <!-- bucket header -->
+    <h1 style="margin-top: 2em;">Bucket {{ indexBucket+1 }} of {{ noOfBuckets }}</h1>
 
-
-
-
-
-
-
-            <h2 style=" margin-left: 0.7em;"> {{bucketProgressPrecentage | percent}}
-                <span>
-                    <mat-progress-spinner style=" margin-right: 0.5em; justify-content: center;" class="example-margin"
-                        color="primary" mode="determinate" [value]="bucketProgressPrecentage*100" diameter="40">
-                    </mat-progress-spinner>
-
-                </span>
-
-            </h2>
-            <!-- <span style="float:right; padding-top: 0.5em;"> Bucket {{ indexBucket+1}}</span>  -->
-        </div>
-
-
-        <!-- progress bar -->
-        <mat-progress-bar class="example-margin" color="primary" mode="'determinate'" [value]="stepProgressValue">
-        </mat-progress-bar>
-
-        <!-- stepper -->
-        <mat-horizontal-stepper linear='true' #stepper>
-
-            <!-- step -->
-            <mat-step *ngFor="let item of members; let i = index;">
-
-
-
-                <!-- bucket -->
-                <div class="row" cdkDropList id="currentBucket" [cdkDropListConnectedTo]="['symptomList']"
-                    [cdkDropListData]='currentBucket' (cdkDropListDropped)="drop($event)"
-                    style="height: 100px; border: 1px solid black;" (click)=openDialog()>
-                    <div class="column" *ngFor="let bucketItem of currentBucket" cdkDrag>{{ bucketItem }}</div>
-
-                </div>
-
-
-            </mat-step>
-
-        </mat-horizontal-stepper>
-
-        <!-- next/previous bucket] -->
-        <div>
-            <button mat-button (click)="goBack(stepper)">Back</button>
-            <button mat-button (click)="goForward(stepper)">Next</button>
-        </div>
-
-    </mat-card>
-
+    <!-- bucket -->
+    <div 
+        class="row" 
+        cdkDropList 
+        id="bucket-container" 
+        [cdkDropListConnectedTo]="['symptomList']"
+        [cdkDropListData]='currentBucket' 
+        (cdkDropListDropped)="drop($event)"
+        style="height: 100px; border: 1px solid black;" 
+        (click)=openDialog()>
+        <div class="column" *ngFor="let bucketItem of currentBucket" cdkDrag>{{ bucketItem.slice(1) }}</div>
+    </div>
 </div>
