@@ -79,17 +79,21 @@ export class BucketComponent implements OnInit {
   // Array for hold the state of carouselArray
   carouselStates: any[];
 
-  // current value of the progress
-  progressValue = 0;
+  // current value of the steps progress
+  stepProgressValue = 0;
 
   // value of a single step
   progressStepCost = 0;
+
+  //current value of of the bucket  progress
+  bucketProgressPrecentage;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.indexCarousel = 0;
     this.indexBucket = 0;
     this.carouselStates = [];
     this.bucketStates = [];
+    this.bucketProgressPrecentage=0
   }
 
   ngOnInit(): void {
@@ -112,7 +116,9 @@ export class BucketComponent implements OnInit {
     this.progressStepCost = 100 / this.noOfBuckets;
 
     // setting the staring value of the progress
-    this.progressValue = 0;
+    this.stepProgressValue = 0;
+
+    
 
     // setting a new state in the carouselStates
     this.carouselStates[0] = JSON.parse(JSON.stringify(this.carouselTemplate));
@@ -166,10 +172,14 @@ export class BucketComponent implements OnInit {
         JSON.stringify(this.currentBucket)
       );
 
-      console.log('carouselArray:', this.carouselArray);
-      console.log('carouselStates:', this.carouselStates);
-      console.log('currentBucket:', this.currentBucket);
-      console.log('bucketStates:', this.bucketStates);
+      //upadte current bucket filled precentage
+      this.updateCurrentBucketFilledPrecentage(this.bucketStates[this.indexBucket].length);
+
+      console.log('b % - '+ this.bucketProgressPrecentage)
+      // console.log('carouselArray:', this.carouselArray);
+      // console.log('carouselStates:', this.carouselStates);
+      // console.log('currentBucket:', this.currentBucket);
+      // console.log('bucketStates:', this.bucketStates);
     }
   }
 
@@ -206,8 +216,8 @@ export class BucketComponent implements OnInit {
       );
       console.log('before state - ' + this.carouselStates[this.indexBucket]);
       stepper.next();
-      this.progressValue += this.progressStepCost;
-      console.log(this.progressValue);
+      this.stepProgressValue += this.progressStepCost;
+      console.log(this.stepProgressValue);
     }
   }
 
@@ -218,8 +228,8 @@ export class BucketComponent implements OnInit {
       this.currentBucket = this.bucketStates[this.indexBucket];
       console.log('bucketNo ' + this.indexBucket);
       stepper.previous();
-      this.progressValue -= this.progressStepCost;
-      console.log(this.progressValue);
+      this.stepProgressValue -= this.progressStepCost;
+      console.log(this.stepProgressValue);
     }
   }
 
@@ -233,7 +243,16 @@ export class BucketComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
+  //update current  bucket filled prcentage
+  updateCurrentBucketFilledPrecentage(val:number){
+    this.bucketProgressPrecentage= (val/this.carouselTemplate.length)
+    
+  }
+
 }
+
+
 
 @Component({
   selector: 'dialog-bucket',
@@ -249,3 +268,4 @@ export class DialogBucket {
     this.dialogRef.close();
   }
 }
+
