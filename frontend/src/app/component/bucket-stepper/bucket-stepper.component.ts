@@ -78,55 +78,26 @@ export class BucketStepperComponent implements OnInit {
   // Next of Stepper - Next bucket
   goForward(stepper: MatStepper) {
     if (this.indexBucket < this.noOfBuckets - 1) {
-      this.bucketStates[this.indexBucket] = [...this.bucket.currentBucket]
-      this.carouselStates[this.indexBucket] = [...this.bucket.carouselArray]
+      this.bucketStates[this.indexBucket] = JSON.parse(JSON.stringify(this.bucket.currentBucket));
+      this.carouselStates[this.indexBucket] = JSON.parse(JSON.stringify(this.bucket.carouselArray));
       this.indexBucket = this.indexBucket + 1
       stepper.next();
       this.progressValue += this.progressStepCost;
       console.log(this.bucketStates)
       console.log(this.carouselStates)
     }
-
-    // if (this.indexBucket < this.noOfBuckets - 1) {
-    //   if (this.carouselStates[this.indexBucket + 1] === undefined) {
-    //     console.log('undefined');
-    //     this.carouselStates[this.indexBucket + 1] = JSON.parse(
-    //       JSON.stringify(this.carouselTemplate)
-    //     );
-    //     this.bucketStates[this.indexBucket + 1] = [];
-    //   }
-    //   this.carouselArray = JSON.parse(
-    //     JSON.stringify(this.carouselStates[++this.indexBucket])
-    //   );
-    //   this.currentBucket = JSON.parse(
-    //     JSON.stringify(this.bucketStates[this.indexBucket])
-    //   );
-    //   console.log('before state - ' + this.carouselStates[this.indexBucket]);
-    //   stepper.next();
-    //   this.progressValue += this.progressStepCost;
-    //   console.log(this.progressValue);
-    // }
   }
 
   // Back of Stepper - Previous bucket
   goBack(stepper: MatStepper) {
     if (this.indexBucket > 0) {
-      this.bucketStates[this.indexBucket] = [...this.bucket.currentBucket]
-      this.carouselStates[this.indexBucket] = [...this.bucket.carouselArray]
+      this.bucketStates[this.indexBucket] = JSON.parse(JSON.stringify(this.bucket.currentBucket));
+      this.carouselStates[this.indexBucket] = JSON.parse(JSON.stringify(this.bucket.carouselArray));
       this.indexBucket = this.indexBucket - 1;
       stepper.previous();
       this.progressValue -= this.progressStepCost;
       console.log(this.bucketStates)
       console.log(this.carouselStates)
     }
-    
-    //   if (this.indexBucket > 0) {
-    //     this.carouselArray = this.carouselStates[--this.indexBucket];
-    //     this.currentBucket = this.bucketStates[this.indexBucket];
-    //     console.log('bucketNo ' + this.indexBucket);
-    //     stepper.previous();
-    //     this.progressValue -= this.progressStepCost;
-    //     console.log(this.progressValue);
-    //   }
   }
 }

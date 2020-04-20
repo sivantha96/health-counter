@@ -23,6 +23,7 @@
     "@angular/router": "~9.1.0",
     "@popperjs/core": "^2.3.2",
     "bootstrap": "^4.4.1",
+    "deep-copy-object": "^1.0.2",
     "jquery": "^3.5.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
