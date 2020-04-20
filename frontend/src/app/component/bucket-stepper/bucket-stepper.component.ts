@@ -78,10 +78,13 @@ export class BucketStepperComponent implements OnInit {
   // Next of Stepper - Next bucket
   goForward(stepper: MatStepper) {
     if (this.indexBucket < this.noOfBuckets - 1) {
-      // this.bucketStates = this.bucket.
+      this.bucketStates[this.indexBucket] = [...this.bucket.currentBucket]
+      this.carouselStates[this.indexBucket] = [...this.bucket.carouselArray]
       this.indexBucket = this.indexBucket + 1
       stepper.next();
       this.progressValue += this.progressStepCost;
+      console.log(this.bucketStates)
+      console.log(this.carouselStates)
     }
 
     // if (this.indexBucket < this.noOfBuckets - 1) {
@@ -108,10 +111,13 @@ export class BucketStepperComponent implements OnInit {
   // Back of Stepper - Previous bucket
   goBack(stepper: MatStepper) {
     if (this.indexBucket > 0) {
-      // this.bucketStates = this.bucket.
+      this.bucketStates[this.indexBucket] = [...this.bucket.currentBucket]
+      this.carouselStates[this.indexBucket] = [...this.bucket.carouselArray]
       this.indexBucket = this.indexBucket - 1;
       stepper.previous();
       this.progressValue -= this.progressStepCost;
+      console.log(this.bucketStates)
+      console.log(this.carouselStates)
     }
     
     //   if (this.indexBucket > 0) {

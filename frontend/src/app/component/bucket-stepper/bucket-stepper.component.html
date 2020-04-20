@@ -10,8 +10,7 @@
             <mat-step *ngFor="let item of members; let i = index;">
 
                 <!-- bucket component -->
-                <!-- <app-bucket></app-bucket> -->
-                <h1>Bucket component</h1>
+                <app-bucket [indexBucket] = "this.indexBucket" [noOfBuckets]="this.noOfBuckets"></app-bucket>
 
             </mat-step>
 

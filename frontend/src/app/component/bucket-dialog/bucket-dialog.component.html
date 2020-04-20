@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>Symptoms Bucket</h1>
-<div mat-dialog-content>
+<div mat-dialog-content *ngFor="let element of data.bucket">
     <!-- <mat-chip-list class="mat-chip-list-stacked" aria-label="Symptoms selected">
         <mat-chip *ngFor="let item of data.bucket" selected>
             {{item}}
         </mat-chip>
     </mat-chip-list> -->
-    <p>{{data.bucket}}</p>
+    <p>{{ element.slice(1) }}</p>
 </div>
 <div mat-dialog-actions>
     <button mat-button cdkFocusInitial (click)="onNoClick()">Ok</button>

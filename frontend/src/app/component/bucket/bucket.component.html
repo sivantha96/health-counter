@@ -1,83 +1,59 @@
-<div class="container">
+<!-- drag&drop connected areas -->
+<div cdkConnectedGroup>
+    <!-- carousel -->
+    <div class="carousel" id="slideCarousel" data-pause="true">
 
-    <!-- card -->
-    <mat-card class="d-block">
-
-        <!-- stepper -->
-        <mat-horizontal-stepper linear='true' #stepper>
-
-            <!-- step -->
-            <mat-step *ngFor="let item of members; let i = index;">
-
-                <!-- drag&drop connected areas -->
-                <div cdkDropListGroup>
-
-                    <!-- carousel -->
-                    <div class="carousel slide" id="{{'slideCarousel'+i}}" data-pause="true">
-
-                        <!-- carousel container -->
-                        <div class="carousel-inner">
-                            <div class="carousel-item" *ngFor="let slide of carouselArray; first as isFirst"
-                                [ngClass]="isFirst ? 'active':'true'">
-                                <h1>{{ slide.name }}</h1>
-                                <div class="row carousel-container" cdkDropList id="{{ 'symptomList' + i }}"
-                                    [cdkDropListConnectedTo]="['currentBucket' + i]"
-                                    cdkDropListOrientation="horizontal"
-                                    [cdkDropListData]='slide.slideItems' cdkDropListSortingDisabled
-                                    (cdkDropListDropped)="drop($event)">
-                                    <div class="col slide-item" *ngFor="let slideItem of slide.slideItems" cdkDrag>
-                                        <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
-                                        {{ slideItem.slice(1) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- carousel arrows -->
-                        <a class="carousel-control-prev" [attr.href]="'#slideCarousel' + i" role="button" data-slide="prev"
-                            (click)="onClick('Previous')">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" [attr.href]="'#slideCarousel' + i" role="button" data-slide="next"
-                            (click)="onClick('Next')">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-
+        <!-- carousel container -->
+        <div class="carousel-inner">
+            <div 
+                class="carousel-item" 
+                *ngFor="let slide of carouselArray; first as isFirst"
+                [ngClass]="isFirst ? 'active':'true'">
+                <h1>{{ slide.name }}</h1>
+                <div 
+                    class="row carousel-container" 
+                    cdkDropList 
+                    id="carousel-container"
+                    [cdkDropListConnectedTo]="['bucket-container']" 
+                    cdkDropListOrientation="horizontal"
+                    [cdkDropListData]='slide.slideItems' 
+                    cdkDropListSortingDisabled 
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="col slide-item" *ngFor="let slideItem of slide.slideItems" cdkDrag>
+                        <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
+                        {{ slideItem.slice(1) }}
                     </div>
                 </div>
-
-                <!-- empty spacer -->
-                <div style="height: 50px;">
-                </div>
-
-                <!-- progress bar -->
-                <mat-progress-bar class="example-margin" color="primary" mode="'determinate'" [value]="progressValue">
-                </mat-progress-bar>
-
-
-
-                <!-- bucket header -->
-                <h1 style="margin-top: 2em;">Bucket {{ indexBucket+1 }} of {{ noOfBuckets }}</h1>
-
-                <!-- bucket -->
-                <div class="row" cdkDropList id="{{ 'currentBucket'+i }}" [cdkDropListConnectedTo]="[ 'symptomList' + i ]"
-                    [cdkDropListData]='currentBucket' (cdkDropListDropped)="drop($event)"
-                    style="height: 100px; border: 1px solid black;" (click)=openDialog()>
-                    <div class="column" *ngFor="let bucketItem of currentBucket" cdkDrag>{{ bucketItem }}</div>
-                </div>
-
-            </mat-step>
-
-        </mat-horizontal-stepper>
-
-        <!-- next/previous bucket] -->
-        <div>
-            <button mat-button (click)="goBack(stepper)">Back</button>
-            <button mat-button (click)="goForward(stepper)">Next</button>
+            </div>
         </div>
 
-    </mat-card>
+        <!-- carousel arrows -->
+        <a class="carousel-control-prev" href="#slideCarousel" role="button" data-slide="prev"
+            (click)="onClick('Previous')">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#slideCarousel" role="button" data-slide="next"
+            (click)="onClick('Next')">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
 
+    </div>
+
+    <!-- bucket header -->
+    <h1 style="margin-top: 2em;">Bucket {{ indexBucket+1 }} of {{ noOfBuckets }}</h1>
+
+    <!-- bucket -->
+    <div 
+        class="row" 
+        cdkDropList 
+        id="bucket-container" 
+        [cdkDropListConnectedTo]="['symptomList']"
+        [cdkDropListData]='currentBucket' 
+        (cdkDropListDropped)="drop($event)"
+        style="height: 100px; border: 1px solid black;" 
+        (click)=openDialog()>
+        <div class="column" *ngFor="let bucketItem of currentBucket" cdkDrag>{{ bucketItem.slice(1) }}</div>
+    </div>
 </div>
