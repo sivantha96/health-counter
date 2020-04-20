@@ -45,7 +45,7 @@
         <mat-horizontal-stepper linear='true' #stepper>
 
             <mat-step *ngFor="let item of members; let i = index;">
-                <h1>Family member No: {{bucketIndex+1}} Bucket</h1>
+                <h1 style="margin-top: 2em;">Bucket {{bucketIndex+1}}  of {{noOfBuckets}}</h1>
 
                 <!-- bucket -->
                 <div class="row" cdkDropList id="bucketList" [cdkDropListConnectedTo]="['symptomList']"
@@ -55,11 +55,14 @@
                 </div>
 
                 <!-- next/previous bucket] -->
-                <div>
-                    <button mat-button (click)="goBack(stepper)">Back</button>
-                    <button mat-button (click)="goForward(stepper)">Next</button>
-                </div>
+               
             </mat-step>
+           
         </mat-horizontal-stepper>
+
+        <div>
+            <button mat-button (click)="goBack(stepper)">Back</button>
+            <button mat-button (click)="goForward(stepper)">Next</button>
+        </div>
     </mat-card>
 </div>
