@@ -26,9 +26,18 @@ export class BucketComponent implements OnInit {
   // Current symptom number
   indexCarousel: number;
 
+  // array to hold severities
   severityArray = ['No Symptoms', 'Mild symptoms', 'Severe symptoms'];
 
   carouselTemplate: Islide[] = [
+    {
+      name: 'Gender',
+      slideItems: ['Male', 'Female', 'Other']
+    },
+    {
+      name: 'Age',
+      slideItems: ['Infant','Child', 'Teenager', 'Adult', 'Elderly']
+    },
     {
       name: 'Cough',
       slideItems: [...this.severityArray],
@@ -98,10 +107,10 @@ export class BucketComponent implements OnInit {
     // setting the staring value of the progress
     this.progressValue = this.progressStepCost;
 
-    // deep copy
+    // setting a new state in the carouselStates
     this.carouselStates[0] = JSON.parse(JSON.stringify(this.carouselTemplate));
 
-    // initialize
+    // setting a new state in the bucketStates
     this.bucketStates[0] = [];
 
     this.carouselArray = this.carouselStates[0];
@@ -125,6 +134,7 @@ export class BucketComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      // this.carouselArray[this.indexCarousel] = 
 
       // Save the template
       this.carouselStates[this.indexBucket] = JSON.parse(
