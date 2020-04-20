@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "health-counter"
+  "defaultProject": "health-counter",
+  "cli": {
+    "analytics": false
+  }
 }

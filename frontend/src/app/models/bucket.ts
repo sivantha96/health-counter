@@ -8,3 +8,7 @@ export interface Islide {
   name: string;
   slideItems: string[];
 }
+
+export interface DialogData {
+  bucket : string[]
+}

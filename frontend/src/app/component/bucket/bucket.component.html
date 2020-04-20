@@ -14,9 +14,14 @@
                     <div class="carousel-item" *ngFor="let slide of carouselArray; first as isFirst"
                         [ngClass]="isFirst ? 'active':'true'">
                         <h1>{{ slide.name }}</h1>
-                        <div class="row carousel-container" cdkDropList id="symptomList"
-                            [cdkDropListConnectedTo]="['currentBucket']" cdkDropListOrientation="horizontal"
-                            [cdkDropListData]='slide.slideItems' cdkDropListSortingDisabled
+                        <div 
+                            class="row carousel-container" 
+                            cdkDropList 
+                            id="symptomList"
+                            [cdkDropListConnectedTo]="['currentBucket']" 
+                            cdkDropListOrientation="horizontal"
+                            [cdkDropListData]='slide.slideItems' 
+                            cdkDropListSortingDisabled
                             (cdkDropListDropped)="drop($event)">
                             <div class="col slide-item" *ngFor="let slideItem of slide.slideItems" cdkDrag>
                                 <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
@@ -59,9 +64,14 @@
                 <h1 style="margin-top: 2em;">Bucket {{ indexBucket+1 }} of {{ noOfBuckets }}</h1>
 
                 <!-- bucket -->
-                <div class="row" cdkDropList id="currentBucket" [cdkDropListConnectedTo]="['symptomList']"
-                    [cdkDropListData]='currentBucket' (cdkDropListDropped)="drop($event)"
-                    style="height: 100px; border: 1px solid black;">
+                <div 
+                    class="row" 
+                    cdkDropList id="currentBucket" 
+                    [cdkDropListConnectedTo]="['symptomList']"
+                    [cdkDropListData]='currentBucket' 
+                    (cdkDropListDropped)="drop($event)"
+                    style="height: 100px; border: 1px solid black;"
+                    (click)=openDialog()>
                     <div class="column" *ngFor="let bucketItem of currentBucket" cdkDrag>{{ bucketItem }}</div>
                 </div>
 
