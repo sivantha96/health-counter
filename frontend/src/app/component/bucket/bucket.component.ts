@@ -3,6 +3,7 @@ import { transferArrayItem } from '@angular/cdk/drag-drop';
 import { PostData } from '../../models/bucket';
 import { ActivatedRoute } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
+import { Islide } from './../../models/bucket';
 
 @Component({
   selector: 'app-bucket',
@@ -25,13 +26,29 @@ export class BucketComponent implements OnInit {
   // Current symptom number
   indexCarousel: number;
 
-  // Template f severities to copy into symptoms array when creating a new step(bucket)
-  carouselTemplate: any[] = [
-    ['Female', 'Male', 'Other'],
-    ['Infant', 'Child', 'Teenager', 'Adult', 'Elderly'],
-    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
-    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
-    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
+  severityArray = ['No Symptoms', 'Mild symptoms', 'Severe symptoms'];
+
+  carouselTemplate: Islide[] = [
+    {
+      name: 'Cough',
+      slideItems: [...this.severityArray],
+    },
+    {
+      name: 'Cold',
+      slideItems: [...this.severityArray],
+    },
+    {
+      name: 'itchy throat',
+      slideItems: [...this.severityArray],
+    },
+    {
+      name: 'Throat Pain',
+      slideItems: [...this.severityArray],
+    },
+    {
+      name: 'Taste loss',
+      slideItems: [...this.severityArray],
+    },
   ];
 
   // Array for holding dropped symptoms for the current bucket
@@ -100,7 +117,7 @@ export class BucketComponent implements OnInit {
   drop(event: any) {
     if (event.previousContainer !== event.container) {
       console.log(event);
-      console.log(this.indexCarousel)
+      console.log(this.indexCarousel);
       console.log(event.item.element.nativeElement.textContent);
       transferArrayItem(
         event.previousContainer.data,

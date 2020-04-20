@@ -3,3 +3,8 @@ export interface PostData {
   is_visited_foreign_country: string;
   is_had_close_contact: string;
 }
+
+export interface Islide {
+  name: string;
+  slideItems: string[];
+}
