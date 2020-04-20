@@ -1,15 +1,29 @@
+
 import { Component, OnInit } from '@angular/core';
 import { transferArrayItem } from '@angular/cdk/drag-drop';
 import { PostData } from '../../models/bucket';
 import { ActivatedRoute } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
-import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
+// import Copier from 'deep-copy-object'
+
+// import { Interface } from 'readline';
+import {ISymptoms } from './../../models/bucket';
+
+
+
 
 @Component({
   selector: 'app-bucket',
   templateUrl: './bucket.component.html',
   styleUrls: ['./bucket.component.css'],
 })
+
+
+
+
+
 export class BucketComponent implements OnInit {
 
   postData: PostData;
@@ -21,11 +35,52 @@ export class BucketComponent implements OnInit {
   symptomNo: number;
 
   // array for holding carousel items
-  symptomsTemplate: any[] = [
-    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
-    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
-    ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
-  ];
+  // symptomsTemplate: any[] = [
+  //   ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
+  //   ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
+  //   ['No symptoms', 'Mild symptoms', 'Severe symptoms'],
+  // ];
+
+  severityArray=[
+    "No Symptoms",
+    "Mild symptoms",
+    "Severe symptoms"
+  ]
+  
+
+  symptomsTemplate: ISymptoms[] = 
+    [
+      {
+        name:"Cough",
+        severity:[...this.severityArray]
+          
+      },
+      {
+        name:"Cold",
+        severity:[...this.severityArray]
+          
+      },
+      {
+        name:"itchy throat",
+        severity:[...this.severityArray]
+          
+      },
+      {
+        name:"Throat Pain",
+        severity:[...this.severityArray]
+          
+      },
+      {
+        name:"Taste loss",
+        severity:[...this.severityArray]
+          
+      },
+
+    ]
+  
+
+
+
 
 
   bucket: string[];
@@ -55,7 +110,7 @@ export class BucketComponent implements OnInit {
       } catch (error) {
         console.log(error);
       }
-    });
+    }); 
 
     this.noOfBuckets = +this.postData.family_members
 
@@ -160,6 +215,20 @@ export class BucketComponent implements OnInit {
     }
 
   }
+
+//   deepCopy(obj) {
+//     const keys = Object.keys(obj)
+//     let newObject=obj
+//     for (let i = 0; i < keys.length; i++) {
+//         const key = keys[i]
+//         if (typeof obj[key] === 'object') {
+//             newObject[key] = this.deepCopy(obj[key])
+//         } else {
+//             newObject[key] = obj[key]
+//         }
+//     }
+//     return newObject
+// }
 
 
 

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sivantha96/health-counter/issues"
   },
-  "homepage": "https://github.com/sivantha96/health-counter#readme"
+  "homepage": "https://github.com/sivantha96/health-counter#readme",
+  "dependencies": {
+    "deep-copy-object": "^1.0.2"
+  }
 }
