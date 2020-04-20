@@ -112,7 +112,7 @@ export class BucketComponent implements OnInit {
     this.progressStepCost = 100 / this.noOfBuckets;
 
     // setting the staring value of the progress
-    this.progressValue = this.progressStepCost;
+    this.progressValue = 0;
 
     // setting a new state in the carouselStates
     this.carouselStates[0] = JSON.parse(JSON.stringify(this.carouselTemplate));
