@@ -4,9 +4,11 @@ import { PostData } from '../../models/bucket';
 import { ActivatedRoute } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
 import { Islide, DialogData } from './../../models/bucket';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
-
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-bucket',
@@ -35,31 +37,33 @@ export class BucketComponent implements OnInit {
   carouselTemplate: Islide[] = [
     {
       name: 'Gender',
-      slideItems: ['Male', 'Female', 'Other'].map(x => "0" + x),
+      slideItems: ['Male', 'Female', 'Other'].map((x) => '0' + x),
     },
     {
       name: 'Age',
-      slideItems: ['Infant','Child', 'Teenager', 'Adult', 'Elderly'].map(x => "1" + x),
+      slideItems: ['Infant', 'Child', 'Teenager', 'Adult', 'Elderly'].map(
+        (x) => '1' + x
+      ),
     },
     {
       name: 'Cough',
-      slideItems: this.severityArray.map(x => "2" + x),
+      slideItems: this.severityArray.map((x) => '2' + x),
     },
     {
       name: 'Cold',
-      slideItems: this.severityArray.map(x => "3" + x),
+      slideItems: this.severityArray.map((x) => '3' + x),
     },
     {
       name: 'itchy throat',
-      slideItems: this.severityArray.map(x => "4" + x),
+      slideItems: this.severityArray.map((x) => '4' + x),
     },
     {
       name: 'Throat Pain',
-      slideItems: this.severityArray.map(x => "5" + x),
+      slideItems: this.severityArray.map((x) => '5' + x),
     },
     {
       name: 'Taste loss',
-      slideItems: this.severityArray.map(x => "6" + x),
+      slideItems: this.severityArray.map((x) => '6' + x),
     },
   ];
 
@@ -81,7 +85,7 @@ export class BucketComponent implements OnInit {
   // value of a single step
   progressStepCost = 0;
 
-  constructor(private route: ActivatedRoute,  public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.indexCarousel = 0;
     this.indexBucket = 0;
     this.carouselStates = [];
@@ -129,25 +133,31 @@ export class BucketComponent implements OnInit {
   drop(event: any) {
     if (event.previousContainer !== event.container) {
       // get the current carousel index as string
-      let myIndex: string = this.indexCarousel.toString()
+      let myIndex: string = this.indexCarousel.toString();
 
       // get the value that dragged over
-      let pattern = event.item.element.nativeElement.textContent.trim()
+      let pattern = event.item.element.nativeElement.textContent.trim();
 
-      // filter carousel template array in such a way that it returns a new array without the "pattern" (the value that dragged over) 
+      // filter carousel template array in such a way that it returns a new array without the "pattern" (the value that dragged over)
       // and assign that value the current carouselArray
       // this replaces the default transferItem function provided by the cdk library
       // this will function as a swapper - not just moving an item from carousel to the bucket
       // this will swap the currently dragged item with the previously dragged item for the same carousel index
-      this.carouselArray[this.indexCarousel].slideItems = this.carouselTemplate[this.indexCarousel].slideItems.filter(function (str) { return str.indexOf(pattern) === -1;} );
+      this.carouselArray[this.indexCarousel].slideItems = this.carouselTemplate[
+        this.indexCarousel
+      ].slideItems.filter(function (str) {
+        return str.indexOf(pattern) === -1;
+      });
 
       // this will remove all the items that starts with the "myIndex"
       // this will remove all the previously dragged items from the same carousel index
-      let newBucket = this.currentBucket.filter(function (str) { return str.indexOf(myIndex) === -1})
+      let newBucket = this.currentBucket.filter(function (str) {
+        return str.indexOf(myIndex) === -1;
+      });
 
       // this will transfer the currently dragged item from the carousel to the bucket
-      this.currentBucket = [...newBucket, this.indexCarousel + pattern]
-      
+      this.currentBucket = [...newBucket, this.indexCarousel + pattern];
+
       // Save the template
       this.carouselStates[this.indexBucket] = JSON.parse(
         JSON.stringify(this.carouselArray)
@@ -156,10 +166,10 @@ export class BucketComponent implements OnInit {
         JSON.stringify(this.currentBucket)
       );
 
-      console.log("carouselArray:", this.carouselArray)
-      console.log("carouselStates:",this.carouselStates)
-      console.log("currentBucket:",this.currentBucket)
-      console.log("bucketStates:",this.bucketStates)
+      console.log('carouselArray:', this.carouselArray);
+      console.log('carouselStates:', this.carouselStates);
+      console.log('currentBucket:', this.currentBucket);
+      console.log('bucketStates:', this.bucketStates);
     }
   }
 
@@ -216,15 +226,13 @@ export class BucketComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogBucket, {
       width: '250px',
-      data: {bucket:this.currentBucket}
+      data: { bucket: this.currentBucket },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-    
     });
   }
-
 }
 
 @Component({
@@ -232,15 +240,12 @@ export class BucketComponent implements OnInit {
   templateUrl: './dialog-bucket.html',
 })
 export class DialogBucket {
-
   constructor(
     public dialogRef: MatDialogRef<DialogBucket>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
-
 }
