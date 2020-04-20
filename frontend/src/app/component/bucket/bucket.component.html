@@ -50,7 +50,7 @@
                 <!-- bucket -->
                 <div class="row" cdkDropList id="bucketList" [cdkDropListConnectedTo]="['symptomList']"
                     [cdkDropListData]='bucket' (cdkDropListDropped)="drop($event)"
-                    style="height: 100px; border: 1px solid black;">
+                    style="height: 100px; border: 1px solid black;cursor: pointer;" (click) = "openDialog()" >
                     <div class="column" *ngFor="let bucketItem of bucket" cdkDrag>{{ bucketItem }}</div>
                 </div>
 

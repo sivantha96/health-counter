@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { transferArrayItem } from '@angular/cdk/drag-drop';
 import { PostData } from '../../models/bucket';
 import { ActivatedRoute } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+export interface DialogData {
+  bucket : string[]
+}
 
 @Component({
   selector: 'app-bucket',
@@ -38,7 +43,7 @@ export class BucketComponent implements OnInit {
   progressStepCost=0
   
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,  public dialog: MatDialog) {
     this.symptomNo = 0;
     this.bucketIndex = 0;
 
@@ -161,7 +166,33 @@ export class BucketComponent implements OnInit {
 
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogBucket, {
+      width: '250px',
+      data: {bucket:this.bucket}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    
+    });
+  }
+
+}
+
+@Component({
+  selector: 'dialog-bucket',
+  templateUrl: './dialog-bucket.html',
+})
+export class DialogBucket {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogBucket>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 
 

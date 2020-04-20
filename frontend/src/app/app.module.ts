@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { LandingModule } from './component/landing/landing.module';
@@ -41,7 +42,8 @@ import { BucketComponent } from './component/bucket/bucket.component';
     MatInputModule,
     MatFormFieldModule,
     MatStepperModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
