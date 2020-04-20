@@ -1,14 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
 import { PostData } from '../../models/bucket';
 import { ActivatedRoute } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
-import { Islide, DialogData } from './../../models/bucket';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { Islide } from './../../models/bucket';
+import { MatDialog } from '@angular/material/dialog';
+import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
 
 @Component({
   selector: 'app-bucket',
@@ -224,7 +220,7 @@ export class BucketComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogBucket, {
+    const dialogRef = this.dialog.open(BucketDialogComponent, {
       width: '250px',
       data: { bucket: this.currentBucket },
     });
@@ -232,20 +228,5 @@ export class BucketComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
-  }
-}
-
-@Component({
-  selector: 'dialog-bucket',
-  templateUrl: './dialog-bucket.html',
-})
-export class DialogBucket {
-  constructor(
-    public dialogRef: MatDialogRef<DialogBucket>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }
