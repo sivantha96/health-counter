@@ -154,9 +154,9 @@ export class BucketComponent implements OnInit {
 
       // the index that contains a true for an incomplete slide
       let incompleteSlide = tempArray.indexOf(true);
-
       // if there are incomplete slides, then transfer into that specific slide automatically
-      if (incompleteSlide) {
+      if (incompleteSlide >= 0) {
+        
         // find the carousel by ID using jquery an use default carousel methods to navigate
         $('#' + this.addIDSlideCarousel()).carousel(incompleteSlide);
         // set the index of the incomplete slide as the current carousel index
