@@ -1,9 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { PostData } from 'src/app/models/bucket';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { BucketComponent } from '../bucket/bucket.component';
+
 
 @Component({
   selector: 'app-bucket-stepper',
@@ -37,7 +38,7 @@ export class BucketStepperComponent implements OnInit {
   // Array for hold the state of carouselArray
   carouselStates: any[];
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog) {
     this.carouselStates = [];
     this.bucketStates = [];
     this.indexBucket = 0;
@@ -89,6 +90,9 @@ export class BucketStepperComponent implements OnInit {
       stepper.next();
       this.progressValue += this.progressStepCost;
       //POST REQ
+      // this.isBucketFull=false;
+
+
     }
   }
 
@@ -102,4 +106,27 @@ export class BucketStepperComponent implements OnInit {
       //POST REQ
     }
   }
+
+  //submitter at the last step
+  onDone(): void {
+    this.router.navigate(['./end'], {
+
+    });
+  }
+
+  // is the current Bucket completely filled
+  isBucketFull(): boolean {
+    let bucketArr = this.bucketQueryList
+    if (bucketArr === undefined) {
+      return false
+    }
+    else {
+      return bucketArr.toArray()[this.indexBucket].currentBucket.length === bucketArr.toArray()[this.indexBucket].carouselArray.length ? true : false
+    }
+
+
+
+  }
+
+
 }

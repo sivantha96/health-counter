@@ -22,8 +22,9 @@
 
         <!-- next/previous bucket] -->
         <div>
-            <button mat-button (click)="goBack(stepper)">Back</button>
-            <button mat-button (click)="goForward(stepper)">Next</button>
+            <button *ngIf='indexBucket!=0' mat-button (click)="goBack(stepper)">Back</button>
+            <button *ngIf='indexBucket+1!= noOfBuckets' [disabled]='!isBucketFull()' mat-button (click)="goForward(stepper)">Next</button>
+            <button *ngIf='indexBucket+1=== noOfBuckets' [disabled]='!isBucketFull()'  mat-button (click)='onDone()'>Done</button>
         </div>
 
     </mat-card>

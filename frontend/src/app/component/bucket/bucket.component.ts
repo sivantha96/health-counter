@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Islide } from './../../models/bucket';
 import { MatDialog } from '@angular/material/dialog';
@@ -85,7 +85,7 @@ export class BucketComponent implements OnInit {
     this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   drop(event: any) {
     if (event.previousContainer !== event.container) {
@@ -113,7 +113,13 @@ export class BucketComponent implements OnInit {
 
       // this will transfer the currently dragged item from the carousel to the bucket
       this.currentBucket = [...newBucket, this.indexCarousel + pattern];
+
+      //updates the current bucket filled prgoress value
       this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
+
+
+
+
     }
   }
 
@@ -166,4 +172,6 @@ export class BucketComponent implements OnInit {
     this.slideCarouselID.push(ID);
     return ID;
   }
+
+
 }

@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +26,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { BucketComponent } from './component/bucket/bucket.component';
 import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
 import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
+import { EndPageComponent } from './component/end-page/end-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.c
     BucketComponent,
     BucketStepperComponent,
     BucketDialogComponent,
+    EndPageComponent
   ],
   imports: [
     BrowserModule,
