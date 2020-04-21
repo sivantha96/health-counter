@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Islide } from './../../models/bucket';
 import { MatDialog } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
-import { BucketStepperComponent } from '../bucket-stepper/bucket-stepper.component';
+import { Copier } from 'deep-copy-object';
 
 @Component({
   selector: 'app-bucket',
@@ -11,16 +11,25 @@ import { BucketStepperComponent } from '../bucket-stepper/bucket-stepper.compone
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
- // index of the current bucket
+  // index of the current bucket
   @Input() indexBucket: number;
   // number of total buckets
   @Input() noOfBuckets: number;
+
+  //Bucket IDs
+  bucketID: string[];
+
+  //Carousel IDs
+  carouselID: string[];
+
+  //SlideCarousel IDs
+  slideCarouselID: string[]
 
   // Current symptom number
   indexCarousel: number;
 
   // CURRENT BUCKET
-  currentBucket: any
+  currentBucket: any;
 
   // Array for hold the severities of the current symptoms
   carouselArray: any;
@@ -36,10 +45,10 @@ export class BucketComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.indexCarousel = 0;
-    this.currentBucket = []
-  }
-
-  ngOnInit(): void {
+    this.currentBucket = [];
+    this.bucketID = [];
+    this.carouselID = [];
+    this.slideCarouselID=[]
     this.carouselTemplate = [
       {
         name: 'Gender',
@@ -72,8 +81,10 @@ export class BucketComponent implements OnInit {
         slideItems: this.severityArray.map((x) => '6' + x),
       },
     ];
-    this.carouselArray = [...this.carouselTemplate];
+    this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
   }
+
+  ngOnInit(): void {}
 
   drop(event: any) {
     if (event.previousContainer !== event.container) {
@@ -82,19 +93,17 @@ export class BucketComponent implements OnInit {
 
       // get the value that dragged over
       let pattern = event.item.element.nativeElement.textContent.trim();
-      console.log(this.carouselTemplate[this.indexCarousel].slideItems)
 
       // filter carousel template array in such a way that it returns a new array without the "pattern" (the value that dragged over)
       // and assign that value the current carouselArray
       // this replaces the default transferItem function provided by the cdk library
       // this will function as a swapper - not just moving an item from carousel to the bucket
       // this will swap the currently dragged item with the previously dragged item for the same carousel index
-      let tempArray = this.carouselTemplate[this.indexCarousel].slideItems;
-      this.carouselArray[this.indexCarousel].slideItems = tempArray.filter(function (str) {
+      this.carouselArray[this.indexCarousel].slideItems = this.carouselTemplate[
+        this.indexCarousel
+      ].slideItems.filter(function (str) {
         return str.indexOf(pattern) === -1;
       });
-
-
       // this will remove all the items that starts with the "myIndex"
       // this will remove all the previously dragged items from the same carousel index
       let newBucket = this.currentBucket.filter(function (str) {
@@ -138,4 +147,21 @@ export class BucketComponent implements OnInit {
     
   }
 
+  addIDCarousel() {
+    let ID = 'carouselContainer' + this.indexBucket;
+    this.carouselID.push(ID);
+    return ID;
+  }
+
+  addIDBucket() {
+    let ID = 'bucketContainer' + this.indexBucket;
+    this.bucketID.push(ID);
+    return ID;
+  }
+
+  addIDSlideCarousel(){
+    let ID='slideCarousel'+ this.indexBucket;
+    this.slideCarouselID.push(ID)
+    return ID
+  }
 }
