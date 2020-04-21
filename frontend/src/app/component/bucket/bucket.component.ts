@@ -40,8 +40,10 @@ export class BucketComponent implements OnInit {
   // template fpr carousel
   carouselTemplate: Islide[];
 
-  //current value of of the bucket  progress
-  bucketProgressPrecentage;
+  //current value of of the bucket  progress precentage
+  bucketProgressValue=0
+  //current value of of the bucket  progress precentage
+  bucketProgressPrecentage=0;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.indexCarousel = 0;
@@ -112,6 +114,7 @@ export class BucketComponent implements OnInit {
 
       // this will transfer the currently dragged item from the carousel to the bucket
       this.currentBucket = [...newBucket, this.indexCarousel + pattern];
+      this.updateCurrentBucketFilledPrecentage(this.currentBucket.length)
     }
   }
 
@@ -143,7 +146,8 @@ export class BucketComponent implements OnInit {
 
   //update current  bucket filled prcentage
   updateCurrentBucketFilledPrecentage(val:number){
-    this.bucketProgressPrecentage= (val/this.carouselTemplate.length)
+   
+    this.bucketProgressPrecentage= ( this.bucketProgressValue=(val/this.carouselTemplate.length))*100
     
   }
 
