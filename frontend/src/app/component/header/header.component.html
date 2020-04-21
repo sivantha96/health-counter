@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div class="container">
         <a class="navbar-brand">
             <img class="mr-1" src="../../../favicon.ico" width="10%" alt="">
@@ -19,4 +19,24 @@
             
         </div>
     </div>
-</nav>
+</nav> -->
+<!--  -->
+<mat-toolbar>
+    <mat-toolbar-row class="toolbar">
+        <p></p>
+        
+        <a class="left">
+            <img class="mr-1" src="../../../favicon.ico" width="10%" alt="">
+            {{ 'HOME.TITLE' | translate }}</a>
+            <form class="right">
+                <mat-button-toggle-group name="languages" class="button" appearance="legacy" aria-label="languages">
+                    <mat-button-toggle value="si" (change)="toggleLanguage($event.value)">සිංහල</mat-button-toggle>
+                    <mat-button-toggle value="en" (change)="toggleLanguage($event.value)">English</mat-button-toggle>
+                    <mat-button-toggle value="ta" (change)="toggleLanguage($event.value)">தமிழ்</mat-button-toggle>
+                </mat-button-toggle-group>
+            </form>
+                
+        
+
+    </mat-toolbar-row>
+</mat-toolbar>

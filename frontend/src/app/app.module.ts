@@ -15,6 +15,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 
 
@@ -25,6 +29,11 @@ import { FooterComponent } from './component/footer/footer.component';
 import { BucketComponent } from './component/bucket/bucket.component';
 import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
 import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
   declarations: [
@@ -34,6 +43,7 @@ import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.c
     BucketComponent,
     BucketStepperComponent,
     BucketDialogComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,8 +61,16 @@ import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.c
     MatStepperModule,
     MatProgressBarModule,
     MatDialogModule,
-    MatProgressSpinnerModule
-    
+    MatProgressSpinnerModule,
+    MatButtonToggleModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
    
   ],
   providers: [],

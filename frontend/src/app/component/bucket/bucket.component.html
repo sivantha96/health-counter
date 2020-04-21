@@ -23,18 +23,18 @@
         <a class="carousel-control-prev" href="#{{ addIDSlideCarousel() }}" role="button" data-slide="prev"
             (click)="onClick('Previous')">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">{{ 'BUCKET.PREVIOUS' | translate }}</span>
         </a>
         <a class="carousel-control-next" href="#{{ addIDSlideCarousel() }}" role="button" data-slide="next"
             (click)="onClick('Next')">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">{{ 'BUCKET.NEXT' | translate }}</span>
         </a>
 
     </div>
 
     <!-- bucket header -->
-    <h1 style="margin-top: 2em;">Bucket {{ indexBucket+1 }} of {{ noOfBuckets }}
+    <h1 style="margin-top: 2em;">{{ 'BUCKET.PERSON' | translate }} {{ indexBucket+1 }} {{ 'BUCKET.OF' | translate }} {{ noOfBuckets }}
         <span class="progress" style="width: 8em; float:right; margin-top: 0.7em;">
             <span class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]=bucketProgressPercentage
                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{bucketProgressValue | percent }}</span>

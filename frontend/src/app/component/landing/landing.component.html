@@ -15,16 +15,16 @@
                                         <img src="../../../assets/landing/family.jpg" alt="">
                                     </div>
                                     <mat-form-field class="field-container" style="width:60%">
-                                        <label>How many family members in your family?</label>
+                                        <label> {{ 'FAMILY-CARD.QUESTION' | translate }}</label>
                                         <input matInput formControlName="noOfFamily" placeholder="" NumberOnly>
-                                        <mat-hint>enter a number</mat-hint>
+                                        <mat-hint>{{ 'FAMILY-CARD.HINT' | translate }}</mat-hint>
                                         <mat-error
                                             *ngIf="dataForm.get('noOfFamily').invalid && (dataForm.get('noOfFamily').dirty || dataForm.get('noOfFamily').touched)  && (dataForm.get('noOfFamily').errors.required)">
-                                            this field is required
+                                            {{ 'FAMILY-CARD.ERROR' | translate }}
                                         </mat-error>
                                         <mat-error
                                             *ngIf="dataForm.get('noOfFamily').invalid && (dataForm.get('noOfFamily').dirty || dataForm.get('noOfFamily').touched)  && (dataForm.get('noOfFamily').errors.numberOnly)">
-                                            please enter a numeric value
+                                            {{ 'FAMILY-CARD.TYPE-ERROR' | translate }}
                                         </mat-error>
 
                                         <!-- <mat-error>This field is required</mat-error> -->
@@ -33,7 +33,7 @@
 
                                         <div class='button-set' style="height: 2em;">
                                             <button type="button" (click)="goForward(stepper)"
-                                                class="btn btn-dark btn-sm btn-block">Next</button>
+                                                class="btn btn-dark btn-sm btn-block">{{ 'FAMILY-CARD.NEXT' | translate }}</button>
                                         </div>
 
 
@@ -49,7 +49,7 @@
                                         <img src="../../../assets/landing/familyAbroad.jpg" alt="">
                                     </div>
                                     <div class="field-container">
-                                        <label>You or any of your family member recently travelled overseas ?</label>
+                                        <label>{{ 'OVERSEAS-CARD.QUESTION' | translate }}</label>
                                         <!-- <mat-radio-group  aria-labelledby="example-radio-group-label"
                                             class="example-radio-group" formControlName="foreignContact">
                                             <mat-radio-button class="example-radio-button" *ngFor="let ans of booleanGroups"
@@ -72,7 +72,7 @@
                                                 </button>
                                             </span>
                                             <button type="button" (click)="goBack(stepper)"
-                                                class="btn btn-light btn-sm btn-block">Back</button>
+                                                class="btn btn-light btn-sm btn-block">{{ 'OVERSEAS-CARD.BACK' | translate }}</button>
                                         </div>
 
 
@@ -91,7 +91,7 @@
                                         <img src="../../../assets/landing/maleAbroad.jpg" alt="">
                                     </div>
                                     <div class="field-container">
-                                        <label>Have you had any close contact with COVID 19 patient?</label>
+                                        <label>{{ 'CLOSE-CONTACT-CARD.QUESTION' | translate }}</label>
 
                                     </div>
                                     <mat-card-actions class="button-container">
@@ -106,7 +106,7 @@
                                                 </button>
                                             </span>
                                             <button type="button" (click)="goBack(stepper)"
-                                                class="btn btn-light btn-sm btn-block">Back</button>
+                                                class="btn btn-light btn-sm btn-block">{{ 'CLOSE-CONTACT-CARD.BACK' | translate }}</button>
                                         </div>
                                     </mat-card-actions>
                                 </mat-step>
