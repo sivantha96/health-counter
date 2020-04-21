@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Islide } from './../../models/bucket';
 import { MatDialog } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
-import { Copier } from 'deep-copy-object';
 
 @Component({
   selector: 'app-bucket',
@@ -23,7 +22,7 @@ export class BucketComponent implements OnInit {
   carouselID: string[];
 
   //SlideCarousel IDs
-  slideCarouselID: string[]
+  slideCarouselID: string[];
 
   // Current symptom number
   indexCarousel: number;
@@ -40,17 +39,17 @@ export class BucketComponent implements OnInit {
   // template fpr carousel
   carouselTemplate: Islide[];
 
-  //current value of of the bucket  progress precentage
-  bucketProgressValue=0
-  //current value of of the bucket  progress precentage
-  bucketProgressPrecentage=0;
+  //current value of of the bucket  progress percentage
+  bucketProgressValue = 0;
+  //current value of of the bucket  progress percentage
+  bucketProgressPercentage = 0;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.indexCarousel = 0;
     this.currentBucket = [];
     this.bucketID = [];
     this.carouselID = [];
-    this.slideCarouselID=[]
+    this.slideCarouselID = [];
     this.carouselTemplate = [
       {
         name: 'Gender',
@@ -114,7 +113,7 @@ export class BucketComponent implements OnInit {
 
       // this will transfer the currently dragged item from the carousel to the bucket
       this.currentBucket = [...newBucket, this.indexCarousel + pattern];
-      this.updateCurrentBucketFilledPrecentage(this.currentBucket.length)
+      this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
     }
   }
 
@@ -144,11 +143,10 @@ export class BucketComponent implements OnInit {
     });
   }
 
-  //update current  bucket filled prcentage
-  updateCurrentBucketFilledPrecentage(val:number){
-   
-    this.bucketProgressPrecentage= ( this.bucketProgressValue=(val/this.carouselTemplate.length))*100
-    
+  //update current  bucket filled percentage
+  updateCurrentBucketFilledPercentage(val: number) {
+    this.bucketProgressPercentage =
+      (this.bucketProgressValue = val / this.carouselTemplate.length) * 100;
   }
 
   addIDCarousel() {
@@ -163,9 +161,9 @@ export class BucketComponent implements OnInit {
     return ID;
   }
 
-  addIDSlideCarousel(){
-    let ID='slideCarousel'+ this.indexBucket;
-    this.slideCarouselID.push(ID)
-    return ID
+  addIDSlideCarousel() {
+    let ID = 'slideCarousel' + this.indexBucket;
+    this.slideCarouselID.push(ID);
+    return ID;
   }
 }

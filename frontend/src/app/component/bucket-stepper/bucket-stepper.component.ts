@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { PostData } from 'src/app/models/bucket';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
 import { MatStepper } from '@angular/material/stepper';
 import { BucketComponent } from '../bucket/bucket.component';
-
-
 
 @Component({
   selector: 'app-bucket-stepper',
@@ -14,8 +11,7 @@ import { BucketComponent } from '../bucket/bucket.component';
   styleUrls: ['./bucket-stepper.component.css'],
 })
 export class BucketStepperComponent implements OnInit {
-  @ViewChild(BucketComponent)
-  bucket: BucketComponent
+  @ViewChildren('cmp') bucketQueryList: QueryList<BucketComponent>;
 
   // Data of a single person - For POST Req
   postData: PostData;
@@ -75,29 +71,35 @@ export class BucketStepperComponent implements OnInit {
     return Array(n);
   }
 
+  // method to save bucket states
+  saveState(bucketList) {
+    this.bucketStates[this.indexBucket] = JSON.parse(
+      JSON.stringify(bucketList[this.indexBucket].currentBucket)
+    );
+    this.carouselStates[this.indexBucket] = JSON.parse(
+      JSON.stringify(bucketList[this.indexBucket].carouselArray)
+    );
+  }
+
   // Next of Stepper - Next bucket
   goForward(stepper: MatStepper) {
     if (this.indexBucket < this.noOfBuckets - 1) {
-      this.bucketStates[this.indexBucket] = JSON.parse(JSON.stringify(this.bucket.currentBucket));
-      this.carouselStates[this.indexBucket] = JSON.parse(JSON.stringify(this.bucket.carouselArray));
-      this.indexBucket = this.indexBucket + 1
+      this.saveState(this.bucketQueryList.toArray());
+      this.indexBucket = this.indexBucket + 1;
       stepper.next();
       this.progressValue += this.progressStepCost;
-      console.log(this.bucketStates)
-      console.log(this.carouselStates)
+      //POST REQ
     }
   }
 
   // Back of Stepper - Previous bucket
   goBack(stepper: MatStepper) {
     if (this.indexBucket > 0) {
-      this.bucketStates[this.indexBucket] = JSON.parse(JSON.stringify(this.bucket.currentBucket));
-      this.carouselStates[this.indexBucket] = JSON.parse(JSON.stringify(this.bucket.carouselArray));
+      this.saveState(this.bucketQueryList.toArray());
       this.indexBucket = this.indexBucket - 1;
       stepper.previous();
       this.progressValue -= this.progressStepCost;
-      console.log(this.bucketStates)
-      console.log(this.carouselStates)
+      //POST REQ
     }
   }
 }
