@@ -4,16 +4,25 @@ import { Islide } from './../../models/bucket';
 import { MatDialog } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
 
+declare var $: any;
+
 @Component({
   selector: 'app-bucket',
   templateUrl: './bucket.component.html',
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
-  // index of the current bucket
+  // getting the index of the current bucket from the parent
   @Input() indexBucket: number;
-  // number of total buckets
+
+  // getting the number of total buckets from the parent
   @Input() noOfBuckets: number;
+
+  // getting the state of the bucket array from the parent
+  @Input() bucketStates: string[];
+
+  // getting the state of the carousel array from the parent
+  @Input() carouselStates: any[];
 
   //Bucket IDs
   bucketID: string[];
@@ -46,10 +55,13 @@ export class BucketComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.indexCarousel = 0;
-    this.currentBucket = [];
     this.bucketID = [];
     this.carouselID = [];
     this.slideCarouselID = [];
+
+    // initializing the carousel template
+    // here, map() function is used to concatenate a number in-front of each slide item
+    // that number is used for the logic inside drop() function
     this.carouselTemplate = [
       {
         name: 'Gender',
@@ -82,17 +94,34 @@ export class BucketComponent implements OnInit {
         slideItems: this.severityArray.map((x) => '6' + x),
       },
     ];
-    this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
+
+    if (typeof this.bucketStates === 'undefined') {
+      //check the state received by the parent is undefined
+      // if so deep copy the template array into the carouselArray and initialize an empty bucket
+      this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
+      this.currentBucket = [];
+    } else if (typeof this.bucketStates[this.indexBucket] === 'undefined') {
+      // check the bucket relevant to the current indexBucket is undefined
+      // if so deep copy the template array into the carouselArray and initialize an empty bucket
+      this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
+      this.currentBucket = [];
+    } else {
+      // restore the previous state
+      // deep clone the bucket array got from the parent in to the current bucket
+      this.currentBucket = JSON.parse(JSON.stringify(this.bucketStates[this.indexBucket]));
+      // deep clone the carousel array got from the parent in to the current carousel array
+      this.carouselArray = JSON.parse(JSON.stringify(this.carouselStates[this.indexBucket]));
+    }
   }
 
   ngOnInit(): void {}
 
   drop(event: any) {
     if (event.previousContainer !== event.container) {
-      // get the current carousel index as string
+      // get the current carousel index as a string
       let myIndex: string = this.indexCarousel.toString();
 
-      // get the value that dragged over
+      // get the value of the item that dragged over and trim its blank spaces
       let pattern = event.item.element.nativeElement.textContent.trim();
 
       // filter carousel template array in such a way that it returns a new array without the "pattern" (the value that dragged over)
@@ -105,8 +134,9 @@ export class BucketComponent implements OnInit {
       ].slideItems.filter(function (str) {
         return str.indexOf(pattern) === -1;
       });
+
       // this will remove all the items that starts with the "myIndex"
-      // this will remove all the previously dragged items from the same carousel index
+      // (items that starts with the "myIndex") = (previously dragged items from the same carousel index)
       let newBucket = this.currentBucket.filter(function (str) {
         return str.indexOf(myIndex) === -1;
       });
@@ -114,18 +144,42 @@ export class BucketComponent implements OnInit {
       // this will transfer the currently dragged item from the carousel to the bucket
       this.currentBucket = [...newBucket, this.indexCarousel + pattern];
       this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
+
+      // new array that hold boolean values which checks whether a single slide is incomplete or not
+      let tempArray = this.carouselArray.map(
+        (slide, index) =>
+          slide.slideItems.length ===
+          this.carouselTemplate[index].slideItems.length
+      );
+
+      // the index that contains a true for an incomplete slide
+      let incompleteSlide = tempArray.indexOf(true);
+
+      // if there are incomplete slides, then transfer into that specific slide automatically
+      if (incompleteSlide) {
+        // find the carousel by ID using jquery an use default carousel methods to navigate
+        $('#' + this.addIDSlideCarousel()).carousel(incompleteSlide);
+        // set the index of the incomplete slide as the current carousel index
+        this.indexCarousel = incompleteSlide;
+      }
     }
   }
 
   // Carousel arrow click Next & Back
   onClick(button) {
     if (button === 'Previous') {
+      // wrapping around
       if (this.indexCarousel === 0) {
         this.indexCarousel = this.carouselArray.length;
       }
+
+      // decrementing index
       this.indexCarousel = this.indexCarousel - 1;
     } else {
+      //incrementing index
       this.indexCarousel = this.indexCarousel + 1;
+
+      // wrapping around
       if (this.indexCarousel === this.carouselArray.length) {
         this.indexCarousel = 0;
       }
@@ -133,34 +187,39 @@ export class BucketComponent implements OnInit {
   }
 
   openDialog(): void {
+    // create the dialog
     const dialogRef = this.dialog.open(BucketDialogComponent, {
       width: '250px',
       data: { bucket: this.currentBucket },
     });
 
+    // subscribe to dialogClosed event
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
   }
 
-  //update current  bucket filled percentage
+  //update current bucket filled percentage
   updateCurrentBucketFilledPercentage(val: number) {
     this.bucketProgressPercentage =
       (this.bucketProgressValue = val / this.carouselTemplate.length) * 100;
   }
 
+  // add a carousel container ID - used for drag & drop
   addIDCarousel() {
     let ID = 'carouselContainer' + this.indexBucket;
     this.carouselID.push(ID);
     return ID;
   }
 
+  // add a bucket ID - used for drag & drop
   addIDBucket() {
     let ID = 'bucketContainer' + this.indexBucket;
     this.bucketID.push(ID);
     return ID;
   }
 
+  // add a carousel slide ID - used for carousel arrows
   addIDSlideCarousel() {
     let ID = 'slideCarousel' + this.indexBucket;
     this.slideCarouselID.push(ID);
