@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatChipsModule } from '@angular/material/chips';
+import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { LandingModule } from './component/landing/landing.module';
@@ -25,6 +26,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { BucketComponent } from './component/bucket/bucket.component';
 import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
 import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
+import { EndPageComponent } from './component/end-page/end-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.c
     BucketComponent,
     BucketStepperComponent,
     BucketDialogComponent,
+    EndPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,8 @@ import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.c
     MatProgressSpinnerModule,
     MatGridListModule,
     MatChipsModule,
+    ToastrModule.forRoot({ preventDuplicates: true }),
+    ToastContainerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,32 +1,33 @@
 <div class="stepper-container">
 
-    <!-- stepper -->
-    <mat-horizontal-stepper linear='true' #stepper>
+  <!-- stepper -->
+  <mat-horizontal-stepper linear='true' #stepper>
 
-        <!-- step -->
-        <!-- dynamically generate all the bucket steps -->
-        <mat-step *ngFor="let item of members; let i = index;">
+    <!-- step -->
+    <!-- dynamically generate all the bucket steps -->
+    <mat-step *ngFor="let item of members; let i = index;">
 
-            <!-- bucket component -->
-            <!-- passing values to the child from the parent -->
-            <app-bucket [indexBucket]="i" [noOfBuckets]="this.noOfBuckets" [bucketStates]="this.bucketStates"
-                [carouselStates]="this.carouselStates" #cmp>
-            </app-bucket>
+      <!-- bucket component -->
+      <!-- passing values to the child from the parent -->
+      <app-bucket [indexBucket]="i" [noOfBuckets]="this.noOfBuckets" [bucketStates]="this.bucketStates"
+        [carouselStates]="this.carouselStates" #cmp>
+      </app-bucket>
 
-        </mat-step>
+    </mat-step>
 
-    </mat-horizontal-stepper>
+  </mat-horizontal-stepper>
 
-    <div class="fixed-bottom">
-        <!-- progress bar -->
-        <mat-progress-bar color="primary" mode="'determinate'" [value]="progressValue"></mat-progress-bar>
+  <div class="fixed-bottom">
+    <!-- progress bar -->
+    <mat-progress-bar color="primary" mode="'determinate'" [value]="progressValue"></mat-progress-bar>
 
-        <!-- next/previous bucket of the stepper] -->
-        <div class="container d-flex justify-content-around p-2 stepper-button-container">
-            <button mat-button (click)="goBack(stepper)">Back</button>
-            <button class="bucket-name" mat-button (click)="openDialog()">Bucket {{ indexBucket+1 }} of {{ noOfBuckets }}</button>
-            <button mat-button (click)="goForward(stepper)">Next</button>
-        </div>
+    <!-- next/previous bucket of the stepper] -->
+    <div class="container d-flex justify-content-around p-2 stepper-button-container">
+      <button mat-button (click)="goBack(stepper)">Back</button>
+      <button class="bucket-name" mat-button (click)="openDialog()">Bucket {{ indexBucket+1 }} of
+        {{ noOfBuckets }}</button>
+      <button mat-button (click)="goForward(stepper)">Next</button>
     </div>
-
+  </div>
+  <div toastContainer></div>
 </div>

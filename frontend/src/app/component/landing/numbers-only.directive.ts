@@ -5,7 +5,12 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class StrictNumberOnlyDirective {
   private regex: RegExp = new RegExp(/^[0-9]+([0-9]*){0,1}$/g); //Decimal Number
-  private specialKeys: Array<string> = ['Backspace', 'ArrowLeft', 'ArrowRight'];
+  private specialKeys: Array<string> = [
+    'Backspace',
+    'ArrowLeft',
+    'ArrowRight',
+    'enter',
+  ];
   constructor(private elementRef: ElementRef) {}
 
   /**
@@ -14,6 +19,7 @@ export class StrictNumberOnlyDirective {
    */
   @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
     if (this.specialKeys.indexOf(event.key) !== -1) {
+      console.log(this.specialKeys.indexOf(event.key));
       return;
     }
     const inputValue: string = this.elementRef.nativeElement.value.concat(

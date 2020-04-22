@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Islide } from './../../models/bucket';
 import { MatDialog } from '@angular/material/dialog';
@@ -143,6 +143,8 @@ export class BucketComponent implements OnInit {
 
       // this will transfer the currently dragged item from the carousel to the bucket
       this.currentBucket = [...newBucket, this.indexCarousel + pattern];
+
+      //updates the current bucket filled progress value
       this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
 
       // new array that hold boolean values which checks whether a single slide is incomplete or not

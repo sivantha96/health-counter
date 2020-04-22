@@ -1,10 +1,18 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+  Directive,
+  ViewChild,
+} from '@angular/core';
 import { PostData } from 'src/app/models/bucket';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { BucketComponent } from '../bucket/bucket.component';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
+import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bucket-stepper',
@@ -14,6 +22,10 @@ import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component'
 export class BucketStepperComponent implements OnInit {
   // getting the child components with id = 'cmp' as an iterable list
   @ViewChildren('cmp') bucketQueryList: QueryList<BucketComponent>;
+
+  //find the separate container for alert toaster
+  @ViewChild(ToastContainerDirective, { static: true })
+  toastContainer: ToastContainerDirective;
 
   // Data of a single person - For POST Req
   postData: PostData;
@@ -37,9 +49,15 @@ export class BucketStepperComponent implements OnInit {
   bucketStates: string[];
 
   // Array to hold carouselStates
-  carouselStates: any[]
+  carouselStates: any[];
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+  constructor(
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
+    this.carouselStates = [];
     this.bucketStates = [];
     this.carouselStates = [];
     this.indexBucket = 0;
@@ -54,6 +72,9 @@ export class BucketStepperComponent implements OnInit {
         console.log(error);
       }
     });
+
+    //initialize  alert toast container
+    this.toastr.overlayContainer = this.toastContainer;
 
     // Setting number of buckets according to the received number of family members
     this.noOfBuckets = +this.postData.family_members;
@@ -95,6 +116,18 @@ export class BucketStepperComponent implements OnInit {
       // ----------------------------------------------
       // ----------------------------------------------
       // ----------------------------------------------
+      if (!this.isBucketFull()) {
+        this.showBucketNoFilledAlert();
+      } else {
+        if (this.indexBucket < this.noOfBuckets - 1) {
+          this.saveState(this.bucketQueryList.toArray());
+          this.indexBucket = this.indexBucket + 1;
+          stepper.next();
+          this.progressValue += this.progressStepCost;
+          //POST REQ
+          // this.isBucketFull=false;
+        }
+      }
     }
   }
 
@@ -120,12 +153,50 @@ export class BucketStepperComponent implements OnInit {
     // create the dialog
     const dialogRef = this.dialog.open(BucketDialogComponent, {
       width: '250px',
-      data: { bucket: this.bucketQueryList.toArray()[this.indexBucket].currentBucket },
+      data: {
+        bucket: this.bucketQueryList.toArray()[this.indexBucket].currentBucket,
+      },
     });
 
     // subscribe to dialogClosed event
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
+  }
+
+  //submitter at the last step
+  onDone(): void {
+    if (!this.isBucketFull()) {
+      this.showBucketNoFilledAlert();
+    } else {
+      this.router.navigate(['./end'], {});
+    }
+  }
+
+  // is the current Bucket completely filled
+  isBucketFull(): boolean {
+    let bucketArr = this.bucketQueryList;
+    if (bucketArr === undefined) {
+      return false;
+    } else {
+      return bucketArr.toArray()[this.indexBucket].currentBucket.length ===
+        bucketArr.toArray()[this.indexBucket].carouselArray.length
+        ? true
+        : false;
+    }
+  }
+
+  //show alert toaster - if bucket not completed
+  showBucketNoFilledAlert() {
+    this.toastr.warning(
+      'Please complete the current bucket',
+      'Incomplete Bucket',
+      {
+        timeOut: 2000,
+        closeButton: true,
+        positionClass: '.toast-center-center',
+        tapToDismiss: true,
+      }
+    );
   }
 }

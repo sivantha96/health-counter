@@ -7,8 +7,8 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { IBoolean, IPostData } from 'src/app/models/landing';
-import { MatStepper} from '@angular/material/stepper';
-import {MatChipsModule, MatChip} from '@angular/material/chips'; 
+import { MatStepper } from '@angular/material/stepper';
+import { MatChipsModule, MatChip } from '@angular/material/chips';
 
 @Component({
   selector: 'app-landing',
@@ -30,10 +30,10 @@ export class LandingComponent implements OnInit {
     closeContact: new FormControl('', Validators.required),
   });
 
-  @Output() changed: EventEmitter<string> = new EventEmitter<string>()
+  @Output() changed: EventEmitter<string> = new EventEmitter<string>();
 
   set foreign(val) {
-    this.dataForm.get('foreignContact').setValue(val)
+    this.dataForm.get('foreignContact').setValue(val);
     this.changed.emit(this.dataForm.get('foreignContact').value);
   }
 
@@ -42,11 +42,9 @@ export class LandingComponent implements OnInit {
     return this.dataForm.get('foreignContact').value;
   }
 
+  constructor(private router: Router, activatedRoute: ActivatedRoute) {}
 
-
-  constructor(private router: Router, activatedRoute: ActivatedRoute) { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   goBack(stepper: MatStepper) {
     stepper.previous();
@@ -56,13 +54,10 @@ export class LandingComponent implements OnInit {
     stepper.next();
   }
 
-  onSelection(ans:IBoolean  , stepper:MatStepper, element:any){
-    element.setValue(ans.value)
+  onSelection(ans: IBoolean, stepper: MatStepper, element: any) {
+    element.setValue(ans.value);
     stepper.next();
   }
-
-
-
 
   onFormSubmit(): void {
     const submitData = Object.assign({}, this.dataForm.value);
