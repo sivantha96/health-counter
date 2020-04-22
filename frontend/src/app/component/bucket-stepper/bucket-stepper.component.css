@@ -1,3 +1,15 @@
 :host ::ng-deep .mat-horizontal-stepper-header-container {
   display: none !important;
 }
+
+.stepper-container {
+  padding: 2%;
+}
+
+.bucket-name {
+  font-size: large;
+}
+
+.stepper-button-container {
+  background-color: white;
+}

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { BucketComponent } from '../bucket/bucket.component';
+import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
 
 @Component({
   selector: 'app-bucket-stepper',
@@ -113,5 +114,18 @@ export class BucketStepperComponent implements OnInit {
       // ----------------------------------------------
       // ----------------------------------------------
     }
+  }
+
+  openDialog(): void {
+    // create the dialog
+    const dialogRef = this.dialog.open(BucketDialogComponent, {
+      width: '250px',
+      data: { bucket: this.bucketQueryList.toArray()[this.indexBucket].currentBucket },
+    });
+
+    // subscribe to dialogClosed event
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }

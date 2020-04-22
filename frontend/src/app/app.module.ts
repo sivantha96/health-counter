@@ -12,11 +12,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
-import {MatProgressBarModule} from '@angular/material/progress-bar'; 
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
-
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppComponent } from './app.component';
 import { LandingModule } from './component/landing/landing.module';
@@ -51,9 +51,9 @@ import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.c
     MatStepperModule,
     MatProgressBarModule,
     MatDialogModule,
-    MatProgressSpinnerModule
-    
-   
+    MatProgressSpinnerModule,
+    MatGridListModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
