@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from './../../models/bucket.dialog';
+import { Islide } from 'src/app/models/bucket';
 
 @Component({
   selector: 'app-bucket-dialog',
@@ -9,6 +10,11 @@ import { DialogData } from './../../models/bucket.dialog';
 })
 export class BucketDialogComponent implements OnInit {
   bucketDisplayItems: any[];
+  originalBucketDisplayItems: any[]
+  currentBucket: string[]
+  carouselTemplate: Islide[]
+  isNoChange: boolean;
+  deletedItems: any[]
 
   constructor(
     public dialogRef: MatDialogRef<BucketDialogComponent>,
@@ -26,22 +32,35 @@ export class BucketDialogComponent implements OnInit {
       };
       this.bucketDisplayItems.push(newObject);
     });
+    this.originalBucketDisplayItems = JSON.parse(JSON.stringify(this.bucketDisplayItems))
+    this.currentBucket = [...data.currentBucket]
+    this.isNoChange = true
+    this.deletedItems = []
   }
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.dialogRef.close(this.data);
+    const sendData = {
+      isNoChange: this.isNoChange,
+      currentBucket: this.currentBucket,
+      deletedItems: this.deletedItems,
+    }
+    this.dialogRef.close(sendData);
   }
 
   onCancel(): void {
+    if (!this.isNoChange) {
+      this.bucketDisplayItems = JSON.parse(JSON.stringify(this.originalBucketDisplayItems))
+      this.currentBucket = this.data.currentBucket
+    }
     this.dialogRef.close();
   }
 
   onDelete(item) {
-    this.data.deletedItems.push(this.data.currentBucket[item]);
+    this.deletedItems.push(this.currentBucket[item]);
     this.bucketDisplayItems.splice(item, 1);
-    this.data.currentBucket.splice(item, 1);
-    this.data.isNoChange = false;
+    this.currentBucket.splice(item, 1);
+    this.isNoChange = false;
   }
 }

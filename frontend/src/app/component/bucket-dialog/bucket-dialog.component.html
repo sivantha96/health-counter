@@ -1,7 +1,7 @@
 <div class="text-center dialog-header">Bucket {{ data.indexBucket + 1 }}</div>
 <div mat-dialog-content>
     <div class="bucket-container container">
-        <div class="no-item text-center" *ngIf="data.currentBucket.length === 0">
+        <div class="no-item text-center" *ngIf="this.currentBucket.length === 0">
             Bucket is empty
         </div>
         <ul class="list-group">
@@ -24,7 +24,7 @@
     </div>
 </div>
 <div mat-dialog-actions align="center" class="action-button-container">
-    <button mat-raised-button [mat-dialog-close]="data" [disabled]="data.isNoChange"
+    <button mat-raised-button [mat-dialog-close]="data" [disabled]="this.isNoChange"
         (click)="onSubmit()">Submit</button>
     <button mat-raised-button (click)="onCancel()">Cancel</button>
 </div>
