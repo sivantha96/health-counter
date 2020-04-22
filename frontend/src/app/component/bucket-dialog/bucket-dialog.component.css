@@ -1,0 +1,35 @@
+.no-item {
+    height: 100px;
+}
+
+.action-button-container {
+    margin-top: 3%;
+}
+
+.dialog-header {
+    margin-bottom: 4%;
+    font-size: large;
+}
+
+.list-group{
+    max-height: 50vh;
+    overflow: 'scroll'
+}
+
+.item-name {
+    font-size: medium;
+    margin-bottom: 0% !important;
+}
+
+.item-value {
+    overflow: hidden;
+    font-size: smaller;
+}
+
+.list-group-item {
+    padding-top: 1.5% !important;
+    padding-right: 0% !important;
+    padding-bottom: 1.5% !important;
+    padding-left: 2% !important;
+}
+

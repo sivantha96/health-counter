@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { PostData } from 'src/app/models/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { BucketComponent } from '../bucket/bucket.component';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
@@ -138,23 +138,7 @@ export class BucketStepperComponent implements OnInit {
   }
 
   openDialog(): void {
-    // create the dialog
-    const dialogRef = this.dialog.open(BucketDialogComponent, {
-      width: '250px',
-      data: {
-        currentBucket: this.bucketQueryList.toArray()[this.indexBucket]
-          .currentBucket,
-        indexBucket: this.bucketQueryList.toArray()[this.indexBucket]
-          .indexBucket,
-        carouselTemplate: this.bucketQueryList.toArray()[this.indexBucket]
-          .carouselTemplate,
-      },
-    });
-
-    // subscribe to dialogClosed event
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    this.bucketQueryList.toArray()[this.indexBucket].openDialog()
   }
 
   //submitter at the last step
