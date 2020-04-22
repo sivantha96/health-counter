@@ -29,10 +29,12 @@
         <button class="bucket-name" mat-button (click)="openDialog()">
           Bucket {{ indexBucket + 1 }} of {{ noOfBuckets }}
         </button>
-        <button *ngIf="indexBucket + 1 !== noOfBuckets" mat-button (click)="goForward(stepper)">
+        
+       
+        <button *ngIf="indexBucket + 1 !== noOfBuckets" mat-button (click)="goForward(stepper)" [ngClass]="{'disabledButton' : !isBucketFull()}" >
           Next
         </button>
-        <button *ngIf="indexBucket + 1 === noOfBuckets" mat-button (click)="onDone()">
+        <button *ngIf="indexBucket + 1 === noOfBuckets" mat-button (click)="onDone()" [ngClass]="{'disabledButton' : !isBucketFull()}">
           Done
         </button>
       </div>
@@ -40,6 +42,5 @@
 
   </div>
 
-  <!-- alert -->
-  <div toastContainer></div>
+  
 </div>
