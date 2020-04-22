@@ -1,8 +1,8 @@
 <div class="text-center dialog-header">Bucket {{ data.indexBucket + 1 }}</div>
 <div mat-dialog-content>
     <div class="bucket-container container">
-        <div class="no-item text-center" *ngIf="data.currentBucket.length === 0">
-            You haven't added anything yet
+        <div class="no-item text-center" *ngIf="this.currentBucket.length === 0">
+            Bucket is empty
         </div>
         <ul class="list-group">
 
@@ -13,8 +13,8 @@
                     <div class="item-value">{{ this.bucketItem.value }}</div>
                 </div>
                 <span class="badge">
-                    <button mat-icon-button color="warn">
-                        <mat-icon (click)="onDelete(i)">cancel</mat-icon>
+                    <button mat-icon-button color="warn" (click)="onDelete(i)">
+                        <mat-icon>cancel</mat-icon>
                     </button>
                 </span>
             </li>
@@ -24,7 +24,7 @@
     </div>
 </div>
 <div mat-dialog-actions align="center" class="action-button-container">
-    <button mat-raised-button [mat-dialog-close]="data" [disabled]="data.isNoChange"
+    <button mat-raised-button [mat-dialog-close]="data" [disabled]="this.isNoChange"
         (click)="onSubmit()">Submit</button>
     <button mat-raised-button (click)="onCancel()">Cancel</button>
 </div>
