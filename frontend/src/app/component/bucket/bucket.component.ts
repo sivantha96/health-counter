@@ -156,23 +156,27 @@ export class BucketComponent implements OnInit {
 
       //updates the current bucket filled progress value
       this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
+      this.goToIncomplete();
+    }
+  }
 
-      // new array that hold boolean values which checks whether a single slide is incomplete or not
-      let tempArray = this.carouselArray.map(
-        (slide, index) =>
-          slide.slideItems.length ===
-          this.carouselTemplate[index].slideItems.length
-      );
+  //go to an incomplete slide
+  goToIncomplete() {
+    // new array that hold boolean values which checks whether a single slide is incomplete or not
+    let tempArray = this.carouselArray.map(
+      (slide, index) =>
+        slide.slideItems.length ===
+        this.carouselTemplate[index].slideItems.length
+    );
 
-      // the index that contains a true for an incomplete slide
-      let incompleteSlide = tempArray.indexOf(true);
-      // if there are incomplete slides, then transfer into that specific slide automatically
-      if (incompleteSlide >= 0) {
-        // find the carousel by ID using jquery an use default carousel methods to navigate
-        $('#' + this.addIDSlideCarousel()).carousel(incompleteSlide);
-        // set the index of the incomplete slide as the current carousel index
-        this.indexCarousel = incompleteSlide;
-      }
+    // the index that contains a true for an incomplete slide
+    let incompleteSlide = tempArray.indexOf(true);
+    // if there are incomplete slides, then transfer into that specific slide automatically
+    if (incompleteSlide >= 0) {
+      // find the carousel by ID using jquery an use default carousel methods to navigate
+      $('#' + this.addIDSlideCarousel()).carousel(incompleteSlide);
+      // set the index of the incomplete slide as the current carousel index
+      this.indexCarousel = incompleteSlide;
     }
   }
 
@@ -201,7 +205,7 @@ export class BucketComponent implements OnInit {
   openDialog(): void {
     // create the position of the dialog
     const dialogPosition: DialogPosition = {
-      top: '8%',
+      top: '5%',
     };
 
     // close all pre-opened dialogs
@@ -215,8 +219,6 @@ export class BucketComponent implements OnInit {
         currentBucket: this.currentBucket,
         indexBucket: this.indexBucket,
         carouselTemplate: JSON.parse(JSON.stringify(this.carouselTemplate)),
-        isNoChange: true,
-        deletedItems: [],
       },
       position: dialogPosition,
       autoFocus: false,
@@ -224,14 +226,17 @@ export class BucketComponent implements OnInit {
 
     // subscribe to dialogClosed event
     dialogRef.afterClosed().subscribe((data) => {
-      if (typeof data !== "undefined" && !data.isNoChange) {
-        this.currentBucket = [...data.currentBucket]
-        let tempArray = JSON.parse(JSON.stringify(data.deletedItems))
-        tempArray.forEach(element => {
+      if (typeof data !== 'undefined' && !data.isNoChange) {
+        this.currentBucket = [...data.currentBucket];
+        let tempArray = JSON.parse(JSON.stringify(data.deletedItems));
+        tempArray.forEach((element) => {
           let pattern = element.charAt(0);
-          this.carouselArray[pattern].slideItems = [...this.carouselTemplate[pattern].slideItems]
-        })
+          this.carouselArray[pattern].slideItems = [
+            ...this.carouselTemplate[pattern].slideItems,
+          ];
+        });
         this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
+        this.goToIncomplete()
       }
     });
   }
