@@ -1,62 +1,92 @@
-<div class="container">
-    <mat-card class="d-block">
-        <mat-horizontal-stepper linear='true'>
-            <mat-step>
-                <div cdkDropListGroup>
+<!-- drag&drop connected areas -->
+<div cdkDropListGroup>
+  <mat-grid-list cols="1" rowHeight="5vh">
+    <mat-grid-tile [rowspan]="9" gutterSize="5px">
+      <h1 class="slide-name">
+        {{ this.carouselArray[this.indexCarousel].name }}
+      </h1>
+      <a
+        class="carousel-control-prev"
+        href="#{{ addIDSlideCarousel() }}"
+        role="button"
+        data-slide="prev"
+        (click)="onClick('Previous')"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#{{ addIDSlideCarousel() }}"
+        role="button"
+        data-slide="next"
+        (click)="onClick('Next')"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
 
-                    <!-- symptoms -->
-                    <div class="carousel slide" id="symptomsCarousel" data-pause="true">
-                        <div class="carousel-inner">
-                            <div class="carousel-item" *ngFor="let symptoms of symptomsArray; first as isFirst" [ngClass]="isFirst ? 'active':'true'">
-                                <div 
-                                    class="row carousel-container" 
-                                    cdkDropList 
-                                    id="symptomList"
-                                    [cdkDropListConnectedTo]="['bucketList']" 
-                                    cdkDropListOrientation="horizontal"
-                                    [cdkDropListData]='symptoms'
-                                    cdkDropListSortingDisabled
-                                    (cdkDropListDropped)="drop($event)">
-                                    <div class="col symptom" *ngFor="let symptom of symptoms" cdkDrag>
-                                        <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
-                                        {{ symptom }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#symptomsCarousel" role="button" data-slide="prev"
-                            (click)="onClick('Previous')">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#symptomsCarousel" role="button" data-slide="next"
-                            (click)="onClick('Next')">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
+      <div
+        class="carousel slide"
+        id="{{ addIDSlideCarousel() }}"
+        data-pause="true"
+      >
+        <!-- carousel container -->
+        <div class="carousel-inner">
+          <div
+            class="carousel-item"
+            *ngFor="let slide of carouselArray; first as isFirst; let i = index"
+            [ngClass]="isFirst ? 'active' : 'true'"
+          >
+            <div
+              class="row justify-content-center container-fluid"
+              cdkDropList
+              [attr.id]="addIDCarousel()"
+              [cdkDropListConnectedTo]="bucketID"
+              cdkDropListOrientation="horizontal"
+              [cdkDropListData]="slide.slideItems"
+              cdkDropListSortingDisabled
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div
+                class="row"
+                *ngFor="let slideItem of slide.slideItems"
+                cdkDrag
+              >
+                <div class="col cdkPlaceholder" *cdkDragPlaceholder></div>
+                <div class="col slide-item">{{ slideItem.slice(1) }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-grid-tile>
 
-                <!-- empty spacer -->
-                <div style="height: 100px;" cdkDropList>
-                </div>
+    <mat-grid-tile [rowspan]="4">
+      <div
+        class="bucket-container d-flex align-items-center justify-content-center"
+        cdkDropList
+        [attr.id]="addIDBucket()"
+        [cdkDropListConnectedTo]="carouselID"
+        [cdkDropListData]="currentBucket"
+        (cdkDropListDropped)="drop($event)"
+        (click)="openDialog()"
+      >
+        <div class="progress" style="width: 50vw;">
+          <div
+            class="progress-bar progress-bar-animated progress-bar-striped"
+            role="progressbar"
+            [style.width.%]="bucketProgressPercentage"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-                <!-- bucket header-->
-                <h1>Family member No:1 Bucket</h1>
+  <!-- carousel -->
 
-                <!-- bucket -->
-                <div class="row" cdkDropList id="bucketList" [cdkDropListConnectedTo]="['symptomList']"
-                    [cdkDropListData]='bucket' (cdkDropListDropped)="drop($event)"
-                    style="height: 200px; border: 1px solid black;">
-                    <div class="column" *ngFor="let bucketItem of bucket" cdkDrag>{{ bucketItem }}</div>
-                </div>
-
-                <!-- next/previous bucket] -->
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </mat-step>
-        </mat-horizontal-stepper>
-    </mat-card>
+  <!-- carousel arrows -->
 </div>
