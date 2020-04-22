@@ -37,6 +37,13 @@
   background-color: burlywood;
   text-align: center;
   cursor: move;
-  width: 20vw;
-  margin: 1%;
+  /* width: 20vw; */
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  width: 15em;
+  border-radius: 1em;
+  padding: 0.3em;
+  font-size: 1em;
 }
