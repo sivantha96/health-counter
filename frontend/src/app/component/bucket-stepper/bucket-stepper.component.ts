@@ -146,7 +146,12 @@ export class BucketStepperComponent implements OnInit {
     const dialogRef = this.dialog.open(BucketDialogComponent, {
       width: '250px',
       data: {
-        bucket: this.bucketQueryList.toArray()[this.indexBucket].currentBucket,
+        currentBucket: this.bucketQueryList.toArray()[this.indexBucket]
+          .currentBucket,
+        indexBucket: this.bucketQueryList.toArray()[this.indexBucket]
+          .indexBucket,
+        carouselTemplate: this.bucketQueryList.toArray()[this.indexBucket]
+          .carouselTemplate,
       },
     });
 

@@ -12,6 +12,8 @@ declare var $: any;
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
+  audio: any;
+
   // getting the index of the current bucket from the parent
   @Input() indexBucket: number;
 
@@ -58,6 +60,9 @@ export class BucketComponent implements OnInit {
     this.bucketID = [];
     this.carouselID = [];
     this.slideCarouselID = [];
+    this.audio = new Audio();
+    this.audio.src = '../../../assets/button-click-sound-effect.wav';
+    this.audio.load();
 
     // initializing the carousel template
     // here, map() function is used to concatenate a number in-front of each slide item
@@ -68,7 +73,7 @@ export class BucketComponent implements OnInit {
         slideItems: ['Male', 'Female', 'Other'].map((x) => '0' + x),
       },
       {
-        name: 'Age',
+        name: 'Age group',
         slideItems: ['Infant', 'Child', 'Teenager', 'Adult', 'Elderly'].map(
           (x) => '1' + x
         ),
@@ -82,7 +87,7 @@ export class BucketComponent implements OnInit {
         slideItems: this.severityArray.map((x) => '3' + x),
       },
       {
-        name: 'itchy throat',
+        name: 'Itchy throat',
         slideItems: this.severityArray.map((x) => '4' + x),
       },
       {
@@ -172,6 +177,7 @@ export class BucketComponent implements OnInit {
 
   // Carousel arrow click Next & Back
   onClick(button) {
+    this.audio.play();
     if (button === 'Previous') {
       // wrapping around
       if (this.indexCarousel === 0) {
@@ -195,7 +201,11 @@ export class BucketComponent implements OnInit {
     // create the dialog
     const dialogRef = this.dialog.open(BucketDialogComponent, {
       width: '250px',
-      data: { bucket: this.currentBucket },
+      data: {
+        currentBucket: this.currentBucket,
+        indexBucket: this.indexBucket,
+        carouselTemplate: this.carouselTemplate,
+      },
     });
 
     // subscribe to dialogClosed event
