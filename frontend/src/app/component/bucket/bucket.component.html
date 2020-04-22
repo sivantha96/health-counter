@@ -1,63 +1,93 @@
 <!-- drag&drop connected areas -->
 <div cdkDropListGroup>
-    <mat-grid-list cols="1" rowHeight="5vh">
-        <mat-grid-tile [rowspan]=2 gutterSize="5px"></mat-grid-tile>
-        <mat-grid-tile [rowspan]=9 gutterSize="5px">
-            <h1 class="slide-name">{{ this.carouselArray[this.indexCarousel].name}}</h1>
-            <a class="carousel-control-prev" href="#{{ addIDSlideCarousel() }}" role="button" data-slide="prev"
-                (click)="onClick('Previous')">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#{{ addIDSlideCarousel() }}" role="button" data-slide="next"
-                (click)="onClick('Next')">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+  <mat-grid-list cols="1" rowHeight="5vh">
+    <mat-grid-tile [rowspan]="2" gutterSize="5px"></mat-grid-tile>
+    <mat-grid-tile [rowspan]="9" gutterSize="5px">
+      <h1 class="slide-name">
+        {{ this.carouselArray[this.indexCarousel].name }}
+      </h1>
+      <a
+        class="carousel-control-prev"
+        href="#{{ addIDSlideCarousel() }}"
+        role="button"
+        data-slide="prev"
+        (click)="onClick('Previous')"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#{{ addIDSlideCarousel() }}"
+        role="button"
+        data-slide="next"
+        (click)="onClick('Next')"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
 
-            <div class="carousel slide" id="{{ addIDSlideCarousel() }}" data-pause="true">
-                <!-- carousel container -->
-                <div class="carousel-inner">
-                    <div class="carousel-item" *ngFor="let slide of carouselArray; first as isFirst;let i = index;"
-                        [ngClass]="isFirst ? 'active':'true'">
-
-                        <div class="row justify-content-center container-fluid" cdkDropList [attr.id]="addIDCarousel()"
-                            [cdkDropListConnectedTo]="bucketID" cdkDropListOrientation="horizontal"
-                            [cdkDropListData]='slide.slideItems' cdkDropListSortingDisabled
-                            (cdkDropListDropped)="drop($event)">
-
-                            <div class="col" *ngFor="let slideItem of slide.slideItems" cdkDrag>
-                                <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
-                                <div class="slide-item">{{ slideItem.slice(1) }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div
+        class="carousel slide"
+        id="{{ addIDSlideCarousel() }}"
+        data-pause="true"
+      >
+        <!-- carousel container -->
+        <div class="carousel-inner">
+          <div
+            class="carousel-item"
+            *ngFor="let slide of carouselArray; first as isFirst; let i = index"
+            [ngClass]="isFirst ? 'active' : 'true'"
+          >
+            <div
+              class="row justify-content-center container-fluid"
+              cdkDropList
+              [attr.id]="addIDCarousel()"
+              [cdkDropListConnectedTo]="bucketID"
+              cdkDropListOrientation="horizontal"
+              [cdkDropListData]="slide.slideItems"
+              cdkDropListSortingDisabled
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div
+                class="col"
+                *ngFor="let slideItem of slide.slideItems"
+                cdkDrag
+              >
+                <div class="cdkPlaceholder" *cdkDragPlaceholder></div>
+                <div class="slide-item">{{ slideItem.slice(1) }}</div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </mat-grid-tile>
 
+    <mat-grid-tile [rowspan]="4">
+      <div
+        class="bucket-container d-flex align-items-center justify-content-center"
+        cdkDropList
+        [attr.id]="addIDBucket()"
+        [cdkDropListConnectedTo]="carouselID"
+        [cdkDropListData]="currentBucket"
+        (cdkDropListDropped)="drop($event)"
+        (click)="openDialog()"
+      >
+        <div class="progress" style="width: 50vw;">
+          <div
+            class="progress-bar progress-bar-animated progress-bar-striped"
+            role="progressbar"
+            [style.width.%]="bucketProgressPercentage"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-        </mat-grid-tile>
+  <!-- carousel -->
 
-        <mat-grid-tile [rowspan]=4>
-            <div class="bucket-container d-flex align-items-center justify-content-center" cdkDropList
-                [attr.id]="addIDBucket()" [cdkDropListConnectedTo]="carouselID" [cdkDropListData]='currentBucket'
-                (cdkDropListDropped)="drop($event)" (click)=openDialog()>
-                <div class="progress" style="width: 50vw">
-                    <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar"
-                        [style.width.%]=bucketProgressPercentage aria-valuenow="25" aria-valuemin="0"
-                        aria-valuemax="100">
-                    </div>
-                </div>
-            </div>
-        </mat-grid-tile>
-    </mat-grid-list>
-
-    <!-- carousel -->
-
-    <!-- carousel arrows -->
-
-
-
-
-
+  <!-- carousel arrows -->
 </div>

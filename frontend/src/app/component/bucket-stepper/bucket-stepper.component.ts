@@ -103,30 +103,22 @@ export class BucketStepperComponent implements OnInit {
 
   // Next of Stepper - Next bucket
   goForward(stepper: MatStepper) {
-    if (this.indexBucket < this.noOfBuckets - 1) {
-      // pass the iterable list as an array to the saveState method
-      this.saveState(this.bucketQueryList.toArray());
+    if (!this.isBucketFull()) {
+      this.showBucketNoFilledAlert();
+    } else {
+      if (this.indexBucket < this.noOfBuckets - 1) {
+        // pass the iterable list as an array to the saveState method
+        this.saveState(this.bucketQueryList.toArray());
 
-      // next
-      this.indexBucket = this.indexBucket + 1;
-      stepper.next();
-      this.progressValue += this.progressStepCost;
+        // next
+        this.indexBucket = this.indexBucket + 1;
+        stepper.next();
+        this.progressValue += this.progressStepCost;
 
-      //POST REQ
-      // ----------------------------------------------
-      // ----------------------------------------------
-      // ----------------------------------------------
-      if (!this.isBucketFull()) {
-        this.showBucketNoFilledAlert();
-      } else {
-        if (this.indexBucket < this.noOfBuckets - 1) {
-          this.saveState(this.bucketQueryList.toArray());
-          this.indexBucket = this.indexBucket + 1;
-          stepper.next();
-          this.progressValue += this.progressStepCost;
-          //POST REQ
-          // this.isBucketFull=false;
-        }
+        //POST REQ
+        // ----------------------------------------------
+        // ----------------------------------------------
+        // ----------------------------------------------
       }
     }
   }
@@ -194,7 +186,7 @@ export class BucketStepperComponent implements OnInit {
       {
         timeOut: 2000,
         closeButton: true,
-        positionClass: '.toast-center-center',
+        positionClass: '.toast-bottom-full-width',
         tapToDismiss: true,
       }
     );
