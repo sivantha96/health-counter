@@ -3,8 +3,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
-  Directive,
-  ViewChild,
+  
 } from '@angular/core';
 import { PostData } from 'src/app/models/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +11,7 @@ import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { BucketComponent } from '../bucket/bucket.component';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
-import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bucket-stepper',
@@ -23,9 +22,7 @@ export class BucketStepperComponent implements OnInit {
   // getting the child components with id = 'cmp' as an iterable list
   @ViewChildren('cmp') bucketQueryList: QueryList<BucketComponent>;
 
-  //find the separate container for alert toaster
-  @ViewChild(ToastContainerDirective, { static: true })
-  toastContainer: ToastContainerDirective;
+ 
 
   // Data of a single person - For POST Req
   postData: PostData;
@@ -73,8 +70,7 @@ export class BucketStepperComponent implements OnInit {
       }
     });
 
-    //initialize  alert toast container
-    this.toastr.overlayContainer = this.toastContainer;
+    
 
     // Setting number of buckets according to the received number of family members
     this.noOfBuckets = +this.postData.family_members;
@@ -169,13 +165,14 @@ export class BucketStepperComponent implements OnInit {
 
   //show alert toaster - if bucket not completed
   showBucketNoFilledAlert() {
-    this.toastr.warning(
+    this.toastr.info(
       'Please complete the current bucket',
-      'Incomplete Bucket',
+      'Incomplete',
       {
+        // toastClass:"ngx-toast",
         timeOut: 2000,
-        closeButton: true,
-        positionClass: '.toast-bottom-full-width',
+        // closeButton: true,
+        positionClass: 'toast-center-center',
         tapToDismiss: true,
       }
     );
