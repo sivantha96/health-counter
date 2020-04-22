@@ -1,9 +1,17 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+  Directive,
+  ViewChild,
+} from '@angular/core';
 import { PostData } from 'src/app/models/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { BucketComponent } from '../bucket/bucket.component';
+import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bucket-stepper',
@@ -12,6 +20,10 @@ import { BucketComponent } from '../bucket/bucket.component';
 })
 export class BucketStepperComponent implements OnInit {
   @ViewChildren('cmp') bucketQueryList: QueryList<BucketComponent>;
+
+  //find the separate container for alert toaster
+  @ViewChild(ToastContainerDirective, { static: true })
+  toastContainer: ToastContainerDirective;
 
   // Data of a single person - For POST Req
   postData: PostData;
@@ -40,7 +52,8 @@ export class BucketStepperComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
   ) {
     this.carouselStates = [];
     this.bucketStates = [];
@@ -56,6 +69,9 @@ export class BucketStepperComponent implements OnInit {
         console.log(error);
       }
     });
+
+    //initialize  alert toast container
+    this.toastr.overlayContainer = this.toastContainer;
 
     // Setting number of buckets according to the received number of family members
     this.noOfBuckets = +this.postData.family_members;
@@ -87,13 +103,17 @@ export class BucketStepperComponent implements OnInit {
 
   // Next of Stepper - Next bucket
   goForward(stepper: MatStepper) {
-    if (this.indexBucket < this.noOfBuckets - 1) {
-      this.saveState(this.bucketQueryList.toArray());
-      this.indexBucket = this.indexBucket + 1;
-      stepper.next();
-      this.progressValue += this.progressStepCost;
-      //POST REQ
-      // this.isBucketFull=false;
+    if (!this.isBucketFull()) {
+      this.showBucketNoFilledAlert();
+    } else {
+      if (this.indexBucket < this.noOfBuckets - 1) {
+        this.saveState(this.bucketQueryList.toArray());
+        this.indexBucket = this.indexBucket + 1;
+        stepper.next();
+        this.progressValue += this.progressStepCost;
+        //POST REQ
+        // this.isBucketFull=false;
+      }
     }
   }
 
@@ -110,7 +130,11 @@ export class BucketStepperComponent implements OnInit {
 
   //submitter at the last step
   onDone(): void {
-    this.router.navigate(['./end'], {});
+    if (!this.isBucketFull()) {
+      this.showBucketNoFilledAlert();
+    } else {
+      this.router.navigate(['./end'], {});
+    }
   }
 
   // is the current Bucket completely filled
@@ -124,5 +148,19 @@ export class BucketStepperComponent implements OnInit {
         ? true
         : false;
     }
+  }
+
+  //show alert toaster - if bucket not completed
+  showBucketNoFilledAlert() {
+    this.toastr.warning(
+      'Please complete the current bucket',
+      'Incomplete Bucket',
+      {
+        timeOut: 2000,
+        closeButton: true,
+        positionClass: '.toast-center-center',
+        tapToDismiss: true,
+      }
+    );
   }
 }

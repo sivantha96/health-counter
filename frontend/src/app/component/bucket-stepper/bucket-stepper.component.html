@@ -1,32 +1,47 @@
 <div class="container">
+  <!-- card -->
+  <mat-card class="d-block">
+    <!-- stepper -->
+    <mat-horizontal-stepper linear="true" #stepper>
+      <!-- step -->
+      <mat-step *ngFor="let item of members; let i = index">
+        <!-- bucket component -->
+        <app-bucket
+          [indexBucket]="i"
+          [noOfBuckets]="this.noOfBuckets"
+          #cmp
+        ></app-bucket>
+      </mat-step>
+    </mat-horizontal-stepper>
 
-    <!-- card -->
-    <mat-card class="d-block">
+    <!-- progress bar -->
+    <mat-progress-bar
+      color="primary"
+      mode="'determinate'"
+      [value]="progressValue"
+    >
+    </mat-progress-bar>
 
-        <!-- stepper -->
-        <mat-horizontal-stepper linear='true' #stepper>
-
-            <!-- step -->
-            <mat-step *ngFor="let item of members; let i = index;">
-
-                <!-- bucket component -->
-                <app-bucket [indexBucket]="i" [noOfBuckets]="this.noOfBuckets" #cmp></app-bucket>
-
-            </mat-step>
-
-        </mat-horizontal-stepper>
-
-        <!-- progress bar -->
-        <mat-progress-bar color="primary" mode="'determinate'" [value]="progressValue">
-        </mat-progress-bar>
-
-        <!-- next/previous bucket] -->
-        <div>
-            <button *ngIf='indexBucket!=0' mat-button (click)="goBack(stepper)">Back</button>
-            <button *ngIf='indexBucket+1!= noOfBuckets' [disabled]='!isBucketFull()' mat-button (click)="goForward(stepper)">Next</button>
-            <button *ngIf='indexBucket+1=== noOfBuckets' [disabled]='!isBucketFull()'  mat-button (click)='onDone()'>Done</button>
-        </div>
-
-    </mat-card>
-
+    <!-- next/previous bucket] -->
+    <div>
+      <button *ngIf="indexBucket != 0" mat-button (click)="goBack(stepper)">
+        Back
+      </button>
+      <button
+        *ngIf="indexBucket + 1 != noOfBuckets"
+        mat-button
+        (click)="goForward(stepper)"
+      >
+        Next
+      </button>
+      <button
+        *ngIf="indexBucket + 1 === noOfBuckets"
+        mat-button
+        (click)="onDone()"
+      >
+        Done
+      </button>
+    </div>
+    <div toastContainer></div>
+  </mat-card>
 </div>

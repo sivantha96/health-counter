@@ -1,4 +1,3 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,11 +12,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
-import {MatProgressBarModule} from '@angular/material/progress-bar'; 
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
-
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { LandingModule } from './component/landing/landing.module';
@@ -36,7 +34,7 @@ import { EndPageComponent } from './component/end-page/end-page.component';
     BucketComponent,
     BucketStepperComponent,
     BucketDialogComponent,
-    EndPageComponent
+    EndPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +52,9 @@ import { EndPageComponent } from './component/end-page/end-page.component';
     MatStepperModule,
     MatProgressBarModule,
     MatDialogModule,
-    MatProgressSpinnerModule
-    
-   
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot({ preventDuplicates: true }),
+    ToastContainerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
