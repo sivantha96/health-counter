@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Islide } from './../../models/bucket';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
+import { element } from 'protractor';
 
 declare var $: any;
 
@@ -198,19 +199,40 @@ export class BucketComponent implements OnInit {
   }
 
   openDialog(): void {
+    // create the position of the dialog
+    const dialogPosition: DialogPosition = {
+      top: '8%',
+    };
+
+    // close all pre-opened dialogs
+    this.dialog.closeAll();
+
     // create the dialog
     const dialogRef = this.dialog.open(BucketDialogComponent, {
-      width: '250px',
+      width: '90%',
+      maxWidth: '400px',
       data: {
         currentBucket: this.currentBucket,
         indexBucket: this.indexBucket,
-        carouselTemplate: this.carouselTemplate,
+        carouselTemplate: JSON.parse(JSON.stringify(this.carouselTemplate)),
+        isNoChange: true,
+        deletedItems: [],
       },
+      position: dialogPosition,
+      autoFocus: false,
     });
 
     // subscribe to dialogClosed event
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((data) => {
+      if (typeof data !== "undefined" && !data.isNoChange) {
+        this.currentBucket = [...data.currentBucket]
+        let tempArray = JSON.parse(JSON.stringify(data.deletedItems))
+        tempArray.forEach(element => {
+          let pattern = element.charAt(0);
+          this.carouselArray[pattern].slideItems = [...this.carouselTemplate[pattern].slideItems]
+        })
+        this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
+      }
     });
   }
 
