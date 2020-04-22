@@ -17,6 +17,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
@@ -57,6 +59,7 @@ import { EndPageComponent } from './component/end-page/end-page.component';
     MatChipsModule,
     ToastrModule.forRoot({ preventDuplicates: true }),
     ToastContainerModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
