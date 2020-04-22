@@ -29,7 +29,7 @@
 }
 
 .cdkPlaceholder {
-    background-color: none;
+  background-color: none;
 }
 
 .slide-item {
@@ -40,4 +40,3 @@
   width: 20vw;
   margin: 1%;
 }
-

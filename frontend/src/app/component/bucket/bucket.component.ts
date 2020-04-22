@@ -108,9 +108,13 @@ export class BucketComponent implements OnInit {
     } else {
       // restore the previous state
       // deep clone the bucket array got from the parent in to the current bucket
-      this.currentBucket = JSON.parse(JSON.stringify(this.bucketStates[this.indexBucket]));
+      this.currentBucket = JSON.parse(
+        JSON.stringify(this.bucketStates[this.indexBucket])
+      );
       // deep clone the carousel array got from the parent in to the current carousel array
-      this.carouselArray = JSON.parse(JSON.stringify(this.carouselStates[this.indexBucket]));
+      this.carouselArray = JSON.parse(
+        JSON.stringify(this.carouselStates[this.indexBucket])
+      );
     }
   }
 
@@ -158,7 +162,6 @@ export class BucketComponent implements OnInit {
       let incompleteSlide = tempArray.indexOf(true);
       // if there are incomplete slides, then transfer into that specific slide automatically
       if (incompleteSlide >= 0) {
-        
         // find the carousel by ID using jquery an use default carousel methods to navigate
         $('#' + this.addIDSlideCarousel()).carousel(incompleteSlide);
         // set the index of the incomplete slide as the current carousel index
