@@ -1,9 +1,10 @@
 .bucket-container {
   flex-direction: column;
   height: 20vh;
+  width: 60vw;
   padding-left: 10%;
   padding-right: 10%;
-  background: #ccc;
+  background: #eeeeee;
   border-radius: 5px;
 }
 
@@ -18,6 +19,37 @@
   display: none !important;
 }
 
+.cdk-drag-preview {
+  opacity: 0.7;
+}
+
+.appearing-message-initial {
+  display: none;
+}
+
+.appearing-message-display {
+  animation:scale-in-center .3s cubic-bezier(.25,.46,.45,.94) both;
+  border-radius: 5px;
+  background-color: #28a745;
+  padding: 2%;
+  width: 100%; 
+  position: relative; 
+  bottom: 30%;
+}
+
+.appearing-message-hide {
+  animation:scale-out-center .3s cubic-bezier(.55,.085,.68,.53) both;
+  border-radius: 5px;
+  background-color: #28a745;
+  padding: 2%;
+  width: 100%; 
+  position: relative; 
+  bottom: 30%;
+}
+
+ @keyframes scale-in-center{0%{transform:scale(0);opacity:1}100%{transform:scale(1);opacity:1}}
+ @keyframes scale-out-center{0%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:1}}
+
 .slide-name {
   font-size: 4.5vmin;
   position: absolute;
@@ -28,9 +60,9 @@
   flex-direction: column;
 }
 
-.cdkPlaceholder {
-  background-color: none;
-}
+.cdk-drag-placeholder {
+  display:none;
+  }
 
 .slide-item {
   font-size: 2.5vmin;
@@ -46,4 +78,8 @@
   border-radius: 1em;
   padding: 0.3em;
   font-size: 1em;
+}
+
+.progress {
+  position: fixed;
 }

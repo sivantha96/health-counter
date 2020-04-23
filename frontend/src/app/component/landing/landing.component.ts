@@ -1,5 +1,14 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Input,
+  Output,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -8,7 +17,6 @@ import {
 } from '@angular/forms';
 import { IBoolean, IPostData } from 'src/app/models/landing';
 import { MatStepper } from '@angular/material/stepper';
-import { MatChipsModule, MatChip } from '@angular/material/chips';
 
 @Component({
   selector: 'app-landing',
@@ -16,6 +24,10 @@ import { MatChipsModule, MatChip } from '@angular/material/chips';
   styleUrls: ['./landing.component.css'],
 })
 export class LandingComponent implements OnInit {
+  //catch the input field and next buttons for outside taping
+  @ViewChild('inputField') inputField: ElementRef;
+  @ViewChild('nextButton') nextButton: ElementRef;
+
   isOptional = false;
 
   //options recently aboard
@@ -42,21 +54,37 @@ export class LandingComponent implements OnInit {
     return this.dataForm.get('foreignContact').value;
   }
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    activatedRoute: ActivatedRoute,
+    private renderer: Renderer2
+  ) {
+    this.renderer.listen('window', 'click', (e: Event) => {
+      if (
+        e.target !== this.inputField.nativeElement &&
+        e.target !== this.nextButton.nativeElement
+      ) {
+        window.scrollTo(0, 0);
+      }
+    });
+  }
 
   ngOnInit(): void {}
 
   goBack(stepper: MatStepper) {
     stepper.previous();
+    window.scrollTo(0, 0);
   }
 
   goForward(stepper: MatStepper) {
     stepper.next();
+    window.scrollTo(0, 0);
   }
 
   onSelection(ans: IBoolean, stepper: MatStepper, element: any) {
     element.setValue(ans.value);
     stepper.next();
+    window.scrollTo(0, 0);
   }
 
   onFormSubmit(): void {

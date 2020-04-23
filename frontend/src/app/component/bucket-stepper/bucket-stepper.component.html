@@ -25,7 +25,7 @@
     <!-- next/previous bucket of the stepper] -->
     <div class="bg-light">
       <div class="container d-flex justify-content-around p-2">
-        <button mat-button (click)="goBack(stepper)">Back</button>
+        <button mat-button (click)="goBack(stepper)" [disabled]='indexBucket===0'>Back</button>
         <button class="bucket-name" mat-button (click)="openDialog()">
           Bucket {{ indexBucket + 1 }} of {{ noOfBuckets }}
         </button>

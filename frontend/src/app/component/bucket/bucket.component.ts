@@ -13,6 +13,7 @@ declare var $: any;
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
+
   audio: any;
 
   // getting the index of the current bucket from the parent
@@ -26,6 +27,9 @@ export class BucketComponent implements OnInit {
 
   // getting the state of the carousel array from the parent
   @Input() carouselStates: any[];
+
+  //Appearing message IDs
+  messageID: string[]
 
   //Bucket IDs
   bucketID: string[];
@@ -56,14 +60,19 @@ export class BucketComponent implements OnInit {
   //current value of of the bucket  progress percentage
   bucketProgressPercentage = 0;
 
+  doneAt;
+
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+    this.doneAt = 0
     this.indexCarousel = 0;
+    this.messageID = [];
     this.bucketID = [];
     this.carouselID = [];
     this.slideCarouselID = [];
     this.audio = new Audio();
     this.audio.src = '../../../assets/button-click-sound-effect.wav';
     this.audio.load();
+    
 
     // initializing the carousel template
     // here, map() function is used to concatenate a number in-front of each slide item
@@ -122,12 +131,35 @@ export class BucketComponent implements OnInit {
         JSON.stringify(this.carouselStates[this.indexBucket])
       );
     }
+    
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
-  drop(event: any) {
+  dragStarted(event: any){
+    $('#' + this.addIDMessage()).removeClass("appearing-message-initial")
+    $('#' + this.addIDMessage()).removeClass("appearing-message-hide")
+    $('#' + this.addIDMessage()).addClass("appearing-message-display")
+  }
+
+  dragEnded(event: any) {
+    $('#' + this.addIDMessage()).removeClass("appearing-message-display")
+    $('#' + this.addIDMessage()).addClass("appearing-message-hide")
+  }
+
+  dragEntered(event: any) {
+    $('#' + event.container.id).css("background", "#28a745")
+  }
+
+  dragExited(event: any) {
+    $('#' + event.container.id).css("background", "#eeeeee")
+  }
+
+  dragDropped(event: any) {
     if (event.previousContainer !== event.container) {
+      $('#' + event.container.id).css("background", "#eeeeee")
+      this.audio.play();
       // get the current carousel index as a string
       let myIndex: string = this.indexCarousel.toString();
 
@@ -182,24 +214,28 @@ export class BucketComponent implements OnInit {
 
   // Carousel arrow click Next & Back
   onClick(button) {
-    this.audio.play();
+    if (Date.now() > this.doneAt) {
+      this.audio.play();
     if (button === 'Previous') {
+      $('#' + this.addIDSlideCarousel()).carousel('prev');
       // wrapping around
       if (this.indexCarousel === 0) {
         this.indexCarousel = this.carouselArray.length;
       }
-
       // decrementing index
       this.indexCarousel = this.indexCarousel - 1;
     } else {
+      $('#' + this.addIDSlideCarousel()).carousel('next');
       //incrementing index
       this.indexCarousel = this.indexCarousel + 1;
-
       // wrapping around
       if (this.indexCarousel === this.carouselArray.length) {
         this.indexCarousel = 0;
       }
     }
+    this.doneAt = Date.now() + 1200
+    }
+    
   }
 
   openDialog(): void {
@@ -265,6 +301,13 @@ export class BucketComponent implements OnInit {
   addIDSlideCarousel() {
     let ID = 'slideCarousel' + this.indexBucket;
     this.slideCarouselID.push(ID);
+    return ID;
+  }
+  
+
+  addIDMessage() {
+    let ID = 'appearing-message' + this.indexBucket;
+    this.messageID.push(ID)
     return ID;
   }
 }
