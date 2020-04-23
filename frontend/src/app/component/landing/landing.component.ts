@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output,} from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -16,6 +16,9 @@ import { MatChipsModule, MatChip } from '@angular/material/chips';
   styleUrls: ['./landing.component.css'],
 })
 export class LandingComponent implements OnInit {
+
+
+
   isOptional = false;
 
   //options recently aboard
@@ -85,4 +88,8 @@ export class LandingComponent implements OnInit {
       return null;
     }
   }
+
+
+
+
 }

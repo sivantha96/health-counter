@@ -1,11 +1,11 @@
 <div class="container">
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <mat-card class="col-12 col-md-6 col-sm-6 card-container">
+      <div class="col-12 col-md-6 col-sm-6 card-container">
         <div class="justify-content-center">
-          <div class="header-container"></div>
+          <!-- <div class="header-container"></div> -->
           <mat-horizontal-stepper class="stepper-container" linear="true" #stepper>
-            <mat-card-content>
+            <div>
               <form
                 [formGroup]="dataForm"
                 (ngSubmit)="onFormSubmit()"
@@ -16,11 +16,12 @@
                   <div class="image-container">
                     <img src="../../../assets/landing/family.jpg" alt="" />
                   </div>
-                  <mat-form-field class="field-container" style="width: 60%;">
-                    <label class="landing-label-container"
-                      >How many family members in your family?</label
-                    >
-                    <input
+                  <label class="landing-label-container"
+                      >How many family members in your family?</label>
+                  <mat-form-field class="field-container" style="width: 60%;  margin-top:0em;">
+                    
+                    
+                    <input 
                       (keydown.enter)="goForward(stepper)"
                       matInput
                       formControlName="noOfFamily"
@@ -51,7 +52,7 @@
 
                     <!-- <mat-error>This field is required</mat-error> -->
                   </mat-form-field>
-                  <mat-card-actions class="button-container">
+                  <div class="button-container">
                     <div class="button-set" style="height: 2em;">
                       <button
                         type="button"
@@ -61,7 +62,7 @@
                         Next
                       </button>
                     </div>
-                  </mat-card-actions>
+                  </div>
                 </mat-step>
 
                 <!-- youForeign -->
@@ -78,7 +79,7 @@
                       overseas ?
                     </label>
                   </div>
-                  <mat-card-actions class="button-container">
+                  <div class="button-container">
                     <div class="button-set">
                       <span *ngFor="let ans of booleanGroups">
                         <button
@@ -107,7 +108,7 @@
                         Back
                       </button>
                     </div>
-                  </mat-card-actions>
+                  </div>
                 </mat-step>
 
                 <!-- closContact -->
@@ -120,7 +121,7 @@
                       Have you had any close contact with COVID 19 patient?
                     </label>
                   </div>
-                  <mat-card-actions class="button-container">
+                  <div class="button-container">
                     <div class="button-set">
                       <span *ngFor="let ans of booleanGroups">
                         <button
@@ -152,13 +153,13 @@
                         Back
                       </button>
                     </div>
-                  </mat-card-actions>
+                  </div>
                 </mat-step>
               </form>
-            </mat-card-content>
+            </div>
           </mat-horizontal-stepper>
         </div>
-      </mat-card>
+      </div>
     </div>
   </div>
 </div>

@@ -1,3 +1,15 @@
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
 .button {
   margin-left: 0.5px;
   margin-right: 0.5px;
@@ -24,19 +36,19 @@
 
 .form-container {
   text-align: center;
-  width: 40%;
-  height: 50em;
+  /* width: 40%; */
+  /* height: 50em; */
 }
 
 .card-container {
-  top: 5vh;
+  /* top: 3vh; */
   padding: 1%;
-  box-shadow: 0px 0px 5px 0px #000;
+  /* box-shadow: 0px 0px 5px 0px #000; */
   text-align: center;
   padding-bottom: 1vmin;
   font-size: 3.45vmin;
-  width: 45%;
-  height: 36em;
+  /* width: 45%; */
+  height: 40rem;
 }
 
 .field-container {
@@ -57,28 +69,29 @@
 
 .image-container img {
   justify-content: center;
-  height: 12rem;
-  width: 16rem;
+  height: 14rem;
+  width: 17rem;
+  margin-bottom: 0.3rem;
 }
 
 .header-container {
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .button-set {
-  width: 15em;
-  /* height: 9em; */
+  width: 15rem;
+  
 }
 
 .button-set button {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .landing-label-container {
-  font-size: 3.67vmin;
+  font-size: 5vmin;
   line-height: 1.3em;
+  width: 100%;
+  /* margin-bottom:0.7em; */
+  /* margin-top: 0.7em; */
 }
 
-.stepper-container{
-  height: 10em;
-}
