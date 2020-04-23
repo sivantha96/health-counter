@@ -39,7 +39,7 @@
         [attr.id]="addIDBucket()" [cdkDropListConnectedTo]="carouselID" [cdkDropListData]="currentBucket"
         (cdkDropListExited)="dragExited($event)" (cdkDropListEntered)="dragEntered($event)"
         (cdkDropListDropped)="dragDropped($event)" (click)="openDialog()">
-        <div id="appearing-message" class="appearing-message-initial mx-2 text-center">
+        <div [attr.id]="addIDMessage()" class="appearing-message-initial text-center">
           Drag here to add
         </div>
         <div class="progress" style="width: 50vw;">

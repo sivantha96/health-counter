@@ -28,6 +28,9 @@ export class BucketComponent implements OnInit {
   // getting the state of the carousel array from the parent
   @Input() carouselStates: any[];
 
+  //Appearing message IDs
+  messageID: string[]
+
   //Bucket IDs
   bucketID: string[];
 
@@ -62,6 +65,7 @@ export class BucketComponent implements OnInit {
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.doneAt = 0
     this.indexCarousel = 0;
+    this.messageID = [];
     this.bucketID = [];
     this.carouselID = [];
     this.slideCarouselID = [];
@@ -134,28 +138,27 @@ export class BucketComponent implements OnInit {
   }
 
   dragStarted(event: any){
-    $("#appearing-message").removeClass("appearing-message-initial")
-    $("#appearing-message").removeClass("appearing-message-hide")
-    $("#appearing-message").addClass("appearing-message-display")
+    $('#' + this.addIDMessage()).removeClass("appearing-message-initial")
+    $('#' + this.addIDMessage()).removeClass("appearing-message-hide")
+    $('#' + this.addIDMessage()).addClass("appearing-message-display")
   }
 
   dragEnded(event: any) {
-    $("#appearing-message").removeClass("appearing-message-display")
-    $("#appearing-message").addClass("appearing-message-hide")
+    $('#' + this.addIDMessage()).removeClass("appearing-message-display")
+    $('#' + this.addIDMessage()).addClass("appearing-message-hide")
   }
 
   dragEntered(event: any) {
     $('#' + event.container.id).css("background", "#28a745")
-    console.log("Drag entered: ", event)
   }
 
   dragExited(event: any) {
     $('#' + event.container.id).css("background", "#eeeeee")
-    console.log("Drag exited", event)
   }
 
   dragDropped(event: any) {
     if (event.previousContainer !== event.container) {
+      $('#' + event.container.id).css("background", "#eeeeee")
       this.audio.play();
       // get the current carousel index as a string
       let myIndex: string = this.indexCarousel.toString();
@@ -301,4 +304,10 @@ export class BucketComponent implements OnInit {
     return ID;
   }
   
+
+  addIDMessage() {
+    let ID = 'appearing-message' + this.indexBucket;
+    this.messageID.push(ID)
+    return ID;
+  }
 }
