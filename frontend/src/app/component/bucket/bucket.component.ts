@@ -13,6 +13,7 @@ declare var $: any;
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
+
   audio: any;
 
   // getting the index of the current bucket from the parent
@@ -56,7 +57,10 @@ export class BucketComponent implements OnInit {
   //current value of of the bucket  progress percentage
   bucketProgressPercentage = 0;
 
+  doneAt;
+
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+    this.doneAt = 0
     this.indexCarousel = 0;
     this.bucketID = [];
     this.carouselID = [];
@@ -64,6 +68,7 @@ export class BucketComponent implements OnInit {
     this.audio = new Audio();
     this.audio.src = '../../../assets/button-click-sound-effect.wav';
     this.audio.load();
+    
 
     // initializing the carousel template
     // here, map() function is used to concatenate a number in-front of each slide item
@@ -122,12 +127,31 @@ export class BucketComponent implements OnInit {
         JSON.stringify(this.carouselStates[this.indexBucket])
       );
     }
+    
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
-  drop(event: any) {
+  dragEnded(event: any){
+    console.log("Drag ended: ", event)
+  }
+
+  dragStarted(event: any) {
+    console.log("Drag started: ", event)
+  }
+
+  dragEntered(event: any) {
+    console.log("Drag entered: ", event)
+  }
+
+  dragExited(event: any) {
+    console.log("Drag exited", event)
+  }
+
+  dragDropped(event: any) {
     if (event.previousContainer !== event.container) {
+      this.audio.play();
       // get the current carousel index as a string
       let myIndex: string = this.indexCarousel.toString();
 
@@ -182,24 +206,28 @@ export class BucketComponent implements OnInit {
 
   // Carousel arrow click Next & Back
   onClick(button) {
-    this.audio.play();
+    if (Date.now() > this.doneAt) {
+      this.audio.play();
     if (button === 'Previous') {
+      $('#' + this.addIDSlideCarousel()).carousel('prev');
       // wrapping around
       if (this.indexCarousel === 0) {
         this.indexCarousel = this.carouselArray.length;
       }
-
       // decrementing index
       this.indexCarousel = this.indexCarousel - 1;
     } else {
+      $('#' + this.addIDSlideCarousel()).carousel('next');
       //incrementing index
       this.indexCarousel = this.indexCarousel + 1;
-
       // wrapping around
       if (this.indexCarousel === this.carouselArray.length) {
         this.indexCarousel = 0;
       }
     }
+    this.doneAt = Date.now() + 1200
+    }
+    
   }
 
   openDialog(): void {
@@ -267,4 +295,5 @@ export class BucketComponent implements OnInit {
     this.slideCarouselID.push(ID);
     return ID;
   }
+  
 }
