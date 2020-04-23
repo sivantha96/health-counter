@@ -1,11 +1,15 @@
-<div class="container">
+<div class="container sticky-top">
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <mat-card class="col-12 col-md-6 col-sm-6 card-container">
+      <div class="col-sm-12 card-container">
         <div class="justify-content-center">
-          <div class="header-container"></div>
-          <mat-horizontal-stepper class="stepper-container" linear="true" #stepper>
-            <mat-card-content>
+          <!-- <div class="header-container"></div> -->
+          <mat-horizontal-stepper
+            class="stepper-container"
+            linear="true"
+            #stepper
+          >
+            <div>
               <form
                 [formGroup]="dataForm"
                 (ngSubmit)="onFormSubmit()"
@@ -16,11 +20,17 @@
                   <div class="image-container">
                     <img src="../../../assets/landing/family.jpg" alt="" />
                   </div>
-                  <mat-form-field class="field-container" style="width: 60%;">
-                    <label class="landing-label-container"
-                      >How many family members in your family?</label
-                    >
+                  <label class="landing-label-container"
+                    >How many family members in your family?</label
+                  >
+                  <mat-form-field
+                    class="field-container"
+                    style="width: 60%; margin-top: 0em;"
+                  >
                     <input
+                      #inputField
+                      class="sticky-top"
+                      style="font-size: 20px;"
                       (keydown.enter)="goForward(stepper)"
                       matInput
                       formControlName="noOfFamily"
@@ -48,12 +58,11 @@
                     >
                       please enter a numeric value
                     </mat-error>
-
-                    <!-- <mat-error>This field is required</mat-error> -->
                   </mat-form-field>
-                  <mat-card-actions class="button-container">
+                  <div class="button-container">
                     <div class="button-set" style="height: 2em;">
                       <button
+                        #nextButton
                         type="button"
                         (click)="goForward(stepper)"
                         class="btn btn-dark btn-sm btn-block"
@@ -61,7 +70,7 @@
                         Next
                       </button>
                     </div>
-                  </mat-card-actions>
+                  </div>
                 </mat-step>
 
                 <!-- youForeign -->
@@ -78,9 +87,12 @@
                       overseas ?
                     </label>
                   </div>
-                  <mat-card-actions class="button-container">
-                    <div class="button-set">
-                      <span *ngFor="let ans of booleanGroups">
+                  <div class="button-container">
+                    <div class="button-set row">
+                      <span
+                        *ngFor="let ans of booleanGroups"
+                        class="col-md-6 col-sm-6"
+                      >
                         <button
                           type="button"
                           (click)="
@@ -107,7 +119,7 @@
                         Back
                       </button>
                     </div>
-                  </mat-card-actions>
+                  </div>
                 </mat-step>
 
                 <!-- closContact -->
@@ -120,9 +132,12 @@
                       Have you had any close contact with COVID 19 patient?
                     </label>
                   </div>
-                  <mat-card-actions class="button-container">
-                    <div class="button-set">
-                      <span *ngFor="let ans of booleanGroups">
+                  <div class="button-container">
+                    <div class="button-set row">
+                      <span
+                        *ngFor="let ans of booleanGroups"
+                        class="col-md-6 col-sm-6"
+                      >
                         <button
                           type="submit"
                           (click)="
@@ -152,13 +167,13 @@
                         Back
                       </button>
                     </div>
-                  </mat-card-actions>
+                  </div>
                 </mat-step>
               </form>
-            </mat-card-content>
+            </div>
           </mat-horizontal-stepper>
         </div>
-      </mat-card>
+      </div>
     </div>
   </div>
 </div>
