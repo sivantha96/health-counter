@@ -39,6 +39,9 @@
         [attr.id]="addIDBucket()" [cdkDropListConnectedTo]="carouselID" [cdkDropListData]="currentBucket"
         (cdkDropListExited)="dragExited($event)" (cdkDropListEntered)="dragEntered($event)"
         (cdkDropListDropped)="dragDropped($event)" (click)="openDialog()">
+        <div id="appearing-message" class="appearing-message-initial mx-2 text-center">
+          Drag here to add
+        </div>
         <div class="progress" style="width: 50vw;">
           <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar"
             [style.width.%]="bucketProgressPercentage" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>

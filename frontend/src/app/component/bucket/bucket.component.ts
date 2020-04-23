@@ -133,19 +133,24 @@ export class BucketComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  dragEnded(event: any){
-    console.log("Drag ended: ", event)
+  dragStarted(event: any){
+    $("#appearing-message").removeClass("appearing-message-initial")
+    $("#appearing-message").removeClass("appearing-message-hide")
+    $("#appearing-message").addClass("appearing-message-display")
   }
 
-  dragStarted(event: any) {
-    console.log("Drag started: ", event)
+  dragEnded(event: any) {
+    $("#appearing-message").removeClass("appearing-message-display")
+    $("#appearing-message").addClass("appearing-message-hide")
   }
 
   dragEntered(event: any) {
+    $('#' + event.container.id).css("background", "#28a745")
     console.log("Drag entered: ", event)
   }
 
   dragExited(event: any) {
+    $('#' + event.container.id).css("background", "#eeeeee")
     console.log("Drag exited", event)
   }
 
