@@ -21,33 +21,16 @@
   text-align: center;
 }
 
-.example-radio-group {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.example-radio-button {
-  padding-top: 2%;
-  margin-top: 2%;
-  margin-left: 2%;
-  margin-right: 2%;
-}
-
 .form-container {
   text-align: center;
-  /* width: 40%; */
-  /* height: 50em; */
 }
 
 .card-container {
-  /* top: 3vh; */
   padding: 1%;
-  /* box-shadow: 0px 0px 5px 0px #000; */
+
   text-align: center;
   padding-bottom: 1vmin;
   font-size: 3.45vmin;
-  /* width: 45%; */
   height: 40rem;
 }
 
@@ -75,12 +58,12 @@
 }
 
 .header-container {
+  width: 20rem;
   margin-top: 5%;
 }
 
 .button-set {
-  width: 15rem;
-  
+  width: 20rem;
 }
 
 .button-set button {
@@ -88,10 +71,8 @@
 }
 
 .landing-label-container {
-  font-size: 5vmin;
+  font-size: 4.8vmin;
   line-height: 1.3em;
   width: 100%;
-  /* margin-bottom:0.7em; */
-  /* margin-top: 0.7em; */
+  margin-bottom: 0.7em;
 }
-
