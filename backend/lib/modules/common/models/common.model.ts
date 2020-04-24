@@ -1,6 +1,6 @@
 export enum response_status_codes {
     success = 200,                      // Success
-    internal_server_error = 500,        // Internal Server Error
+    mongo_error = 503,        // Internal Server Error
     unauthorized = 401,                 // Unauthorized
     invalid_user_error = 403,           // Forbidden
     not_found_error = 404,              // Not Found

@@ -3,9 +3,9 @@ import { response_status_codes } from '../models/common.model';
 
 class InternalErrorResponseService {
     public response( err: any, res: Response) {
-        res.status(response_status_codes.internal_server_error).json({
+        res.status(response_status_codes.mongo_error).json({
             STATUS: 'FAILURE',
-            MESSAGE: 'Internal server error',
+            MESSAGE: 'Mongo error',
             DATA: err
         });
     }
