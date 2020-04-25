@@ -1,10 +1,6 @@
-import {
-  Component,
-  OnInit,
-  QueryList,
-  ViewChildren,
-  
-} from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+
+import { IFamilyDetails } from './../../models/data.model';
 import { PostData } from 'src/app/models/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
@@ -12,6 +8,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { BucketComponent } from '../bucket/bucket.component';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
 import { ToastrService } from 'ngx-toastr';
+import { DataTransferService } from 'src/app/services/data.transfer.service';
 
 @Component({
   selector: 'app-bucket-stepper',
@@ -22,10 +19,10 @@ export class BucketStepperComponent implements OnInit {
   // getting the child components with id = 'cmp' as an iterable list
   @ViewChildren('cmp') bucketQueryList: QueryList<BucketComponent>;
 
- 
-
   // Data of a single person - For POST Req
-  postData: PostData;
+  // postData: PostData;
+  //api response - commented out for frontend********
+  postData: IFamilyDetails;
 
   // Array for number of family members
   members: any[];
@@ -52,7 +49,8 @@ export class BucketStepperComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dataTransferService: DataTransferService
   ) {
     this.carouselStates = [];
     this.bucketStates = [];
@@ -61,19 +59,16 @@ export class BucketStepperComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // parsing stringified data received from the previous route to postData
-    this.route.queryParams.subscribe((params) => {
-      try {
-        this.postData = { ...JSON.parse(params.postData) };
-      } catch (error) {
-        console.log(error);
-      }
-    });
-
-    
+    //catch data from landing using data transfer service
+    this.postData = this.dataTransferService.get_family_data();
+    //destroying the instance
+    this.dataTransferService = null;
 
     // Setting number of buckets according to the received number of family members
-    this.noOfBuckets = +this.postData.family_members;
+    // this.noOfBuckets = +this.postData.family_members;
+
+    //api response - commented out for frontend********
+    this.noOfBuckets = +this.postData.n_family_members;
 
     // constructing the dummy array for stepper
     this.members = this.giveMeDummy(this.noOfBuckets);
@@ -138,7 +133,7 @@ export class BucketStepperComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.bucketQueryList.toArray()[this.indexBucket].openDialog()
+    this.bucketQueryList.toArray()[this.indexBucket].openDialog();
   }
 
   //submitter at the last step
@@ -165,16 +160,12 @@ export class BucketStepperComponent implements OnInit {
 
   //show alert toaster - if bucket not completed
   showBucketNoFilledAlert() {
-    this.toastr.info(
-      'Please complete the current bucket',
-      'Incomplete',
-      {
-        // toastClass:"ngx-toast",
-        timeOut: 2000,
-        // closeButton: true,
-        positionClass: 'toast-center-center',
-        tapToDismiss: true,
-      }
-    );
+    this.toastr.info('Please complete the current bucket', 'Incomplete', {
+      // toastClass:"ngx-toast",
+      timeOut: 2000,
+      // closeButton: true,
+      positionClass: 'toast-center-center',
+      tapToDismiss: true,
+    });
   }
 }

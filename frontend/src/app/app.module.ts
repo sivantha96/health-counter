@@ -29,7 +29,8 @@ import { BucketComponent } from './component/bucket/bucket.component';
 import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
 import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
 import { EndPageComponent } from './component/end-page/end-page.component';
-import { from } from 'rxjs';
+
+import { ServiceModule } from './services/service.module';
 
 @NgModule({
   declarations: [
@@ -62,8 +63,9 @@ import { from } from 'rxjs';
     ToastrModule.forRoot({ preventDuplicates: true }),
     ToastContainerModule,
     MatIconModule,
+    ServiceModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
