@@ -1,36 +1,85 @@
-.slide-item {
-  margin: 2%;
-  width: 25%;
-  height: 2em;
-  min-width: 150px;
-  background: red;
-  cursor: move;
+.bucket-container {
+  flex-direction: column;
+  height: 20vh;
+  width: 60vw;
+  padding-left: 10%;
+  padding-right: 10%;
+  background: #eeeeee;
+  border-radius: 5px;
 }
 
-.carousel-container {
-  width: 100%;
-  padding-left: 8%;
-  background-color: blue;
-}
-
-.cdkPlaceholder {
-  margin: 2%;
-  width: 25%;
-  height: 2em;
-  min-width: 150px;
-  background: #ccc;
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  position: absolute;
+  top: 5%;
+  filter: invert(1);
 }
 
 :host ::ng-deep .mat-horizontal-stepper-header-container {
   display: none !important;
 }
 
-.example-margin {
-  margin: 0 10px;
+.cdk-drag-preview {
+  opacity: 0.7;
 }
 
-/* .bucket-header{
-  display: flex;
- 
-} */
+.appearing-message-initial {
+  display: none;
+}
+
+.appearing-message-display {
+  animation:scale-in-center .3s cubic-bezier(.25,.46,.45,.94) both;
+  border-radius: 5px;
+  background-color: #28a745;
+  padding: 2%;
+  width: 100%; 
+  position: relative; 
+  bottom: 30%;
+}
+
+.appearing-message-hide {
+  animation:scale-out-center .3s cubic-bezier(.55,.085,.68,.53) both;
+  border-radius: 5px;
+  background-color: #28a745;
+  padding: 2%;
+  width: 100%; 
+  position: relative; 
+  bottom: 30%;
+}
+
+ @keyframes scale-in-center{0%{transform:scale(0);opacity:1}100%{transform:scale(1);opacity:1}}
+ @keyframes scale-out-center{0%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:1}}
+
+.slide-name {
+  font-size: 4.5vmin;
+  position: absolute;
+  top: 2%;
+}
+
+.carousel-item {
+  flex-direction: column;
+}
+
+.cdk-drag-placeholder {
+  display:none;
+  }
+
+.slide-item {
+  font-size: 2.5vmin;
+  background-color: burlywood;
+  text-align: center;
+  cursor: move;
+  /* width: 20vw; */
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  width: 14em;
+  border-radius: 1em;
+  padding: 0.3em;
+  font-size: 1em;
+}
+
+.progress {
+  position: fixed;
+}

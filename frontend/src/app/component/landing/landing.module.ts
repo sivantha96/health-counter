@@ -21,6 +21,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
+
 @NgModule({
   declarations: [LandingComponent, StrictNumberOnlyDirective],
   imports: [
@@ -45,5 +46,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     })
   ],
+
+  
 })
 export class LandingModule {}

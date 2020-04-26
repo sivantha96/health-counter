@@ -1,3 +1,7 @@
+import { Islide } from './bucket';
+
 export interface DialogData {
-  bucket: string[];
+  currentBucket: string[];
+  indexBucket: number;
+  carouselTemplate: Islide[];
 }
