@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
 
+
 @NgModule({
   declarations: [LandingComponent, StrictNumberOnlyDirective],
   imports: [
@@ -28,5 +29,7 @@ import {MatChipsModule} from '@angular/material/chips';
     ReactiveFormsModule,
     MatChipsModule
   ],
+
+  
 })
 export class LandingModule {}

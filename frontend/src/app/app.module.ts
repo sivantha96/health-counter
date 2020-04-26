@@ -1,3 +1,5 @@
+import { RouterGuardModule } from './guards/router.guard.module';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -64,6 +66,7 @@ import { ServiceModule } from './services/service.module';
     ToastContainerModule,
     MatIconModule,
     ServiceModule,
+    RouterGuardModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

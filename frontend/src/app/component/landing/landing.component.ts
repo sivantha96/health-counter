@@ -110,8 +110,8 @@ export class LandingComponent implements OnInit, OnDestroy {
       is_aboard: submitData.foreignContact,
       is_patient_contacted: submitData.closeContact,
     };
-
-    //uncomment this out when you are ready to let the api,  connect with front end
+    // //------------------------Enable API POST--------------------------------------------//
+    // //uncomment this out when you are ready to let the api,  connect with front end
     // this.dataService.post_family_data(postQuery).subscribe((family_data) => {
     //   // let familyResponse=JSON.parse(family_data)
     //   this.transferData = {
@@ -121,14 +121,17 @@ export class LandingComponent implements OnInit, OnDestroy {
     //   console.log(this.transferData.id);
     //   this.router.navigate(['./bucket']);
     // });
+    // //---------------------------------------------------------------------------//
 
+    // //------------------------Disable API POST-----------------------------------//
     //comment this out when you are ready to let the api connect with front end
     this.transferData = {
       n_family_members: postQuery.n_family_members,
       id: '1', //dummy id
     };
+    //------------------------------------------------------------------------------//
 
-    this.router.navigate(['./bucket']);
+    this.router.navigate(['./bucket', { id: this.transferData.id }]);
   }
 
   //custom validation
