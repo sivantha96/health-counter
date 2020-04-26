@@ -65,7 +65,7 @@
                         #nextButton
                         type="button"
                         (click)="goForward(stepper)"
-                        class="btn btn-dark btn-sm btn-block"
+                        class="btn btn-dark btn-md btn-block"
                       >
                         Next
                       </button>
@@ -104,20 +104,22 @@
                           "
                           [ngClass]="
                             ans.value == 'Yes'
-                              ? 'btn btn-dark btn-sm btn-block active'
-                              : 'btn btn-secondary btn-sm btn-block active'
+                              ? 'btn btn-dark btn-md btn-block active'
+                              : 'btn btn-secondary btn-md btn-block active'
                           "
                         >
                           {{ ans.viewValue }}
                         </button>
                       </span>
-                      <button
-                        type="button"
-                        (click)="goBack(stepper)"
-                        class="btn btn-light btn-sm btn-block"
-                      >
-                        Back
-                      </button>
+                      <span class="col-md-12 col-sm-12">
+                        <button
+                          type="button"
+                          (click)="goBack(stepper)"
+                          class="btn btn-light btn-md btn-block"
+                        >
+                          Back
+                        </button>
+                      </span>
                     </div>
                   </div>
                 </mat-step>
@@ -152,20 +154,22 @@
                           "
                           [ngClass]="
                             ans.value == 'Yes'
-                              ? 'btn btn-dark btn-sm btn-block active'
-                              : 'btn btn-secondary btn-sm btn-block active'
+                              ? 'btn btn-dark btn-md btn-block active'
+                              : 'btn btn-secondary btn-md btn-block active'
                           "
                         >
                           {{ ans.viewValue }}
                         </button>
                       </span>
-                      <button
-                        type="button"
-                        (click)="goBack(stepper)"
-                        class="btn btn-light btn-sm btn-block"
-                      >
-                        Back
-                      </button>
+                      <span class="col-md-12 col-sm-12">
+                        <button
+                          type="button"
+                          (click)="goBack(stepper)"
+                          class="btn btn-light btn-md btn-block"
+                        >
+                          Back
+                        </button>
+                      </span>
                     </div>
                   </div>
                 </mat-step>

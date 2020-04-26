@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'bucket',
     //---uncomment this when you are ready to use route guard for bucket ----//
-    // canActivate:[RouteGuardForBucket],
+    canActivate:[RouteGuardForBucket],
     //-----------------------------------------------------------------------//
     component: BucketStepperComponent,
   },

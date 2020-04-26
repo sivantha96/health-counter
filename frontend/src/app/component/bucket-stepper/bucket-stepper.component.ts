@@ -64,45 +64,45 @@ export class BucketStepperComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // //------------------------Activate Route Guard----------------------------//
-    // //uncomment this out when you are ready to apply route guard for bucket.
-    // //And also comment out the Deactivate Route Guard area below.
-    // //Keep in mind that you have to uncomment the canActivate of the bucket route
-    // //in the appRouting module
-
-    // //check route came from landing****************
-    // //catch the landing id generated from landing
-    // this.route.params.subscribe((params) => {
-    //   this.landingId = params.id;
-    // });
-
-    // if (this.dataTransferService === undefined) {
-    //   this.router.navigateByUrl('/landing');
-    // } else {
-    //   //catch data from landing using data transfer service
-    //   this.postData = this.dataTransferService.get_family_data();
-    //   if (
-    //     !this.landingId ||
-    //     !this.postData ||
-    //     this.landingId !== this.postData.id
-    //   ) {
-    //     //destroying the instance
-    //     this.dataTransferService = null;
-    //     this.router.navigateByUrl('/landing');
-    //   }
-    // }
-    // //--------------------------------------------------------------------------//
-
-    //------------------------Deactivate Route Guard----------------------------//
+    //------------------------Activate Route Guard----------------------------//
     //uncomment this out when you are ready to apply route guard for bucket.
-    //And also comment out the Activate Route Guard area above.
-    //Keep in mind that you have to comment the canActivate of the bucket route
+    //And also comment out the Deactivate Route Guard area below.
+    //Keep in mind that you have to uncomment the canActivate of the bucket route
     //in the appRouting module
 
-    //catch data from landing using data transfer service
-    this.postData = this.dataTransferService.get_family_data();
-    this.dataTransferService = null;
+    //check route came from landing****************
+    //catch the landing id generated from landing
+    this.route.params.subscribe((params) => {
+      this.landingId = params.id;
+    });
+
+    if (this.dataTransferService === undefined) {
+      this.router.navigateByUrl('/landing');
+    } else {
+      //catch data from landing using data transfer service
+      this.postData = this.dataTransferService.get_family_data();
+      if (
+        !this.landingId ||
+        !this.postData ||
+        this.landingId !== this.postData.id
+      ) {
+        //destroying the instance
+        this.dataTransferService = null;
+        this.router.navigateByUrl('/landing');
+      }
+    }
     //--------------------------------------------------------------------------//
+
+    // //------------------------Deactivate Route Guard----------------------------//
+    // //uncomment this out when you are ready to apply route guard for bucket.
+    // //And also comment out the Activate Route Guard area above.
+    // //Keep in mind that you have to comment the canActivate of the bucket route
+    // //in the appRouting module
+
+    // //catch data from landing using data transfer service
+    // this.postData = this.dataTransferService.get_family_data();
+    // this.dataTransferService = null;
+    // //--------------------------------------------------------------------------//
 
     // Setting number of buckets according to the received number of family members
     // this.noOfBuckets = +this.postData.family_members;
