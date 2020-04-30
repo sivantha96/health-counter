@@ -1,37 +1,42 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
-.toolbar{
-    background-color:#eeeeee;
-    width: 100%;
-    margin-left: 0px;
-    margin-right: 0px;
-    display: inline-block;
-    top:0;
-    position: fixed;
-    text-align: center;
-    
+.toolbar {
+  background-color: #eeeeee;
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  display: inline-block;
+  top: 0;
+  position: fixed;
+  text-align: center;
 }
 
-.left{
-    float: left;
+.left {
+  float: left;
 }
 
-.right{
-    float: right;
+.right {
+  float: right;
 }
 
 .mat-button-toggle-checked {
-    border: none;
-    background-color:cyans; 
-    outline-style: none !important;
-    outline: none !important;
- }
-
-.button{
-    background-color:darkcyan;
+  border: none;
+  background-color: cyans;
+  outline-style: none !important;
+  outline: none !important;
 }
 
-button:focus, button:active:focus, button.active:focus {
-    outline: none !important;
-    outline-style: none !important;
-    }
+.button {
+  background-color: darkcyan;
+}
+
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}
+
+.mat-button-wrapper {
+    font-size: 3.5vmin;
+}
