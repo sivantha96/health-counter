@@ -4,15 +4,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BucketComponent } from './component/bucket/bucket.component';
 import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
+
 import { EndPageComponent } from './component/end-page/end-page.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/landing',
-    pathMatch: 'full'
-  },
+  { path: '', component: WelcomeComponent },
   {
     path: 'landing',
     component: LandingComponent,
@@ -20,7 +18,7 @@ const routes: Routes = [
   {
     path: 'bucket',
     //---uncomment this when you are ready to use route guard for bucket ----//
-    canActivate:[RouteGuardForBucket],
+    canActivate: [RouteGuardForBucket],
     //-----------------------------------------------------------------------//
     component: BucketStepperComponent,
   },
@@ -30,12 +28,12 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent
-  }
+    component: NotFoundComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

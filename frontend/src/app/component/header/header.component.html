@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand">
             <img class="mr-1" src="../../../favicon.ico" width="10%" alt="">
-            Health Counter
+            {{ 'HOME.TITLE' | translate }}
         </a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarToggler"
             aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,11 +11,19 @@
         <div class="collapse navbar-collapse flex-row-reverse" id="navbarToggler">
             <div class="d-flex">
                 <ul class="nav navbar-nav navbar-right ">
-                    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link">සිංහල</a></li>
-                    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link">English</a></li>
-                    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link">தமிழ்</a></li>
+                    <li class="btn-nav" style="cursor: pointer;"><a data-value ="si" class="nav-link" (click) = 'toggleLanguage($event.value)'>සිංහල</a></li>
+                    <li class="btn-nav" style="cursor: pointer;"><a data-value ="en" class="nav-link" (click) = 'toggleLanguage($event.value)'>English</a></li>
+                    <li class="btn-nav" style="cursor: pointer;"><a data-value ="ta" class="nav-link" (click) = 'toggleLanguage($event.value)'>தமிழ்</a></li>
                 </ul>
             </div>
         </div>
     </div>
-</nav>
+</nav> 
+
+
+<!-- 
+<ul class="nav navbar-nav navbar-right ">
+    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link" (click) = "toggleLanguage(si)">සිංහල</a></li>
+    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link" (click) = "toggleLanguage(en)">English</a></li>
+    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link" (click) = "toggleLanguage(ta)">தமிழ்</a></li>
+</ul> -->

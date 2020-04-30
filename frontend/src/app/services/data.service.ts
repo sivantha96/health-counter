@@ -24,6 +24,19 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  public post_bucket_data(postData: any): Observable<any> {
+    let json = {
+      // is_aboard: postData.is_aboard,
+      // is_patient_contacted: postData.is_patient_contacted,
+      // n_family_members: postData.n_family_members,
+    };
+
+    return this.http
+      .post<IFamilyDetails>(this.baseUrl + this.port + '/family/details/', json)
+      .pipe(catchError(this.handleError));
+  }
+
+
   private handleError(error: any) {
     console.error('server error:', error);
     if (error.error instanceof Error) {

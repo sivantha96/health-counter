@@ -18,6 +18,11 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,10 +35,15 @@ import { HeaderComponent } from './component/header/header.component';
 import { BucketComponent } from './component/bucket/bucket.component';
 import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
 import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
 import { EndPageComponent } from './component/end-page/end-page.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 
 import { ServiceModule } from './services/service.module';
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
   declarations: [
@@ -42,6 +52,7 @@ import { ServiceModule } from './services/service.module';
     BucketComponent,
     BucketStepperComponent,
     BucketDialogComponent,
+    WelcomeComponent,
     EndPageComponent,
     NotFoundComponent,
   ],
@@ -62,6 +73,15 @@ import { ServiceModule } from './services/service.module';
     MatProgressBarModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatButtonToggleModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     MatGridListModule,
     MatChipsModule,
     ToastrModule.forRoot({ preventDuplicates: true }),

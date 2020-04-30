@@ -1,0 +1,32 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.toolbar{
+    background-color:darkcyan;
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    display: inline-block;
+    top:0;
+    position: fixed;
+    text-align: center;
+    
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.mat-button-toggle-checked {
+    border: none;
+    background-color:cyans; 
+    outline-style: none !important;
+    outline: none !important;
+ }
+
+.button{
+    background-color:darkcyan;
+}

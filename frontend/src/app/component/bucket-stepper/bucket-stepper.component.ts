@@ -26,6 +26,9 @@ export class BucketStepperComponent implements OnInit {
   //api response - commented out for frontend********
   postData: IFamilyDetails;
 
+  //bucket data from bucket
+  bucket_data: any;
+
   //id generated from landing
   landingId: String;
 
@@ -140,12 +143,13 @@ export class BucketStepperComponent implements OnInit {
       if (this.indexBucket < this.noOfBuckets - 1) {
         // pass the iterable list as an array to the saveState method
         this.saveState(this.bucketQueryList.toArray());
-
+        //get the bucket data from bucket component
+        this.bucket_data = this.dataTransferService.get_bucket_data();
         // next
         this.indexBucket = this.indexBucket + 1;
         stepper.next();
         this.progressValue += this.progressStepCost;
-
+        
         //POST REQ
         // ----------------------------------------------
         // ----------------------------------------------

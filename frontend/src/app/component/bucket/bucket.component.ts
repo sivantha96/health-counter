@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Islide } from './../../models/bucket';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
+import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { element } from 'protractor';
 
 declare var $: any;
@@ -61,7 +62,9 @@ export class BucketComponent implements OnInit {
 
   doneAt;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, public dialog: MatDialog,
+    private dataTransferService: DataTransferService
+    ) {
     this.doneAt = 0;
     this.indexCarousel = 0;
     this.messageID = [];
@@ -226,6 +229,7 @@ export class BucketComponent implements OnInit {
         this.indexCarousel = this.indexCarousel + 1;
         // wrapping around
         if (this.indexCarousel === this.carouselArray.length) {
+          
           this.indexCarousel = 0;
         }
       }
@@ -238,7 +242,7 @@ export class BucketComponent implements OnInit {
     const dialogPosition: DialogPosition = {
       top: '5%',
     };
-
+   
     // close all pre-opened dialogs
     this.dialog.closeAll();
 
@@ -277,6 +281,10 @@ export class BucketComponent implements OnInit {
   updateCurrentBucketFilledPercentage(val: number) {
     this.bucketProgressPercentage =
       (this.bucketProgressValue = val / this.carouselTemplate.length) * 100;
+      if(this.bucketProgressPercentage == 100){
+        this.dataTransferService.set_bucket_data(this.currentBucket);
+        console.log(this.currentBucket);
+      }
   }
 
   // add a carousel container ID - used for drag & drop
