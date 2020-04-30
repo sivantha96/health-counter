@@ -7,6 +7,11 @@ import { EndPageComponent } from './component/end-page/end-page.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/landing',
+    pathMatch: 'full'
+  },
+  {
     path: 'landing',
     component: LandingComponent,
   },
@@ -24,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
