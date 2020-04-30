@@ -82,3 +82,10 @@
 .stepper-container{
   height: 10em;
 }
+
+.main-page {
+  background-image: url('../../../assets/covid-min.png');
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
