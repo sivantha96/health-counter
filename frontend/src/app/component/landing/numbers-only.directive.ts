@@ -19,13 +19,11 @@ export class StrictNumberOnlyDirective {
    */
   @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
     if (this.specialKeys.indexOf(event.key) !== -1) {
-      console.log(this.specialKeys.indexOf(event.key));
       return;
     }
     const inputValue: string = this.elementRef.nativeElement.value.concat(
       event.key
     );
-    console.log(event.key);
     if (inputValue && !String(inputValue).match(this.regex)) {
       event.preventDefault();
     }

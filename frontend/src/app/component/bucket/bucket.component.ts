@@ -3,7 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Islide } from './../../models/bucket';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
+import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { element } from 'protractor';
+import { IBucketDetails } from '../../models/data.model';
+
 
 declare var $: any;
 
@@ -13,7 +16,6 @@ declare var $: any;
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
-
   audio: any;
 
   // getting the index of the current bucket from the parent
@@ -29,7 +31,7 @@ export class BucketComponent implements OnInit {
   @Input() carouselStates: any[];
 
   //Appearing message IDs
-  messageID: string[]
+  messageID: string[];
 
   //Bucket IDs
   bucketID: string[];
@@ -60,10 +62,14 @@ export class BucketComponent implements OnInit {
   //current value of of the bucket  progress percentage
   bucketProgressPercentage = 0;
 
+  bucket_details: IBucketDetails;
+
   doneAt;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
-    this.doneAt = 0
+  constructor(private route: ActivatedRoute, public dialog: MatDialog,
+    private dataTransferService: DataTransferService
+    ) {
+    this.doneAt = 0;
     this.indexCarousel = 0;
     this.messageID = [];
     this.bucketID = [];
@@ -72,7 +78,6 @@ export class BucketComponent implements OnInit {
     this.audio = new Audio();
     this.audio.src = '../../../assets/button-click-sound-effect.wav';
     this.audio.load();
-    
 
     // initializing the carousel template
     // here, map() function is used to concatenate a number in-front of each slide item
@@ -131,34 +136,32 @@ export class BucketComponent implements OnInit {
         JSON.stringify(this.carouselStates[this.indexBucket])
       );
     }
-    
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  dragStarted(event: any){
-    $('#' + this.addIDMessage()).removeClass("appearing-message-initial")
-    $('#' + this.addIDMessage()).removeClass("appearing-message-hide")
-    $('#' + this.addIDMessage()).addClass("appearing-message-display")
+  dragStarted(event: any) {
+    $('#' + this.addIDMessage()).removeClass('appearing-message-initial');
+    $('#' + this.addIDMessage()).removeClass('appearing-message-hide');
+    $('#' + this.addIDMessage()).addClass('appearing-message-display');
   }
 
   dragEnded(event: any) {
-    $('#' + this.addIDMessage()).removeClass("appearing-message-display")
-    $('#' + this.addIDMessage()).addClass("appearing-message-hide")
+    $('#' + this.addIDMessage()).removeClass('appearing-message-display');
+    $('#' + this.addIDMessage()).addClass('appearing-message-hide');
   }
 
   dragEntered(event: any) {
-    $('#' + event.container.id).css("background", "#28a745")
+    $('#' + event.container.id).css('background', '#28a745');
   }
 
   dragExited(event: any) {
-    $('#' + event.container.id).css("background", "#eeeeee")
+    $('#' + event.container.id).css('background', '#eeeeee');
   }
 
   dragDropped(event: any) {
     if (event.previousContainer !== event.container) {
-      $('#' + event.container.id).css("background", "#eeeeee")
+      $('#' + event.container.id).css('background', '#eeeeee');
       this.audio.play();
       // get the current carousel index as a string
       let myIndex: string = this.indexCarousel.toString();
@@ -216,26 +219,26 @@ export class BucketComponent implements OnInit {
   onClick(button) {
     if (Date.now() > this.doneAt) {
       this.audio.play();
-    if (button === 'Previous') {
-      $('#' + this.addIDSlideCarousel()).carousel('prev');
-      // wrapping around
-      if (this.indexCarousel === 0) {
-        this.indexCarousel = this.carouselArray.length;
+      if (button === 'Previous') {
+        $('#' + this.addIDSlideCarousel()).carousel('prev');
+        // wrapping around
+        if (this.indexCarousel === 0) {
+          this.indexCarousel = this.carouselArray.length;
+        }
+        // decrementing index
+        this.indexCarousel = this.indexCarousel - 1;
+      } else {
+        $('#' + this.addIDSlideCarousel()).carousel('next');
+        //incrementing index
+        this.indexCarousel = this.indexCarousel + 1;
+        // wrapping around
+        if (this.indexCarousel === this.carouselArray.length) {
+          
+          this.indexCarousel = 0;
+        }
       }
-      // decrementing index
-      this.indexCarousel = this.indexCarousel - 1;
-    } else {
-      $('#' + this.addIDSlideCarousel()).carousel('next');
-      //incrementing index
-      this.indexCarousel = this.indexCarousel + 1;
-      // wrapping around
-      if (this.indexCarousel === this.carouselArray.length) {
-        this.indexCarousel = 0;
-      }
+      this.doneAt = Date.now() + 1200;
     }
-    this.doneAt = Date.now() + 1200
-    }
-    
   }
 
   openDialog(): void {
@@ -243,7 +246,7 @@ export class BucketComponent implements OnInit {
     const dialogPosition: DialogPosition = {
       top: '5%',
     };
-
+   
     // close all pre-opened dialogs
     this.dialog.closeAll();
 
@@ -258,6 +261,7 @@ export class BucketComponent implements OnInit {
       },
       position: dialogPosition,
       autoFocus: false,
+      restoreFocus: false,
     });
 
     // subscribe to dialogClosed event
@@ -272,7 +276,7 @@ export class BucketComponent implements OnInit {
           ];
         });
         this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
-        this.goToIncomplete()
+        this.goToIncomplete();
       }
     });
   }
@@ -281,6 +285,10 @@ export class BucketComponent implements OnInit {
   updateCurrentBucketFilledPercentage(val: number) {
     this.bucketProgressPercentage =
       (this.bucketProgressValue = val / this.carouselTemplate.length) * 100;
+      if(this.bucketProgressPercentage == 100){
+        this.formatBucketDetails();
+        this.dataTransferService.set_bucket_data(this.bucket_details);
+      }
   }
 
   // add a carousel container ID - used for drag & drop
@@ -303,11 +311,44 @@ export class BucketComponent implements OnInit {
     this.slideCarouselID.push(ID);
     return ID;
   }
-  
 
   addIDMessage() {
     let ID = 'appearing-message' + this.indexBucket;
-    this.messageID.push(ID)
+    this.messageID.push(ID);
     return ID;
+  }
+
+  formatBucketDetails(){
+    let i=0;
+    let str,gender,age_group,cough,cold,itchy_throat,
+      throat_pain,taste_loss;
+    for(i=0;i<this.currentBucket.length;i++){
+      str= this.currentBucket[i];
+      if(str.charAt(0) == '0')
+      gender = str.substring(1,str.length);
+      else if(str.charAt(0) == '1')
+      age_group = str.substring(1,str.length);
+      else if(str.charAt(0) == '2')
+      cough = str.substring(1,str.length);
+      else if(str.charAt(0) == '3')
+      cold = str.substring(1,str.length);
+      else if(str.charAt(0) == '4')
+      itchy_throat = str.substring(1,str.length);
+      else if(str.charAt(0) == '5')
+      throat_pain = str.substring(1,str.length);
+      else if(str.charAt(0) == '6')
+      taste_loss = str.substring(1,str.length);
+    }
+
+    this.bucket_details = {
+      id: this.indexBucket+1,
+      gender: gender,
+      age_group: age_group,
+      cough: cough,
+      cold: cold,
+      itchy_throat: itchy_throat,
+      throat_pain: throat_pain,
+      taste_loss: taste_loss
+    };
   }
 }
