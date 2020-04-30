@@ -6,6 +6,7 @@ import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component'
 import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { element } from 'protractor';
 import { IBucketDetails } from '../../models/data.model';
+import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
 
 declare var $: any;
@@ -138,7 +139,9 @@ export class BucketComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.openHelpDialog();
+  }
 
   dragStarted(event: any) {
     $('#' + this.addIDMessage()).removeClass('appearing-message-initial');
@@ -241,6 +244,14 @@ export class BucketComponent implements OnInit {
     }
   }
 
+  //pen a dialog to show tips on how to drag
+  openHelpDialog(): void {
+    this.dialog.closeAll();
+    const helpDialogRef = this.dialog.open(HelpDialogComponent, {
+    })
+  }
+
+  //dialog of the bucket
   openDialog(): void {
     // create the position of the dialog
     const dialogPosition: DialogPosition = {

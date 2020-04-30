@@ -41,6 +41,7 @@ import { EndPageComponent } from './component/end-page/end-page.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 
 import { ServiceModule } from './services/service.module';
+import { HelpDialogComponent } from './component/help-dialog/help-dialog.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     WelcomeComponent,
     EndPageComponent,
     NotFoundComponent,
+    HelpDialogComponent,
   ],
   imports: [
     BrowserModule,
