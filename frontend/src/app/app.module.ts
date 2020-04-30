@@ -1,8 +1,11 @@
+import { RouterGuardModule } from './guards/router.guard.module';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CookieService } from 'ngx-cookie-service';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,6 +32,8 @@ import { BucketStepperComponent } from './component/bucket-stepper/bucket-steppe
 import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
 import { EndPageComponent } from './component/end-page/end-page.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
+
+import { ServiceModule } from './services/service.module';
 
 @NgModule({
   declarations: [
@@ -62,8 +67,10 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
     ToastrModule.forRoot({ preventDuplicates: true }),
     ToastContainerModule,
     MatIconModule,
+    ServiceModule,
+    RouterGuardModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
