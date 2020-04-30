@@ -1,29 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand">
+<mat-toolbar>
+    <mat-toolbar-row class="toolbar">
+        <p></p>
+
+        <a class="left">
             <img class="mr-1" src="../../../favicon.ico" width="10%" alt="">
-            {{ 'HOME.TITLE' | translate }}
-        </a>
-        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarToggler"
-            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse flex-row-reverse" id="navbarToggler">
-            <div class="d-flex">
-                <ul class="nav navbar-nav navbar-right ">
-                    <li class="btn-nav" style="cursor: pointer;"><a data-value ="si" class="nav-link" (click) = 'toggleLanguage($event.value)'>සිංහල</a></li>
-                    <li class="btn-nav" style="cursor: pointer;"><a data-value ="en" class="nav-link" (click) = 'toggleLanguage($event.value)'>English</a></li>
-                    <li class="btn-nav" style="cursor: pointer;"><a data-value ="ta" class="nav-link" (click) = 'toggleLanguage($event.value)'>தமிழ்</a></li>
-                </ul>
-            </div>
+            {{ 'HOME.TITLE' | translate }}</a>
+
+        <div class="right">
+            <button aria-haspopup="true" mat-button [matMenuTriggerFor]="menu" mattooltip="Select a language">
+                <div class="mat-button-focus-overlay"></div>
+                <span class="mat-button-wrapper"> {{ currentLan }}
+                    <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color">arrow_drop_down</mat-icon>
+                </span>
+                <div matripple="" class="mat-ripple mat-button-ripple"></div>
+            </button>
+            <mat-menu #menu="matMenu">
+                <span (mouseleave)="closeMyMenu()">
+                <button mat-menu-item (click)="toggleLanguage('si')">සිංහල</button>
+                <button mat-menu-item (click)="toggleLanguage('en')">English</button>
+                <button mat-menu-item (click)="toggleLanguage('ta')">தமிழ்</button>
+                </span>
+            </mat-menu>
         </div>
-    </div>
-</nav> 
+    </mat-toolbar-row>
+</mat-toolbar>
 
-
-<!-- 
-<ul class="nav navbar-nav navbar-right ">
-    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link" (click) = "toggleLanguage(si)">සිංහල</a></li>
-    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link" (click) = "toggleLanguage(en)">English</a></li>
-    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link" (click) = "toggleLanguage(ta)">தமிழ்</a></li>
-</ul> -->

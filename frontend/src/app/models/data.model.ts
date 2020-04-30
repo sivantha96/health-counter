@@ -3,3 +3,14 @@ export interface IFamilyDetails {
     n_family_members: Number;
 }
 
+export interface IBucketDetails {
+    id: Number;
+    gender: String;
+    age_group: String;
+    cough: String;
+    cold: String;
+    itchy_throat: String;
+    throat_pain: String;
+    taste_loss: String;
+}
+

@@ -5,6 +5,8 @@ import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
 import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { element } from 'protractor';
+import { IBucketDetails } from '../../models/data.model';
+
 
 declare var $: any;
 
@@ -59,6 +61,8 @@ export class BucketComponent implements OnInit {
   bucketProgressValue = 0;
   //current value of of the bucket  progress percentage
   bucketProgressPercentage = 0;
+
+  bucket_details: IBucketDetails;
 
   doneAt;
 
@@ -281,8 +285,9 @@ export class BucketComponent implements OnInit {
     this.bucketProgressPercentage =
       (this.bucketProgressValue = val / this.carouselTemplate.length) * 100;
       if(this.bucketProgressPercentage == 100){
-        this.dataTransferService.set_bucket_data(this.currentBucket);
-        console.log(this.currentBucket);
+        this.formatBucketDetails();
+        this.dataTransferService.set_bucket_data(this.bucket_details);
+        console.log(this.bucket_details);
       }
   }
 
@@ -311,5 +316,39 @@ export class BucketComponent implements OnInit {
     let ID = 'appearing-message' + this.indexBucket;
     this.messageID.push(ID);
     return ID;
+  }
+
+  formatBucketDetails(){
+    let i=0;
+    let str,gender,age_group,cough,cold,itchy_throat,
+      throat_pain,taste_loss;
+    for(i=0;i<this.currentBucket.length;i++){
+      str= this.currentBucket[i];
+      if(str.charAt(0) == '0')
+      gender = str.substring(1,str.length);
+      else if(str.charAt(0) == '1')
+      age_group = str.substring(1,str.length);
+      else if(str.charAt(0) == '2')
+      cough = str.substring(1,str.length);
+      else if(str.charAt(0) == '3')
+      cold = str.substring(1,str.length);
+      else if(str.charAt(0) == '4')
+      itchy_throat = str.substring(1,str.length);
+      else if(str.charAt(0) == '5')
+      throat_pain = str.substring(1,str.length);
+      else if(str.charAt(0) == '6')
+      taste_loss = str.substring(1,str.length);
+    }
+
+    this.bucket_details = {
+      id: this.indexBucket+1,
+      gender: gender,
+      age_group: age_group,
+      cough: cough,
+      cold: cold,
+      itchy_throat: itchy_throat,
+      throat_pain: throat_pain,
+      taste_loss: taste_loss
+    };
   }
 }
