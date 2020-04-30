@@ -23,10 +23,9 @@
             [ngClass]="isFirst ? 'active' : 'true'">
             <div class="row justify-content-center container-fluid m-0 p-0" cdkDropList [attr.id]="addIDCarousel()"
               [cdkDropListConnectedTo]="bucketID" [cdkDropListData]="slide.slideItems" cdkDropListSortingDisabled>
-              <div class="row" *ngFor="let slideItem of slide.slideItems" cdkDrag (cdkDragEnded)="dragEnded($event)"
+              <div class="row answer-chip" *ngFor="let slideItem of slide.slideItems" cdkDrag (cdkDragEnded)="dragEnded($event)"
                 (cdkDragStarted)="dragStarted($event)">
-                <div class="col cdkPlaceholder" *cdkDragPlaceholder></div>
-                <div class="col slide-item">{{ slideItem.slice(1) }}</div>
+                <p class="col slide-item">{{ slideItem.slice(1) }}</p>
               </div>
             </div>
           </div>

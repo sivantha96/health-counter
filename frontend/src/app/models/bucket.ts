@@ -4,7 +4,7 @@ export interface PostData {
   is_had_close_contact: string;
 }
 
-export interface Islide {
+export interface ISlide {
   name: string;
   slideItems: string[];
 }
