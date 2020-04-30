@@ -24,14 +24,14 @@ export class BucketStepperComponent implements OnInit {
   @ViewChildren('cmp') bucketQueryList: QueryList<BucketComponent>;
 
   // Data of a single person - For POST Req
-  //api response - commented out for frontend********
+  // api response - commented out for frontend********
   postData: IFamilyDetails;
 
-  //bucket data from
-  bucket_data: any;
+  // id generated from landing
+  landingId: string;
 
-  //id generated from landing
-  landingId: String;
+  // bucket data from
+  bucket_data: any;
 
   // Array for number of family members
   members: any[];
@@ -73,14 +73,14 @@ export class BucketStepperComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //------------------------Activate Route Guard----------------------------//
-    //uncomment this out when you are ready to apply route guard for bucket.
-    //And also comment out the Deactivate Route Guard area below.
-    //Keep in mind that you have to uncomment the canActivate of the bucket route
-    //in the appRouting module
+    // ------------------------Activate Route Guard---------------------------- //
+    // uncomment this out when you are ready to apply route guard for bucket.
+    // And also comment out the Deactivate Route Guard area below.
+    // Keep in mind that you have to uncomment the canActivate of the bucket route
+    // in the appRouting module
 
-    //check route came from landing****************
-    //catch the landing id generated from landing
+    // check route came from landing****************
+    // catch the landing id generated from landing
     this.route.params.subscribe((params) => {
       this.landingId = params.id;
     });
@@ -88,19 +88,19 @@ export class BucketStepperComponent implements OnInit {
     if (this.dataTransferService === undefined) {
       this.router.navigateByUrl('/landing');
     } else {
-      //catch data from landing using data transfer service
+      // catch data from landing using data transfer service
       this.postData = this.dataTransferService.get_family_data();
       if (
         !this.landingId ||
         !this.postData ||
         this.landingId !== this.postData.id
       ) {
-        //destroying the instance
+        // destroying the instance
         this.dataTransferService = null;
         this.router.navigateByUrl('/landing');
       }
     }
-    //--------------------------------------------------------------------------//
+    // -------------------------------------------------------------------------- //
 
     // //------------------------Deactivate Route Guard----------------------------//
     // //uncomment this out when you are ready to apply route guard for bucket.
@@ -116,8 +116,8 @@ export class BucketStepperComponent implements OnInit {
     // Setting number of buckets according to the received number of family members
     // this.noOfBuckets = +this.postData.family_members;
 
-    //api response - commented out for frontend********
-    this.noOfBuckets = +this.postData.n_family_members;;
+    // api response - commented out for frontend********
+    this.noOfBuckets = +this.postData.n_family_members;
 
     // constructing the dummy array for stepper
     this.members = this.giveMeDummy(this.noOfBuckets);
@@ -155,8 +155,8 @@ export class BucketStepperComponent implements OnInit {
         this.indexBucket = this.indexBucket + 1;
         stepper.next();
         this.progressValue += this.progressStepCost;
-        
-        //POST REQ
+
+        // POST REQ
         // ----------------------------------------------
         // ----------------------------------------------
         // ----------------------------------------------
@@ -164,12 +164,12 @@ export class BucketStepperComponent implements OnInit {
         // //uncomment this out when you are ready to let the api,  connect with front end
         // this.postBucketData = this.dataTransferService.get_bucket_data();
         //this.dataService.post_bucket_data(this.postBucketData).subscribe((bucket_data) => {
-      
-    // });
-    // //---------------------------------------------------------------------------//
 
-    // //------------------------Disable API POST-----------------------------------//
-    //comment this out when you are ready to let the api connect with front end
+        // });
+        // //---------------------------------------------------------------------------//
+
+        // //------------------------Disable API POST-----------------------------------//
+        //comment this out when you are ready to let the api connect with front end
       }
     }
   }
@@ -185,7 +185,7 @@ export class BucketStepperComponent implements OnInit {
       stepper.previous();
       this.progressValue -= this.progressStepCost;
 
-      //POST REQ
+      // POST REQ
       // ----------------------------------------------
       // ----------------------------------------------
       // ----------------------------------------------
@@ -196,7 +196,7 @@ export class BucketStepperComponent implements OnInit {
     this.bucketQueryList.toArray()[this.indexBucket].openDialog();
   }
 
-  //submitter at the last step
+  // submitter at the last step
   onDone(): void {
     if (!this.isBucketFull()) {
       this.showBucketNoFilledAlert();
@@ -207,18 +207,16 @@ export class BucketStepperComponent implements OnInit {
 
   // is the current Bucket completely filled
   isBucketFull(): boolean {
-    let bucketArr = this.bucketQueryList;
+    const bucketArr = this.bucketQueryList;
     if (bucketArr === undefined) {
       return false;
     } else {
       return bucketArr.toArray()[this.indexBucket].currentBucket.length ===
-        bucketArr.toArray()[this.indexBucket].carouselArray.length
-        ? true
-        : false;
+        bucketArr.toArray()[this.indexBucket].carouselArray.length;
     }
   }
 
-  //show alert toaster - if bucket not completed
+  // show alert toaster - if bucket not completed
   showBucketNoFilledAlert() {
     this.toastr.info('Please complete the current bucket', 'Incomplete', {
       // toastClass:"ngx-toast",

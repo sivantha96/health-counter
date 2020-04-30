@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()
 export class RouteGuardForBucket implements CanActivate {
-  id: String;
+  id: string;
   constructor(public router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {

@@ -29,12 +29,14 @@
         <button class="bucket-name" mat-stroked-button (click)="openDialog()">
           Bucket {{ indexBucket + 1 }} of {{ noOfBuckets }}
         </button>
-        
-       
-        <button *ngIf="indexBucket + 1 !== noOfBuckets" mat-button (click)="goForward(stepper)" [ngClass]="{'disabledButton' : !isBucketFull()}" >
+
+
+        <button *ngIf="indexBucket + 1 !== noOfBuckets" mat-button (click)="goForward(stepper)"
+          [ngClass]="{'disabledButton' : !isBucketFull()}">
           Next
         </button>
-        <button *ngIf="indexBucket + 1 === noOfBuckets" mat-button (click)="onDone()" [ngClass]="{'disabledButton' : !isBucketFull()}">
+        <button *ngIf="indexBucket + 1 === noOfBuckets" mat-button (click)="onDone()"
+          [ngClass]="{'disabledButton' : !isBucketFull()}">
           Done
         </button>
       </div>
@@ -42,5 +44,5 @@
 
   </div>
 
-  
+
 </div>

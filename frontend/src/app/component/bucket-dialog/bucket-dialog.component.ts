@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from './../../models/bucket.dialog';
-import { Islide } from 'src/app/models/bucket';
+import { ISlide } from 'src/app/models/bucket';
 
 @Component({
   selector: 'app-bucket-dialog',
@@ -12,7 +12,7 @@ export class BucketDialogComponent implements OnInit {
   bucketDisplayItems: any[];
   originalBucketDisplayItems: any[]
   currentBucket: string[]
-  carouselTemplate: Islide[]
+  carouselTemplate: ISlide[]
   isNoChange: boolean;
   deletedItems: any[]
 

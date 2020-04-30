@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Islide } from './../../models/bucket';
+import { ISlide } from './../../models/bucket';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
 import { DataTransferService } from 'src/app/services/data.transfer.service';
-import { element } from 'protractor';
 import { IBucketDetails } from '../../models/data.model';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
@@ -31,16 +30,16 @@ export class BucketComponent implements OnInit {
   // getting the state of the carousel array from the parent
   @Input() carouselStates: any[];
 
-  //Appearing message IDs
+  // Appearing message IDs
   messageID: string[];
 
-  //Bucket IDs
+  // Bucket IDs
   bucketID: string[];
 
-  //Carousel IDs
+  // Carousel IDs
   carouselID: string[];
 
-  //SlideCarousel IDs
+  // SlideCarousel IDs
   slideCarouselID: string[];
 
   // Current symptom number
@@ -56,11 +55,11 @@ export class BucketComponent implements OnInit {
   severityArray = ['No Symptoms', 'Mild symptoms', 'Severe symptoms'];
 
   // template fpr carousel
-  carouselTemplate: Islide[];
+  carouselTemplate: ISlide[];
 
-  //current value of of the bucket  progress percentage
+  // current value of of the bucket  progress percentage
   bucketProgressValue = 0;
-  //current value of of the bucket  progress percentage
+  // current value of of the bucket  progress percentage
   bucketProgressPercentage = 0;
 
   bucket_details: IBucketDetails;
@@ -69,7 +68,7 @@ export class BucketComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog,
     private dataTransferService: DataTransferService
-    ) {
+  ) {
     this.doneAt = 0;
     this.indexCarousel = 0;
     this.messageID = [];
@@ -116,16 +115,17 @@ export class BucketComponent implements OnInit {
       },
     ];
 
-    if (typeof this.bucketStates === 'undefined') {
-      //check the state received by the parent is undefined
+    // if (typeof this.bucketStates === 'undefined') {
+    if ((typeof this.bucketStates === 'undefined') || (typeof this.bucketStates[this.indexBucket] === 'undefined')) {
+      // check the state received by the parent is undefined
       // if so deep copy the template array into the carouselArray and initialize an empty bucket
       this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
       this.currentBucket = [];
-    } else if (typeof this.bucketStates[this.indexBucket] === 'undefined') {
-      // check the bucket relevant to the current indexBucket is undefined
-      // if so deep copy the template array into the carouselArray and initialize an empty bucket
-      this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
-      this.currentBucket = [];
+      // } else if (typeof this.bucketStates[this.indexBucket] === 'undefined') {
+      //   // check the bucket relevant to the current indexBucket is undefined
+      //   // if so deep copy the template array into the carouselArray and initialize an empty bucket
+      //   this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
+      //   this.currentBucket = [];
     } else {
       // restore the previous state
       // deep clone the bucket array got from the parent in to the current bucket
@@ -167,10 +167,10 @@ export class BucketComponent implements OnInit {
       $('#' + event.container.id).css('background', '#eeeeee');
       this.audio.play();
       // get the current carousel index as a string
-      let myIndex: string = this.indexCarousel.toString();
+      const myIndex: string = this.indexCarousel.toString();
 
       // get the value of the item that dragged over and trim its blank spaces
-      let pattern = event.item.element.nativeElement.textContent.trim();
+      const pattern = event.item.element.nativeElement.textContent.trim();
 
       // filter carousel template array in such a way that it returns a new array without the "pattern" (the value that dragged over)
       // and assign that value the current carouselArray
@@ -179,36 +179,32 @@ export class BucketComponent implements OnInit {
       // this will swap the currently dragged item with the previously dragged item for the same carousel index
       this.carouselArray[this.indexCarousel].slideItems = this.carouselTemplate[
         this.indexCarousel
-      ].slideItems.filter(function (str) {
-        return str.indexOf(pattern) === -1;
-      });
+      ].slideItems.filter(str => str.indexOf(pattern) === -1);
 
       // this will remove all the items that starts with the "myIndex"
       // (items that starts with the "myIndex") = (previously dragged items from the same carousel index)
-      let newBucket = this.currentBucket.filter(function (str) {
-        return str.indexOf(myIndex) === -1;
-      });
+      const newBucket = this.currentBucket.filter(str => str.indexOf(myIndex) === -1);
 
       // this will transfer the currently dragged item from the carousel to the bucket
       this.currentBucket = [...newBucket, this.indexCarousel + pattern];
 
-      //updates the current bucket filled progress value
+      // updates the current bucket filled progress value
       this.updateCurrentBucketFilledPercentage(this.currentBucket.length);
       this.goToIncomplete();
     }
   }
 
-  //go to an incomplete slide
+  // go to an incomplete slide
   goToIncomplete() {
     // new array that hold boolean values which checks whether a single slide is incomplete or not
-    let tempArray = this.carouselArray.map(
+    const tempArray = this.carouselArray.map(
       (slide, index) =>
         slide.slideItems.length ===
         this.carouselTemplate[index].slideItems.length
     );
 
     // the index that contains a true for an incomplete slide
-    let incompleteSlide = tempArray.indexOf(true);
+    const incompleteSlide = tempArray.indexOf(true);
     // if there are incomplete slides, then transfer into that specific slide automatically
     if (incompleteSlide >= 0) {
       // find the carousel by ID using jquery an use default carousel methods to navigate
@@ -232,11 +228,11 @@ export class BucketComponent implements OnInit {
         this.indexCarousel = this.indexCarousel - 1;
       } else {
         $('#' + this.addIDSlideCarousel()).carousel('next');
-        //incrementing index
+        // incrementing index
         this.indexCarousel = this.indexCarousel + 1;
         // wrapping around
         if (this.indexCarousel === this.carouselArray.length) {
-          
+
           this.indexCarousel = 0;
         }
       }
@@ -257,7 +253,7 @@ export class BucketComponent implements OnInit {
     const dialogPosition: DialogPosition = {
       top: '5%',
     };
-   
+
     // close all pre-opened dialogs
     this.dialog.closeAll();
 
@@ -279,9 +275,9 @@ export class BucketComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (typeof data !== 'undefined' && !data.isNoChange) {
         this.currentBucket = [...data.currentBucket];
-        let tempArray = JSON.parse(JSON.stringify(data.deletedItems));
+        const tempArray = JSON.parse(JSON.stringify(data.deletedItems));
         tempArray.forEach((element) => {
-          let pattern = element.charAt(0);
+          const pattern = element.charAt(0);
           this.carouselArray[pattern].slideItems = [
             ...this.carouselTemplate[pattern].slideItems,
           ];
@@ -292,74 +288,73 @@ export class BucketComponent implements OnInit {
     });
   }
 
-  //update current bucket filled percentage
+  // update current bucket filled percentage
   updateCurrentBucketFilledPercentage(val: number) {
     this.bucketProgressPercentage =
       (this.bucketProgressValue = val / this.carouselTemplate.length) * 100;
-      if(this.bucketProgressPercentage == 100){
-        this.formatBucketDetails();
-        this.dataTransferService.set_bucket_data(this.bucket_details);
-      }
+    if (this.bucketProgressPercentage == 100) {
+      this.formatBucketDetails();
+      this.dataTransferService.set_bucket_data(this.bucket_details);
+    }
   }
 
   // add a carousel container ID - used for drag & drop
   addIDCarousel() {
-    let ID = 'carouselContainer' + this.indexBucket;
+    const ID = 'carouselContainer' + this.indexBucket;
     this.carouselID.push(ID);
     return ID;
   }
 
   // add a bucket ID - used for drag & drop
   addIDBucket() {
-    let ID = 'bucketContainer' + this.indexBucket;
+    const ID = 'bucketContainer' + this.indexBucket;
     this.bucketID.push(ID);
     return ID;
   }
 
   // add a carousel slide ID - used for carousel arrows
   addIDSlideCarousel() {
-    let ID = 'slideCarousel' + this.indexBucket;
+    const ID = 'slideCarousel' + this.indexBucket;
     this.slideCarouselID.push(ID);
     return ID;
   }
 
   addIDMessage() {
-    let ID = 'appearing-message' + this.indexBucket;
+    const ID = 'appearing-message' + this.indexBucket;
     this.messageID.push(ID);
     return ID;
   }
 
-  formatBucketDetails(){
-    let i=0;
-    let str,gender,age_group,cough,cold,itchy_throat,
-      throat_pain,taste_loss;
-    for(i=0;i<this.currentBucket.length;i++){
-      str= this.currentBucket[i];
-      if(str.charAt(0) == '0')
-      gender = str.substring(1,str.length);
-      else if(str.charAt(0) == '1')
-      age_group = str.substring(1,str.length);
-      else if(str.charAt(0) == '2')
-      cough = str.substring(1,str.length);
-      else if(str.charAt(0) == '3')
-      cold = str.substring(1,str.length);
-      else if(str.charAt(0) == '4')
-      itchy_throat = str.substring(1,str.length);
-      else if(str.charAt(0) == '5')
-      throat_pain = str.substring(1,str.length);
-      else if(str.charAt(0) == '6')
-      taste_loss = str.substring(1,str.length);
+  formatBucketDetails() {
+    let str, gender, age_group, cough, cold, itchy_throat,
+      throat_pain, taste_loss;
+    for (let i = 0; i < this.currentBucket.length; i++) {
+      str = this.currentBucket[i];
+      if (str.charAt(0) == '0')
+        gender = str.substring(1, str.length);
+      else if (str.charAt(0) == '1')
+        age_group = str.substring(1, str.length);
+      else if (str.charAt(0) == '2')
+        cough = str.substring(1, str.length);
+      else if (str.charAt(0) == '3')
+        cold = str.substring(1, str.length);
+      else if (str.charAt(0) == '4')
+        itchy_throat = str.substring(1, str.length);
+      else if (str.charAt(0) == '5')
+        throat_pain = str.substring(1, str.length);
+      else if (str.charAt(0) == '6')
+        taste_loss = str.substring(1, str.length);
     }
 
     this.bucket_details = {
-      id: this.indexBucket+1,
-      gender: gender,
-      age_group: age_group,
-      cough: cough,
-      cold: cold,
-      itchy_throat: itchy_throat,
-      throat_pain: throat_pain,
-      taste_loss: taste_loss
+      id: this.indexBucket + 1,
+      gender,
+      age_group,
+      cough,
+      cold,
+      itchy_throat,
+      throat_pain,
+      taste_loss
     };
   }
 }
