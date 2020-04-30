@@ -1,4 +1,4 @@
-<div class="stepper-container">
+<div class="stepper-container" style="touch-action: none">
 
   <!-- stepper -->
   <mat-horizontal-stepper linear="true" #stepper>
@@ -26,7 +26,7 @@
     <div class="bg-light">
       <div class="container d-flex justify-content-around p-2">
         <button mat-button (click)="goBack(stepper)" [disabled]='indexBucket===0'>Back</button>
-        <button class="bucket-name" mat-button (click)="openDialog()">
+        <button class="bucket-name" mat-stroked-button (click)="openDialog()">
           Bucket {{ indexBucket + 1 }} of {{ noOfBuckets }}
         </button>
 

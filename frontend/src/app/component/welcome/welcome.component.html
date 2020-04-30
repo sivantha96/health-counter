@@ -1,0 +1,23 @@
+<div>
+    <mat-card class="card">
+        <mat-card-title>
+            {{ 'WELCOME-CARD.TITLE' | translate }}
+        </mat-card-title>
+        <mat-card-content>
+            <div class="row">
+            <div class="col-md-6">
+                <img src="../../../favicon.ico" width="25%" alt="logo">
+            </div>
+            <div class="col-md-6" >
+                <mat-card-subtitle>
+                    {{ 'WELCOME-CARD.SUB-TITLE' | translate }}
+                </mat-card-subtitle>
+                <p>{{ 'WELCOME-CARD.INTRO' | translate }}</p>
+            </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="onclick()">{{ 'WELCOME-CARD.START' | translate }}</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

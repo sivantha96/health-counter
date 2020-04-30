@@ -1,0 +1,50 @@
+{
+    "HOME": {
+      "TITLE": "HEALTH COUNTER",
+      "SELECT": "ENGLISH"
+    },
+
+    "WELCOME-CARD": {
+        "TITLE": "WELCOME TO HEALTH COUNTER",
+        "SUB-TITLE": "Research project",
+        "INTRO": "Please fill the correct details to support the study",
+        "START": "Start"
+      },
+
+      "FAMILY-CARD":{
+        "QUESTION":"How many family members in your family?",
+        "HINT":"enter a number",
+        "NEXT":"Next",
+        "TYPE-ERROR":"please enter a numeric value",
+        "ERROR":"this field is required"
+      },
+
+      "OVERSEAS-CARD":{
+        "QUESTION":"You or any of your family member recently travelled overseas ?<",
+        "YES":"",
+        "NO":"",
+        "BACK":"Back"
+      },
+
+      "CLOSE-CONTACT-CARD":{
+        "QUESTION":"Have you had any close contact with COVID 19 patients?",
+        "YES":"",
+        "NO":"",
+        "BACK":"Back"
+      },
+
+      "BUCKET":{
+        "PERSON": "Person",
+        "OF": "of"
+      },
+
+      "BUCKET-STEPPER":{
+        "PREVIOUS": "Previous",
+        "NEXT": "Next"
+      },
+
+      "BUCKET-DIALOG":{
+        "TITLE": "Symptoms Added",
+        "OK": "Ok"
+      }
+  }

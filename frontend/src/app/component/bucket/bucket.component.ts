@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ISlide } from './../../models/bucket';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
+import { DataTransferService } from 'src/app/services/data.transfer.service';
+import { IBucketDetails } from '../../models/data.model';
+
 
 declare var $: any;
 
@@ -58,9 +61,13 @@ export class BucketComponent implements OnInit {
   // current value of of the bucket  progress percentage
   bucketProgressPercentage = 0;
 
+  bucket_details: IBucketDetails;
+
   doneAt;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, public dialog: MatDialog,
+    private dataTransferService: DataTransferService
+  ) {
     this.doneAt = 0;
     this.indexCarousel = 0;
     this.messageID = [];
@@ -222,6 +229,7 @@ export class BucketComponent implements OnInit {
         this.indexCarousel = this.indexCarousel + 1;
         // wrapping around
         if (this.indexCarousel === this.carouselArray.length) {
+
           this.indexCarousel = 0;
         }
       }
@@ -249,6 +257,7 @@ export class BucketComponent implements OnInit {
       },
       position: dialogPosition,
       autoFocus: false,
+      restoreFocus: false,
     });
 
     // subscribe to dialogClosed event
@@ -272,6 +281,10 @@ export class BucketComponent implements OnInit {
   updateCurrentBucketFilledPercentage(val: number) {
     this.bucketProgressPercentage =
       (this.bucketProgressValue = val / this.carouselTemplate.length) * 100;
+    if (this.bucketProgressPercentage == 100) {
+      this.formatBucketDetails();
+      this.dataTransferService.set_bucket_data(this.bucket_details);
+    }
   }
 
   // add a carousel container ID - used for drag & drop
@@ -299,5 +312,38 @@ export class BucketComponent implements OnInit {
     const ID = 'appearing-message' + this.indexBucket;
     this.messageID.push(ID);
     return ID;
+  }
+
+  formatBucketDetails() {
+    let str, gender, age_group, cough, cold, itchy_throat,
+      throat_pain, taste_loss;
+    for (let i = 0; i < this.currentBucket.length; i++) {
+      str = this.currentBucket[i];
+      if (str.charAt(0) == '0')
+        gender = str.substring(1, str.length);
+      else if (str.charAt(0) == '1')
+        age_group = str.substring(1, str.length);
+      else if (str.charAt(0) == '2')
+        cough = str.substring(1, str.length);
+      else if (str.charAt(0) == '3')
+        cold = str.substring(1, str.length);
+      else if (str.charAt(0) == '4')
+        itchy_throat = str.substring(1, str.length);
+      else if (str.charAt(0) == '5')
+        throat_pain = str.substring(1, str.length);
+      else if (str.charAt(0) == '6')
+        taste_loss = str.substring(1, str.length);
+    }
+
+    this.bucket_details = {
+      id: this.indexBucket + 1,
+      gender,
+      age_group,
+      cough,
+      cold,
+      itchy_throat,
+      throat_pain,
+      taste_loss
+    };
   }
 }

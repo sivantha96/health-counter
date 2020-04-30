@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 
-import { IFamilyDetails } from './../../models/data.model';
+import { IFamilyDetails, IBucketDetails } from './../../models/data.model';
 import { PostData } from 'src/app/models/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { BucketComponent } from '../bucket/bucket.component';
 import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { DataTransferService } from 'src/app/services/data.transfer.service';
+import { DataService } from './../../services/data.service';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -28,6 +29,9 @@ export class BucketStepperComponent implements OnInit {
 
   // id generated from landing
   landingId: string;
+
+  // bucket data from
+  bucket_data: any;
 
   // Array for number of family members
   members: any[];
@@ -50,12 +54,17 @@ export class BucketStepperComponent implements OnInit {
   // Array to hold carouselStates
   carouselStates: any[];
 
+  //hold details of post bucket
+  postBucketData: IBucketDetails;
+
   constructor(
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private router: Router,
     private toastr: ToastrService,
-    private dataTransferService: DataTransferService
+    private dataTransferService: DataTransferService,
+    private dataService: DataService,
+
   ) {
     this.carouselStates = [];
     this.bucketStates = [];
@@ -140,7 +149,8 @@ export class BucketStepperComponent implements OnInit {
       if (this.indexBucket < this.noOfBuckets - 1) {
         // pass the iterable list as an array to the saveState method
         this.saveState(this.bucketQueryList.toArray());
-
+        //get the bucket data from bucket component
+        this.bucket_data = this.dataTransferService.get_bucket_data();
         // next
         this.indexBucket = this.indexBucket + 1;
         stepper.next();
@@ -150,6 +160,16 @@ export class BucketStepperComponent implements OnInit {
         // ----------------------------------------------
         // ----------------------------------------------
         // ----------------------------------------------
+        // //------------------------Enable API POST--------------------------------------------//
+        // //uncomment this out when you are ready to let the api,  connect with front end
+        // this.postBucketData = this.dataTransferService.get_bucket_data();
+        //this.dataService.post_bucket_data(this.postBucketData).subscribe((bucket_data) => {
+
+        // });
+        // //---------------------------------------------------------------------------//
+
+        // //------------------------Disable API POST-----------------------------------//
+        //comment this out when you are ready to let the api connect with front end
       }
     }
   }
