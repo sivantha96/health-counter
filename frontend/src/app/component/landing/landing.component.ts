@@ -118,7 +118,6 @@ export class LandingComponent implements OnInit, OnDestroy {
     //     n_family_members: postQuery.n_family_members,
     //     id: family_data.DATA.id,
     //   };
-    //   console.log(this.transferData.id);
     //   this.router.navigate(['./bucket']);
     // });
     // //---------------------------------------------------------------------------//
@@ -138,7 +137,6 @@ export class LandingComponent implements OnInit, OnDestroy {
   numberOnly(event: AbstractControl): { [key: string]: boolean } | null {
     const inp = event.value ? event.value : event.value;
     if (isNaN(inp)) {
-      console.log('error cha present');
       return { notNumbers: true };
     } else {
       return null;

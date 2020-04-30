@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IFamilyDetails } from '../models/data.model';
+import { IFamilyDetails, IBucketDetails } from '../models/data.model';
 import { from } from 'rxjs';
 
 @Injectable()
 export class DataTransferService {
   private data: IFamilyDetails;
-  bucket: any;
+  bucket: IBucketDetails;
   public set_family_data(data: IFamilyDetails) {
     this.data = data;
   }
@@ -14,7 +14,7 @@ export class DataTransferService {
     return this.data;
   }
 
-  public set_bucket_data(data: any){
+  public set_bucket_data(data: IBucketDetails){
     this.bucket = data;
   }
 
