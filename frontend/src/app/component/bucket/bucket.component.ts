@@ -253,6 +253,7 @@ export class BucketComponent implements OnInit {
       },
       position: dialogPosition,
       autoFocus: false,
+      restoreFocus: false,
     });
 
     // subscribe to dialogClosed event

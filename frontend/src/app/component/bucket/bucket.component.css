@@ -83,3 +83,9 @@
 .progress {
   position: fixed;
 }
+
+.dialog-button {
+  position: relative;
+  top: -37%;
+  left: 60%;
+}

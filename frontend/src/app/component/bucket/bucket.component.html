@@ -1,5 +1,5 @@
 <!-- drag&drop connected areas -->
-<div cdkDropListGroup>
+<div cdkDropListGroup style="touch-action: none">
   <mat-grid-list cols="1" rowHeight="5vh">
     <mat-grid-tile [rowspan]="9" gutterSize="5px">
       <h1 class="slide-name">
@@ -16,7 +16,7 @@
         <span class="sr-only">Next</span>
       </div>
 
-      <div class="carousel slide" id="{{ addIDSlideCarousel() }}" data-pause="true">
+      <div class="carousel slide" id="{{ addIDSlideCarousel() }}" data-pause="true" data-touch="false" data-keyboard="false">
         <!-- carousel container -->
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let slide of carouselArray; first as isFirst; let i = index"
@@ -38,10 +38,16 @@
       <div class="bucket-container d-flex align-items-center justify-content-center" cdkDropList
         [attr.id]="addIDBucket()" [cdkDropListConnectedTo]="carouselID" [cdkDropListData]="currentBucket"
         (cdkDropListExited)="dragExited($event)" (cdkDropListEntered)="dragEntered($event)"
-        (cdkDropListDropped)="dragDropped($event)" (click)="openDialog()">
+        (cdkDropListDropped)="dragDropped($event)">
         <div [attr.id]="addIDMessage()" class="appearing-message-initial text-center">
           Drag here to add
         </div>
+        <span class="dialog-button">
+          <button mat-icon-button (click)="openDialog()">
+            <mat-icon>launch</mat-icon>
+        </button>
+
+        </span>
         <div class="progress" style="width: 50vw;">
           <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar"
             [style.width.%]="bucketProgressPercentage" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
