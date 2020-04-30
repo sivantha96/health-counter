@@ -31,6 +31,7 @@ import { BucketComponent } from './component/bucket/bucket.component';
 import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
 import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
 import { EndPageComponent } from './component/end-page/end-page.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 import { ServiceModule } from './services/service.module';
 
@@ -42,6 +43,7 @@ import { ServiceModule } from './services/service.module';
     BucketStepperComponent,
     BucketDialogComponent,
     EndPageComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
