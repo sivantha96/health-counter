@@ -28,6 +28,7 @@ import { BucketComponent } from './component/bucket/bucket.component';
 import { BucketStepperComponent } from './component/bucket-stepper/bucket-stepper.component';
 import { BucketDialogComponent } from './component/bucket-dialog/bucket-dialog.component';
 import { EndPageComponent } from './component/end-page/end-page.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { EndPageComponent } from './component/end-page/end-page.component';
     BucketStepperComponent,
     BucketDialogComponent,
     EndPageComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
