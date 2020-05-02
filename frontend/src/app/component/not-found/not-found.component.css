@@ -1,12 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Cabin+Sketch");
 
-body {
-  display: flex;
-}
-
 h1 {
   font-family: "Cabin Sketch", cursive;
-  font-size: 3em;
+  font-size: 2em;
   text-align: center;
   opacity: 0.8;
   order: 1;
@@ -179,5 +175,5 @@ h1 small {
 }
 
 .not-found {
-  margin-top: 10%;
+  margin: 12vh;
 }
