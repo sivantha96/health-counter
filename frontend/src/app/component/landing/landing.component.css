@@ -57,7 +57,7 @@ body{
 .image-container img {
   margin-top: 1rem;
   justify-content: center;
-  height: 14rem;
+  height: 11rem;
   width: 17rem;
   z-index: -1;
 }

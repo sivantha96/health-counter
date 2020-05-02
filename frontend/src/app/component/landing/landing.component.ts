@@ -1,6 +1,6 @@
 import { IFamilyDetails } from './../../models/data.model';
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 import {
   Component,
   OnInit,
@@ -22,11 +22,15 @@ import { IBoolean, IPostData } from 'src/app/models/landing';
 import { DataService } from './../../services/data.service';
 import { MatStepper } from '@angular/material/stepper';
 import { DataTransferService } from 'src/app/services/data.transfer.service';
+import { fader, slider } from 'src/app/route-animations';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
+  animations: [
+    slider
+  ]
 })
 export class LandingComponent implements OnInit, OnDestroy {
   //catch the input field and next buttons for outside taping
@@ -142,4 +146,5 @@ export class LandingComponent implements OnInit, OnDestroy {
       return null;
     }
   }
+
 }

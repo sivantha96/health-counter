@@ -13,11 +13,15 @@ import { DataService } from './../../services/data.service';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { fader, slider } from 'src/app/route-animations';
 
 @Component({
   selector: 'app-bucket-stepper',
   templateUrl: './bucket-stepper.component.html',
   styleUrls: ['./bucket-stepper.component.css'],
+  animations: [
+    slider
+  ]
 })
 export class BucketStepperComponent implements OnInit {
   // getting the child components with id = 'cmp' as an iterable list

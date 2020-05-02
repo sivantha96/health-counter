@@ -48,3 +48,7 @@ button.active:focus {
   padding-left: 5%;
   font-size: 4vmin;
 }
+
+.mat-button-wrapper {
+  font-size: 3.5vmin;
+}

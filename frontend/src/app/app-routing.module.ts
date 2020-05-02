@@ -10,10 +10,15 @@ import { EndPageComponent } from './component/end-page/end-page.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', component: WelcomeComponent },
+  { 
+    path: '', 
+    component: WelcomeComponent,
+    data: { animation: 'isRight' }
+  },
   {
     path: 'landing',
     component: LandingComponent,
+    data: { animation: 'isRight' }
   },
   {
     path: 'bucket',
@@ -21,14 +26,17 @@ const routes: Routes = [
     canActivate: [RouteGuardForBucket],
     // ----------------------------------------------------------------------- //
     component: BucketStepperComponent,
+    data: { animation: 'isRight' }
   },
   {
     path: 'end',
     component: EndPageComponent,
+    data: { animation: 'isRight' }
   },
   {
     path: '**',
     component: NotFoundComponent,
+    data: { animation: 'isRight' }
   },
 ];
 

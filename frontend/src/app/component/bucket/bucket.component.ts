@@ -140,6 +140,10 @@ export class BucketComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+  }
+
+  ngAfterContentInit(){
     this.openHelpDialog();
   }
 
