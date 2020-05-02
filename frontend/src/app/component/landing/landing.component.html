@@ -4,40 +4,64 @@
       <div class="col-sm-12 card-container">
         <div class="justify-content-center">
           <!-- <div class="header-container"></div> -->
-          <mat-horizontal-stepper class="stepper-container" linear="true" #stepper>
+          <mat-horizontal-stepper
+            class="stepper-container"
+            linear="true"
+            #stepper
+          >
             <div>
-              <form [formGroup]="dataForm" (ngSubmit)="onFormSubmit()" class="form-container">
+              <form
+                [formGroup]="dataForm"
+                (ngSubmit)="onFormSubmit()"
+                class="form-container"
+              >
                 <!-- noOfFamily -->
                 <mat-step [stepControl]="dataForm.get('noOfFamily')">
                   <div class="image-container">
                     <img src="../../../assets/landing/family.png" alt="Family" />
                   </div>
-                  <label class="landing-label-container">How many family members in your family?</label>
-                  <mat-form-field class="field-container" style="width: 60%; margin-top: 0em;">
-                    <input #inputField class="sticky-top" style="font-size: 20px;" (keydown.enter)="goForward(stepper)"
-                      matInput formControlName="noOfFamily" placeholder="" NumberOnly />
+                  <label class="landing-label-container"
+                    >How many family members in your family?</label
+                  >
+                  <mat-form-field
+                    class="field-container"
+                    style="width: 60%; margin-top: 0em;"
+                  >
+                    <input
+                      #inputField
+                      class="sticky-top"
+                      style="font-size: 20px;"
+                      (keydown.enter)="goForward(stepper)"
+                      matInput
+                      formControlName="noOfFamily"
+                      placeholder=""
+                      NumberOnly
+                      [errorStateMatcher]="matcher"
+                    />
                     <mat-hint>enter a number</mat-hint>
-                    <mat-error *ngIf="
-                        dataForm.get('noOfFamily').invalid &&
-                        (dataForm.get('noOfFamily').dirty ||
-                          dataForm.get('noOfFamily').touched) &&
-                        dataForm.get('noOfFamily').errors.required
-                      ">
-                      This field is required
+
+                    <mat-error
+                      *ngIf="dataForm.get('noOfFamily').hasError('required')"
+                    >
+                      {{ errorMessages.required }}</mat-error
+                    >
+                    <mat-error
+                      *ngIf="dataForm.get('noOfFamily').hasError('notNumbers')"
+                      >{{ errorMessages.notNumbers }}
                     </mat-error>
-                    <mat-error *ngIf="
-                        dataForm.get('noOfFamily').invalid &&
-                        (dataForm.get('noOfFamily').dirty ||
-                          dataForm.get('noOfFamily').touched) &&
-                        dataForm.get('noOfFamily').errors.numberOnly
-                      ">
-                      Please enter a numeric value
+                    <mat-error
+                      *ngIf="dataForm.get('noOfFamily').hasError('limitExceed')"
+                      >{{ errorMessages.limitExceed }}
                     </mat-error>
                   </mat-form-field>
                   <div class="button-container">
                     <div class="button-set" style="height: 2em;">
-                      <button #nextButton type="button" (click)="goForward(stepper)"
-                        class="btn btn-dark btn-md btn-block">
+                      <button
+                        #nextButton
+                        type="button"
+                        (click)="goForward(stepper)"
+                        class="btn btn-dark btn-md btn-block"
+                      >
                         Next
                       </button>
                     </div>
@@ -57,23 +81,34 @@
                   </div>
                   <div class="button-container">
                     <div class="button-set row">
-                      <span *ngFor="let ans of booleanGroups" class="col-md-6 col-sm-6">
-                        <button type="button" (click)="
+                      <span
+                        *ngFor="let ans of booleanGroups"
+                        class="col-md-6 col-sm-6"
+                      >
+                        <button
+                          type="button"
+                          (click)="
                             onSelection(
                               ans,
                               stepper,
                               dataForm.get('foreignContact')
                             )
-                          " [ngClass]="
+                          "
+                          [ngClass]="
                             ans.value == 'Yes'
                               ? 'btn btn-dark btn-md btn-block active'
                               : 'btn btn-secondary btn-md btn-block active'
-                          ">
+                          "
+                        >
                           {{ ans.viewValue }}
                         </button>
                       </span>
                       <span class="col-md-12 col-sm-12">
-                        <button type="button" (click)="goBack(stepper)" class="btn btn-light btn-md btn-block">
+                        <button
+                          type="button"
+                          (click)="goBack(stepper)"
+                          class="btn btn-light btn-md btn-block"
+                        >
                           Back
                         </button>
                       </span>
@@ -93,8 +128,13 @@
                   </div>
                   <div class="button-container">
                     <div class="button-set row">
-                      <span *ngFor="let ans of booleanGroups" class="col-md-6 col-sm-6">
-                        <button type="submit" (click)="
+                      <span
+                        *ngFor="let ans of booleanGroups"
+                        class="col-md-6 col-sm-6"
+                      >
+                        <button
+                          type="submit"
+                          (click)="
                             [
                               onSelection(
                                 ans,
@@ -103,16 +143,22 @@
                               ),
                               onFormSubmit()
                             ]
-                          " [ngClass]="
+                          "
+                          [ngClass]="
                             ans.value == 'Yes'
                               ? 'btn btn-dark btn-md btn-block active'
                               : 'btn btn-secondary btn-md btn-block active'
-                          ">
+                          "
+                        >
                           {{ ans.viewValue }}
                         </button>
                       </span>
                       <span class="col-md-12 col-sm-12">
-                        <button type="button" (click)="goBack(stepper)" class="btn btn-light btn-md btn-block">
+                        <button
+                          type="button"
+                          (click)="goBack(stepper)"
+                          class="btn btn-light btn-md btn-block"
+                        >
                           Back
                         </button>
                       </span>

@@ -15,7 +15,7 @@ declare var $: any;
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
-  audio: any;
+  // audio: any;
 
   // getting the index of the current bucket from the parent
   @Input() indexBucket: number;
@@ -28,6 +28,9 @@ export class BucketComponent implements OnInit {
 
   // getting the state of the carousel array from the parent
   @Input() carouselStates: any[];
+
+  //call showBucketFilledAlert() in bucketStepper when current bucket is full
+  @Output() BucketFilledAlert = new EventEmitter<void>();
 
   // Appearing message IDs
   messageID: string[];
@@ -76,9 +79,9 @@ export class BucketComponent implements OnInit {
     this.bucketID = [];
     this.carouselID = [];
     this.slideCarouselID = [];
-    this.audio = new Audio();
-    this.audio.src = '../../../assets/button-click-sound-effect.wav';
-    this.audio.load();
+    // this.audio = new Audio();
+    // this.audio.src = '../../../assets/button-click-sound-effect.wav';
+    // this.audio.load();
 
     // initializing the carousel template
     // here, map() function is used to concatenate a number in-front of each slide item
@@ -169,7 +172,7 @@ export class BucketComponent implements OnInit {
   dragDropped(event: any) {
     if (event.previousContainer !== event.container) {
       $('#' + event.container.id).css('background', '#eeeeee');
-      this.audio.play();
+      // this.audio.play();
       // get the current carousel index as a string
       const myIndex: string = this.indexCarousel.toString();
 
@@ -223,7 +226,7 @@ export class BucketComponent implements OnInit {
   // Carousel arrow click Next & Back
   onClick(button) {
     if (Date.now() > this.doneAt) {
-      this.audio.play();
+      // this.audio.play();
       if (button === 'Previous') {
         $('#' + this.addIDSlideCarousel()).carousel('prev');
         // wrapping around
@@ -297,6 +300,8 @@ export class BucketComponent implements OnInit {
     this.bucketProgressPercentage =
       (this.bucketProgressValue = val / this.carouselTemplate.length) * 100;
     if (this.bucketProgressPercentage == 100) {
+      //calling the alert - filled bucket
+      this.BucketFilledAlert.next();
       this.formatBucketDetails();
       this.dataTransferService.set_bucket_data(this.bucket_details);
     }

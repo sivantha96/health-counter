@@ -13,12 +13,14 @@ const routes: Routes = [
   {
     path: '',
     component: WelcomeComponent,
-    data: { animation: 'isRight' },
   },
   {
-    path: 'landing',
+    path: 'home',
     component: LandingComponent,
-    data: { animation: 'isRight' },
+  },
+  {
+    path: 'home/:*',
+    redirectTo: 'home',
   },
   {
     path: 'bucket',
@@ -26,17 +28,14 @@ const routes: Routes = [
     canActivate: [RouteGuardForBucket],
     // ----------------------------------------------------------------------- //
     component: BucketStepperComponent,
-    data: { animation: 'isRight' },
   },
   {
     path: 'end',
     component: EndPageComponent,
-    data: { animation: 'isRight' },
   },
   {
     path: '**',
     component: NotFoundComponent,
-    data: { animation: 'isRight' },
   },
 ];
 

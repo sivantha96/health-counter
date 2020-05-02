@@ -12,6 +12,6 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {}
 
   onclick() {
-    this.router.navigate(['/landing']);
+    this.router.navigate(['/home']);
   }
 }

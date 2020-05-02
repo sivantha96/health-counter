@@ -21,8 +21,16 @@ import {
 import { IBoolean, IPostData } from 'src/app/models/landing';
 import { DataService } from './../../services/data.service';
 import { MatStepper } from '@angular/material/stepper';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { fader, slider } from 'src/app/route-animations';
+
+//check validity of inputs in the form
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl): boolean {
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+}
 
 @Component({
   selector: 'app-landing',
@@ -37,6 +45,9 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   isOptional = false;
 
+  //form validation
+  matcher = new MyErrorStateMatcher();
+
   //options recently aboard
   booleanGroups: IBoolean[] = [
     { value: 'Yes', viewValue: 'Yes' },
@@ -44,7 +55,11 @@ export class LandingComponent implements OnInit, OnDestroy {
   ];
 
   dataForm = new FormGroup({
-    noOfFamily: new FormControl('', [Validators.required, this.numberOnly]),
+    noOfFamily: new FormControl('', [
+      this.numberOnly,
+      this.familyLimit,
+      Validators.required,
+    ]),
     foreignContact: new FormControl('', Validators.required),
     closeContact: new FormControl('', Validators.required),
   });
@@ -136,12 +151,23 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   //custom validation
+  //Validate input is a number?
   numberOnly(event: AbstractControl): { [key: string]: boolean } | null {
     const inp = event.value ? event.value : event.value;
-    if (isNaN(inp)) {
-      return { notNumbers: true };
-    } else {
-      return null;
-    }
+
+    return isNaN(inp) ? { notNumbers: true } : null;
   }
+  //Validate  noOfFamily limit(<50)
+  familyLimit(event: AbstractControl): { [key: string]: boolean } | null {
+    const inp = event.value ? event.value : event.value;
+
+    return inp > 50 ? { limitExceed: true } : null;
+  }
+
+  //custom error messages for validations
+  errorMessages: { [key: string]: string } = {
+    required: 'this field is required',
+    notNumbers: 'only numeric values allowed',
+    limitExceed: 'family limit is 50',
+  };
 }
