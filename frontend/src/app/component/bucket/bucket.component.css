@@ -1,9 +1,7 @@
 .bucket-container {
   flex-direction: column;
-  height: 20vh;
-  width: 60vw;
-  padding-left: 10%;
-  padding-right: 10%;
+  flex-grow: 1;
+  height: 100%;
   background: #eeeeee;
   border-radius: 5px;
 }
@@ -29,22 +27,22 @@
 
 .appearing-message-display {
   animation: scale-in-center 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #28a745;
-  padding: 2%;
-  width: 100%;
+  width: 80px;
   position: relative;
-  bottom: 30%;
+  font-size: smaller;
+  color: white;
 }
 
 .appearing-message-hide {
   animation: scale-out-center 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #28a745;
-  padding: 2%;
-  width: 100%;
+  width: 80px;
   position: relative;
-  bottom: 30%;
+  font-size: smaller;
+  color: white;
 }
 
 @keyframes scale-in-center {
@@ -115,7 +113,16 @@
   padding-top: 14px;
 }
 .dialog-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.progress-spinner {
+  position: absolute;
+}
+
+.progress-image {
+  width: 40px;
   position: relative;
-  top: -37%;
-  left: 60%;
+  margin-bottom: 3px;
 }

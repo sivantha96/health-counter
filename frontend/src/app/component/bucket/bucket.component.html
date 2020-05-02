@@ -1,7 +1,6 @@
-<!-- drag&drop connected areas -->
 <div cdkDropListGroup style="touch-action: none">
   <mat-grid-list cols="1" rowHeight="5vh">
-    <mat-grid-tile [rowspan]="9" gutterSize="5px">
+    <mat-grid-tile [rowspan]="8">
       <h1 class="slide-name">
         {{ this.carouselArray[this.indexCarousel].name }}
       </h1>
@@ -14,10 +13,8 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </div>
-
       <div class="carousel slide" id="{{ addIDSlideCarousel() }}" data-pause="true" data-touch="false"
         data-keyboard="false">
-        <!-- carousel container -->
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let slide of carouselArray; first as isFirst; let i = index"
             [ngClass]="isFirst ? 'active' : 'true'">
@@ -32,30 +29,21 @@
         </div>
       </div>
     </mat-grid-tile>
-
-    <mat-grid-tile [rowspan]="4">
+    <mat-grid-tile [rowspan]="5">
       <div class="bucket-container d-flex align-items-center justify-content-center" cdkDropList
         [attr.id]="addIDBucket()" [cdkDropListConnectedTo]="carouselID" [cdkDropListData]="currentBucket"
         (cdkDropListExited)="dragExited($event)" (cdkDropListEntered)="dragEntered($event)"
         (cdkDropListDropped)="dragDropped($event)">
-        <div [attr.id]="addIDMessage()" class="appearing-message-initial text-center">
-          Drag here to add
-        </div>
+        <img class="progress-image" src='../../../assets/avatar.png'>
+        <div [attr.id]="addIDMessage()" class="appearing-message-initial text-center">Drag here</div>
         <span class="dialog-button">
           <button mat-icon-button (click)="openDialog()">
             <mat-icon>launch</mat-icon>
           </button>
-
         </span>
-        <div class="progress" style="width: 50vw;">
-          <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar"
-            [style.width.%]="bucketProgressPercentage" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+        <mat-progress-spinner class="progress-spinner" [color]="'primary'" [mode]="'determinate'"
+          [value]="bucketProgressPercentage" [strokeWidth]='5' [diameter]="120"></mat-progress-spinner>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
-
-  <!-- carousel -->
-
-  <!-- carousel arrows -->
 </div>
