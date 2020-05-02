@@ -1,7 +1,13 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+  OnDestroy,
+} from '@angular/core';
 
 import { IFamilyDetails, IBucketDetails } from './../../models/data.model';
-import { PostData } from 'src/app/models/bucket';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
@@ -13,13 +19,14 @@ import { DataService } from './../../services/data.service';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { DragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-bucket-stepper',
   templateUrl: './bucket-stepper.component.html',
   styleUrls: ['./bucket-stepper.component.css'],
 })
-export class BucketStepperComponent implements OnInit {
+export class BucketStepperComponent implements OnInit, OnDestroy {
   // getting the child components with id = 'cmp' as an iterable list
   @ViewChildren('cmp') bucketQueryList: QueryList<BucketComponent>;
 
@@ -63,8 +70,7 @@ export class BucketStepperComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private dataTransferService: DataTransferService,
-    private dataService: DataService,
-
+    private dataService: DataService
   ) {
     this.carouselStates = [];
     this.bucketStates = [];
@@ -76,8 +82,6 @@ export class BucketStepperComponent implements OnInit {
     // ------------------------Activate Route Guard---------------------------- //
     // uncomment this out when you are ready to apply route guard for bucket.
     // And also comment out the Deactivate Route Guard area below.
-    // Keep in mind that you have to uncomment the canActivate of the bucket route
-    // in the appRouting module
 
     // check route came from landing****************
     // catch the landing id generated from landing
@@ -85,49 +89,42 @@ export class BucketStepperComponent implements OnInit {
       this.landingId = params.id;
     });
 
-    if (this.dataTransferService === undefined) {
-      this.router.navigateByUrl('/landing');
+    if (this.dataTransferService === undefined && this.postData == undefined) {
+      this.postData = null;
+      this.router.navigateByUrl('/home');
     } else {
       // catch data from landing using data transfer service
       this.postData = this.dataTransferService.get_family_data();
+      // destroying the instance
+      this.dataTransferService = null;
       if (
         !this.landingId ||
         !this.postData ||
         this.landingId !== this.postData.id
       ) {
-        // destroying the instance
-        this.dataTransferService = null;
-        this.router.navigateByUrl('/landing');
+        this.postData = null;
+        this.router.navigateByUrl('/home');
+      } else {
+        // Setting number of buckets according to the received number of family members
+        // this.noOfBuckets = +this.postData.family_members;
+
+        // api response - commented out for frontend********
+
+        this.noOfBuckets = +this.postData.n_family_members;
+
+        // constructing the dummy array for stepper
+        this.members = this.giveMeDummy(this.noOfBuckets);
+
+        // calculate the value for a single step
+        this.progressStepCost = 100 / this.noOfBuckets;
+
+        // setting the staring value of the progress
+        this.progressValue = 0;
       }
     }
-    // -------------------------------------------------------------------------- //
-
-    // //------------------------Deactivate Route Guard----------------------------//
-    // //uncomment this out when you are ready to apply route guard for bucket.
-    // //And also comment out the Activate Route Guard area above.
-    // //Keep in mind that you have to comment the canActivate of the bucket route
-    // //in the appRouting module
-
-    // //catch data from landing using data transfer service
-    // this.postData = this.dataTransferService.get_family_data();
-    // this.dataTransferService = null;
-    // //--------------------------------------------------------------------------//
-
-    // Setting number of buckets according to the received number of family members
-    // this.noOfBuckets = +this.postData.family_members;
-
-    // api response - commented out for frontend********
-    this.noOfBuckets = +this.postData.n_family_members;
-
-    // constructing the dummy array for stepper
-    this.members = this.giveMeDummy(this.noOfBuckets);
-
-    // calculate the value for a single step
-    this.progressStepCost = 100 / this.noOfBuckets;
-
-    // setting the staring value of the progress
-    this.progressValue = 0;
   }
+
+  ngOnDestroy(): void {}
 
   // dummy array creator
   giveMeDummy(n: number): any[] {
@@ -149,12 +146,16 @@ export class BucketStepperComponent implements OnInit {
       if (this.indexBucket < this.noOfBuckets - 1) {
         // pass the iterable list as an array to the saveState method
         this.saveState(this.bucketQueryList.toArray());
-        //get the bucket data from bucket component
-        this.bucket_data = this.dataTransferService.get_bucket_data();
+        // //get the bucket data from bucket component
+        // this.bucket_data = this.dataTransferService.get_bucket_data();
         // next
         this.indexBucket = this.indexBucket + 1;
         stepper.next();
         this.progressValue += this.progressStepCost;
+        //show alert if current bucket is full
+        if (this.isBucketFull()) {
+          this.showBucketFilledAlert();
+        }
 
         // POST REQ
         // ----------------------------------------------
@@ -182,8 +183,13 @@ export class BucketStepperComponent implements OnInit {
 
       // previous
       this.indexBucket = this.indexBucket - 1;
+
       stepper.previous();
       this.progressValue -= this.progressStepCost;
+      //show alert if current bucket is full
+      if (this.isBucketFull()) {
+        this.showBucketFilledAlertAlready();
+      }
 
       // POST REQ
       // ----------------------------------------------
@@ -207,18 +213,59 @@ export class BucketStepperComponent implements OnInit {
 
   // is the current Bucket completely filled
   isBucketFull(): boolean {
-    const bucketArr = this.bucketQueryList;
-    if (bucketArr === undefined) {
+    if (this.postData == null) {
       return false;
     } else {
-      return bucketArr.toArray()[this.indexBucket].currentBucket.length ===
-        bucketArr.toArray()[this.indexBucket].carouselArray.length;
+      const bucketArr = this.bucketQueryList;
+      if (bucketArr === undefined) {
+        return false;
+      } else {
+        return (
+          bucketArr.toArray()[this.indexBucket].currentBucket.length ===
+          bucketArr.toArray()[this.indexBucket].carouselArray.length
+        );
+      }
     }
   }
 
   // show alert toaster - if bucket not completed
   showBucketNoFilledAlert() {
-    this.toastr.info('Please complete the current bucket', 'Incomplete', {
+    this.toastr.info('please complete the current bucket', 'Incomplete', {
+      // toastClass:"ngx-toast",
+      timeOut: 1500,
+      // closeButton: true,
+      positionClass: 'toast-center-center',
+      tapToDismiss: true,
+    });
+  }
+
+  showBucketFilledAlert() {
+    //two options when lase(all) buckets filled and current bucket is filled
+    let errorMessages: { msg: string; head: string }[] = [
+      {
+        msg: 'this bucket is complete.',
+        head: 'Click Next',
+      },
+      {
+        msg: 'all buckets completed',
+        head: 'Click Done',
+      },
+    ];
+    let errorMessage: { msg: string; head: string } =
+      this.indexBucket + 1 != this.noOfBuckets
+        ? errorMessages[0]
+        : errorMessages[1];
+    this.toastr.success(errorMessage.msg, errorMessage.head, {
+      // toastClass:"ngx-toast",
+      timeOut: 2000,
+      // closeButton: true,
+      positionClass: 'toast-center-center',
+      tapToDismiss: true,
+    });
+  }
+
+  showBucketFilledAlertAlready() {
+    this.toastr.success('already completed bucket', 'Completed', {
       // toastClass:"ngx-toast",
       timeOut: 2000,
       // closeButton: true,

@@ -4,17 +4,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.css']
+  styleUrls: ['./welcome.component.css'],
 })
 export class WelcomeComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  onclick() {
+    this.router.navigate(['/home']);
   }
-
-  onclick(){
-    this.router.navigate(['/landing']);
-  }
-
 }

@@ -11,10 +11,17 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
+
   {
-    path: 'landing',
+    path: 'home',
     component: LandingComponent,
   },
+
+  {
+    path: 'home/:*',
+    redirectTo: 'home',
+  },
+
   {
     path: 'bucket',
     // ---uncomment this when you are ready to use route guard for bucket ---- //
@@ -26,8 +33,10 @@ const routes: Routes = [
     path: 'end',
     component: EndPageComponent,
   },
+
   {
     path: '**',
+
     component: NotFoundComponent,
   },
 ];
