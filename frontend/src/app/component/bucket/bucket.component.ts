@@ -7,7 +7,6 @@ import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { IBucketDetails } from '../../models/data.model';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
-
 declare var $: any;
 
 @Component({
@@ -66,7 +65,9 @@ export class BucketComponent implements OnInit {
 
   doneAt;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog,
+  constructor(
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
     private dataTransferService: DataTransferService
   ) {
     this.doneAt = 0;
@@ -116,7 +117,10 @@ export class BucketComponent implements OnInit {
     ];
 
     // if (typeof this.bucketStates === 'undefined') {
-    if ((typeof this.bucketStates === 'undefined') || (typeof this.bucketStates[this.indexBucket] === 'undefined')) {
+    if (
+      typeof this.bucketStates === 'undefined' ||
+      typeof this.bucketStates[this.indexBucket] === 'undefined'
+    ) {
       // check the state received by the parent is undefined
       // if so deep copy the template array into the carouselArray and initialize an empty bucket
       this.carouselArray = JSON.parse(JSON.stringify(this.carouselTemplate));
@@ -140,11 +144,7 @@ export class BucketComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-  }
-
-  ngAfterContentInit(){
-    this.openHelpDialog();
+    setTimeout(this.openHelpDialog.bind(this), 1000);
   }
 
   dragStarted(event: any) {
@@ -183,11 +183,13 @@ export class BucketComponent implements OnInit {
       // this will swap the currently dragged item with the previously dragged item for the same carousel index
       this.carouselArray[this.indexCarousel].slideItems = this.carouselTemplate[
         this.indexCarousel
-      ].slideItems.filter(str => str.indexOf(pattern) === -1);
+      ].slideItems.filter((str) => str.indexOf(pattern) === -1);
 
       // this will remove all the items that starts with the "myIndex"
       // (items that starts with the "myIndex") = (previously dragged items from the same carousel index)
-      const newBucket = this.currentBucket.filter(str => str.indexOf(myIndex) === -1);
+      const newBucket = this.currentBucket.filter(
+        (str) => str.indexOf(myIndex) === -1
+      );
 
       // this will transfer the currently dragged item from the carousel to the bucket
       this.currentBucket = [...newBucket, this.indexCarousel + pattern];
@@ -236,7 +238,6 @@ export class BucketComponent implements OnInit {
         this.indexCarousel = this.indexCarousel + 1;
         // wrapping around
         if (this.indexCarousel === this.carouselArray.length) {
-
           this.indexCarousel = 0;
         }
       }
@@ -247,8 +248,7 @@ export class BucketComponent implements OnInit {
   //pen a dialog to show tips on how to drag
   openHelpDialog(): void {
     this.dialog.closeAll();
-    const helpDialogRef = this.dialog.open(HelpDialogComponent, {
-    })
+    const helpDialogRef = this.dialog.open(HelpDialogComponent, {});
   }
 
   //dialog of the bucket
@@ -330,24 +330,24 @@ export class BucketComponent implements OnInit {
   }
 
   formatBucketDetails() {
-    let str, gender, age_group, cough, cold, itchy_throat,
-      throat_pain, taste_loss;
+    let str,
+      gender,
+      age_group,
+      cough,
+      cold,
+      itchy_throat,
+      throat_pain,
+      taste_loss;
     for (let i = 0; i < this.currentBucket.length; i++) {
       str = this.currentBucket[i];
-      if (str.charAt(0) == '0')
-        gender = str.substring(1, str.length);
-      else if (str.charAt(0) == '1')
-        age_group = str.substring(1, str.length);
-      else if (str.charAt(0) == '2')
-        cough = str.substring(1, str.length);
-      else if (str.charAt(0) == '3')
-        cold = str.substring(1, str.length);
+      if (str.charAt(0) == '0') gender = str.substring(1, str.length);
+      else if (str.charAt(0) == '1') age_group = str.substring(1, str.length);
+      else if (str.charAt(0) == '2') cough = str.substring(1, str.length);
+      else if (str.charAt(0) == '3') cold = str.substring(1, str.length);
       else if (str.charAt(0) == '4')
         itchy_throat = str.substring(1, str.length);
-      else if (str.charAt(0) == '5')
-        throat_pain = str.substring(1, str.length);
-      else if (str.charAt(0) == '6')
-        taste_loss = str.substring(1, str.length);
+      else if (str.charAt(0) == '5') throat_pain = str.substring(1, str.length);
+      else if (str.charAt(0) == '6') taste_loss = str.substring(1, str.length);
     }
 
     this.bucket_details = {
@@ -358,7 +358,7 @@ export class BucketComponent implements OnInit {
       cold,
       itchy_throat,
       throat_pain,
-      taste_loss
+      taste_loss,
     };
   }
 }

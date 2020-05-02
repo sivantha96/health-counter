@@ -19,9 +19,7 @@ import { fader, slider } from 'src/app/route-animations';
   selector: 'app-bucket-stepper',
   templateUrl: './bucket-stepper.component.html',
   styleUrls: ['./bucket-stepper.component.css'],
-  animations: [
-    slider
-  ]
+  animations: [slider],
 })
 export class BucketStepperComponent implements OnInit {
   // getting the child components with id = 'cmp' as an iterable list
@@ -67,8 +65,7 @@ export class BucketStepperComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private dataTransferService: DataTransferService,
-    private dataService: DataService,
-
+    private dataService: DataService
   ) {
     this.carouselStates = [];
     this.bucketStates = [];
@@ -215,8 +212,10 @@ export class BucketStepperComponent implements OnInit {
     if (bucketArr === undefined) {
       return false;
     } else {
-      return bucketArr.toArray()[this.indexBucket].currentBucket.length ===
-        bucketArr.toArray()[this.indexBucket].carouselArray.length;
+      return (
+        bucketArr.toArray()[this.indexBucket].currentBucket.length ===
+        bucketArr.toArray()[this.indexBucket].carouselArray.length
+      );
     }
   }
 

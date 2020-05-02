@@ -7,7 +7,6 @@ export class RouteGuardForBucket implements CanActivate {
   constructor(public router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-
     if (!route.params.id) {
       this.router.navigate(['./landing']);
       return false;

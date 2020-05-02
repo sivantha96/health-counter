@@ -1,37 +1,36 @@
 .no-item {
-    margin-top: 5%;
-    height: 30px;
+  margin-top: 5%;
+  height: 30px;
 }
 
 .action-button-container {
-    margin-top: 3%;
+  margin-top: 3%;
 }
 
 .dialog-header {
-    margin-bottom: 4%;
-    font-size: large;
+  margin-bottom: 4%;
+  font-size: large;
 }
 
-.list-group{
-    max-height: 40vh;
-    overflow: 'scroll'
+.list-group {
+  max-height: 40vh;
+  overflow: "scroll";
 }
 
 .item-name {
-    font-size: medium;
-    margin-bottom: 0% !important;
+  font-size: medium;
+  margin-bottom: 0% !important;
 }
 
 .item-value {
-    overflow: hidden;
-    font-size: smaller;
+  overflow: hidden;
+  font-size: smaller;
 }
 
 .list-group-item {
-    min-height: 60px;
-    padding-top: 1rem !important;
-    padding-right: 0rem !important;
-    padding-bottom: 1rem !important;
-    padding-left: 1.5rem !important;
+  min-height: 60px;
+  padding-top: 1rem !important;
+  padding-right: 0rem !important;
+  padding-bottom: 1rem !important;
+  padding-left: 1.5rem !important;
 }
-

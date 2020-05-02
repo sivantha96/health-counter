@@ -33,11 +33,14 @@ export class DataService {
       cold: postData.cold,
       itchy_throat: postData.itchy_throat,
       throat_pain: postData.throat_pain,
-      taste_loss: postData.taste_loss
+      taste_loss: postData.taste_loss,
     };
 
     return this.http
-      .post<IBucketDetails>(this.baseUrl + this.port + '/bucket/' + postData.id, json)
+      .post<IBucketDetails>(
+        this.baseUrl + this.port + '/bucket/' + postData.id,
+        json
+      )
       .pipe(catchError(this.handleError));
   }
 

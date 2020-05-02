@@ -10,7 +10,7 @@
   }
 }
 
-body{
+body {
   position: fixed;
 }
 
@@ -83,10 +83,11 @@ body{
   margin-bottom: 0.7em;
 }
 
-.stepper-container{
+.stepper-container {
   height: 10em;
 }
 
-.mat-stepper-horizontal, .mat-stepper-vertical {
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
   background-color: transparent !important;
 }

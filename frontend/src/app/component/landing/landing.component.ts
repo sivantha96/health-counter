@@ -28,9 +28,7 @@ import { fader, slider } from 'src/app/route-animations';
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
-  animations: [
-    slider
-  ]
+  animations: [slider],
 })
 export class LandingComponent implements OnInit, OnDestroy {
   //catch the input field and next buttons for outside taping
@@ -146,5 +144,4 @@ export class LandingComponent implements OnInit, OnDestroy {
       return null;
     }
   }
-
 }

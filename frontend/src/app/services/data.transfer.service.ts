@@ -14,7 +14,7 @@ export class DataTransferService {
     return this.data;
   }
 
-  public set_bucket_data(data: IBucketDetails){
+  public set_bucket_data(data: IBucketDetails) {
     this.bucket = data;
   }
 

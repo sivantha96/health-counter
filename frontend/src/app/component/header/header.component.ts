@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
-    private overlayContainer: OverlayContainer,
+    private overlayContainer: OverlayContainer
   ) {
     translate.addLangs(['en', 'si', 'ta']);
     translate.setDefaultLang('en');
@@ -39,15 +39,15 @@ export class HeaderComponent implements OnInit {
     } else if (this.selectedLang == 'ta') {
       this.currentLan = 'தமிழ்';
     }
-    this.closeMyMenu()
+    this.closeMyMenu();
   }
 
   closeMyMenu() {
-    $('.collapse').collapse('hide')
-    clearTimeout(this.timer)
+    $('.collapse').collapse('hide');
+    clearTimeout(this.timer);
   }
 
   collapseAuto() {
-    this.timer = setTimeout(this.closeMyMenu, 2000)
+    this.timer = setTimeout(this.closeMyMenu, 2000);
   }
 }

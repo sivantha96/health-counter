@@ -4,17 +4,14 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-help-dialog',
   templateUrl: './help-dialog.component.html',
-  styleUrls: ['./help-dialog.component.css']
+  styleUrls: ['./help-dialog.component.css'],
 })
 export class HelpDialogComponent implements OnInit {
+  constructor(public helpDialogRef: MatDialogRef<HelpDialogComponent>) {}
 
-  constructor(public helpDialogRef: MatDialogRef<HelpDialogComponent>) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onNoClick(): void {
     this.helpDialogRef.close();
   }
-
 }

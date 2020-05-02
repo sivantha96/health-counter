@@ -5,26 +5,26 @@
       <h1 class="slide-name">
         {{ this.carouselArray[this.indexCarousel].name }}
       </h1>
-      <div id="previous-button" class="carousel-control-prev" role="button"
-        data-slide="prev" (click)="onClick('Previous')">
+      <div id="previous-button" class="carousel-control-prev" role="button" data-slide="prev"
+        (click)="onClick('Previous')">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </div>
-      <div id="next-button" class="carousel-control-next" role="button"
-        data-slide="next" (click)="onClick('Next')">
+      <div id="next-button" class="carousel-control-next" role="button" data-slide="next" (click)="onClick('Next')">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </div>
 
-      <div class="carousel slide" id="{{ addIDSlideCarousel() }}" data-pause="true" data-touch="false" data-keyboard="false">
+      <div class="carousel slide" id="{{ addIDSlideCarousel() }}" data-pause="true" data-touch="false"
+        data-keyboard="false">
         <!-- carousel container -->
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let slide of carouselArray; first as isFirst; let i = index"
             [ngClass]="isFirst ? 'active' : 'true'">
             <div class="row justify-content-center container-fluid m-0 p-0" cdkDropList [attr.id]="addIDCarousel()"
               [cdkDropListConnectedTo]="bucketID" [cdkDropListData]="slide.slideItems" cdkDropListSortingDisabled>
-              <div class="row answer-chip" *ngFor="let slideItem of slide.slideItems" cdkDrag (cdkDragEnded)="dragEnded($event)"
-                (cdkDragStarted)="dragStarted($event)">
+              <div class="row answer-chip" *ngFor="let slideItem of slide.slideItems" cdkDrag
+                (cdkDragEnded)="dragEnded($event)" (cdkDragStarted)="dragStarted($event)">
                 <p class="col slide-item">{{ slideItem.slice(1) }}</p>
               </div>
             </div>
@@ -44,7 +44,7 @@
         <span class="dialog-button">
           <button mat-icon-button (click)="openDialog()">
             <mat-icon>launch</mat-icon>
-        </button>
+          </button>
 
         </span>
         <div class="progress" style="width: 50vw;">

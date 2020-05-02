@@ -1,4 +1,3 @@
-
 import { DataTransferService } from 'src/app/services/data.transfer.service';
 
 import { HttpClientModule } from '@angular/common/http';
