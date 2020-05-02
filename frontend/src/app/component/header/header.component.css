@@ -1,4 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .toolbar {
   background-color: #eeeeee;
@@ -11,12 +12,10 @@
   text-align: center;
 }
 
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
+.header-content, .mat-button-wrapper {
+  font-size: 3vmin;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
 }
 
 .mat-button-toggle-checked {
@@ -37,6 +36,15 @@ button.active:focus {
   outline-style: none !important;
 }
 
-.mat-button-wrapper {
-    font-size: 3.5vmin;
+.navbar-toggler {
+  border: none;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.header-title {
+  padding-left: 5%;
+  font-size: 4vmin;
 }
