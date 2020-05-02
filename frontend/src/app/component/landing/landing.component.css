@@ -31,7 +31,6 @@ body{
 
 .card-container {
   padding: 1%;
-
   text-align: center;
   padding-bottom: 1vmin;
   font-size: 3.45vmin;
@@ -60,6 +59,7 @@ body{
   justify-content: center;
   height: 14rem;
   width: 17rem;
+  z-index: -1;
 }
 
 .header-container {
@@ -87,9 +87,6 @@ body{
   height: 10em;
 }
 
-.main-page {
-  background-image: url('../../../assets/covid-min.png');
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+.mat-stepper-horizontal, .mat-stepper-vertical {
+  background-color: transparent !important;
 }
