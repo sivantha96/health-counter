@@ -16,6 +16,7 @@ export const fader = trigger('routeAnimations', [
       [
         style({
           position: 'absolute',
+          
           left: 0,
           width: '100%',
           opacity: 0,
@@ -49,7 +50,7 @@ function slideTo(direction) {
       [
         style({
           position: 'absolute',
-          top: 0,
+          top: "9.75%",
           [direction]: 0,
           width: '100%',
         }),
