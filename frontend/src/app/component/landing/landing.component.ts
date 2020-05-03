@@ -145,9 +145,17 @@ export class LandingComponent implements OnInit, OnDestroy {
       n_family_members: postQuery.n_family_members,
       id: '1', //dummy id
     };
-    //------------------------------------------------------------------------------//
 
+    //----------------------Deactivate Route Guard----------------------------------------//
+    // 1. comment out Route Guard section below.
+    // 2. comment out Route Guard section in the bucketStepper page
+    // 3. comment out Route Guard section in the bucket path of app.routing.module
+    //---------------------- Route Guard-----------------------------------------------//
     this.router.navigate(['./bucket', { id: this.transferData.id }]);
+    //---------------------- Route Guard-----------------------------------------------//
+
+
+    this.router.navigate(['./bucket']);
   }
 
   //custom validation

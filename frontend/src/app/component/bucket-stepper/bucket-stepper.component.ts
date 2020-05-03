@@ -75,11 +75,13 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // ------------------------Activate Route Guard---------------------------- //
-    // uncomment this out when you are ready to apply route guard for bucket.
-    // And also comment out the Deactivate Route Guard area below.
-
-    // check route came from landing****************
+    
+    // ------------------------Deactivate Route Guard---------------------------- //
+    // 1.comment out Route Guard section below.
+    // 2. comment out Route Guard in the landing page
+    // 3.uncomment out Route Guard in the bucket path of app.routing.module
+    // ------------------------Route Guard----------------------------------------------------------------------------------//
+    // check route came from landing
     // catch the landing id generated from landing
     this.route.params.subscribe((params) => {
       this.landingId = params.id;
@@ -118,6 +120,32 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
         this.progressValue = 0;
       }
     }
+    // ------------------------Route Guard----------------------------------------------------------------------------------//
+    
+
+    if (
+      this.dataTransferService !== undefined &&
+      this.dataTransferService != null
+    ) {
+      this.postData = this.dataTransferService.get_family_data();
+    }
+
+    // Setting number of buckets according to the received number of family members
+    // this.noOfBuckets = +this.postData.family_members;
+
+    // api response - commented out for frontend********
+
+    this.noOfBuckets = +this.postData.n_family_members;
+
+    // constructing the dummy array for stepper
+    this.members = this.giveMeDummy(this.noOfBuckets);
+
+    // calculate the value for a single step
+    this.progressStepCost = 100 / this.noOfBuckets;
+
+    // setting the staring value of the progress
+    this.progressValue = 0;
+    //............................................................................
   }
 
   ngOnDestroy(): void {}
