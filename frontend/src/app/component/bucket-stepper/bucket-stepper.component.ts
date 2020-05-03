@@ -75,49 +75,83 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // ------------------------Activate Route Guard---------------------------- //
-    // uncomment this out when you are ready to apply route guard for bucket.
-    // And also comment out the Deactivate Route Guard area below.
+    // // ------------------------Activate Route Guard---------------------------- //
+    // // uncomment this out when you are ready to apply route guard for bucket.
+    // //Please make sure
+    // //1.comment out the Deactivate Route Guard area below.
+    // //2.uncomment out activate route guard in the landing page and
+    // //3.uncomment out activate route guard area the in the bucket path of app.routing.module
 
-    // check route came from landing****************
-    // catch the landing id generated from landing
-    this.route.params.subscribe((params) => {
-      this.landingId = params.id;
-    });
+    // // check route came from landing****************
+    // // catch the landing id generated from landing
+    // this.route.params.subscribe((params) => {
+    //   this.landingId = params.id;
+    // });
 
-    if (this.dataTransferService === undefined && this.postData == undefined) {
-      this.postData = null;
-      this.router.navigateByUrl('/home');
-    } else {
-      // catch data from landing using data transfer service
+    // if (this.dataTransferService === undefined && this.postData == undefined) {
+    //   this.postData = null;
+    //   this.router.navigateByUrl('/home');
+    // } else {
+    //   // catch data from landing using data transfer service
+    //   this.postData = this.dataTransferService.get_family_data();
+    //   // destroying the instance
+    //   this.dataTransferService = null;
+    //   if (
+    //     !this.landingId ||
+    //     !this.postData ||
+    //     this.landingId !== this.postData.id
+    //   ) {
+    //     this.postData = null;
+    //     this.router.navigateByUrl('/home');
+    //   } else {
+    //     // Setting number of buckets according to the received number of family members
+    //     // this.noOfBuckets = +this.postData.family_members;
+
+    //     // api response - commented out for frontend********
+
+    //     this.noOfBuckets = +this.postData.n_family_members;
+
+    //     // constructing the dummy array for stepper
+    //     this.members = this.giveMeDummy(this.noOfBuckets);
+
+    //     // calculate the value for a single step
+    //     this.progressStepCost = 100 / this.noOfBuckets;
+
+    //     // setting the staring value of the progress
+    //     this.progressValue = 0;
+    //   }
+    // }
+    // //-----------------------------------------------------------------------------//
+
+    // ------------------------Deactivate Route Guard---------------------------- //
+    // uncomment this out when you want to deactivate route guard for bucket.
+    //Please make sure
+    //1.comment out the Activate Route Guard area above.
+    //2.uncomment out deactivate route guard in the landing page and
+    //3.uncomment out deactivate route guard area the in the bucket path of app.routing.module
+    if (
+      this.dataTransferService !== undefined &&
+      this.dataTransferService != null
+    ) {
       this.postData = this.dataTransferService.get_family_data();
-      // destroying the instance
-      this.dataTransferService = null;
-      if (
-        !this.landingId ||
-        !this.postData ||
-        this.landingId !== this.postData.id
-      ) {
-        this.postData = null;
-        this.router.navigateByUrl('/home');
-      } else {
-        // Setting number of buckets according to the received number of family members
-        // this.noOfBuckets = +this.postData.family_members;
-
-        // api response - commented out for frontend********
-
-        this.noOfBuckets = +this.postData.n_family_members;
-
-        // constructing the dummy array for stepper
-        this.members = this.giveMeDummy(this.noOfBuckets);
-
-        // calculate the value for a single step
-        this.progressStepCost = 100 / this.noOfBuckets;
-
-        // setting the staring value of the progress
-        this.progressValue = 0;
-      }
     }
+
+    // Setting number of buckets according to the received number of family members
+    // this.noOfBuckets = +this.postData.family_members;
+
+    // api response - commented out for frontend********
+
+    this.noOfBuckets = +this.postData.n_family_members;
+
+    // constructing the dummy array for stepper
+    this.members = this.giveMeDummy(this.noOfBuckets);
+
+    // calculate the value for a single step
+    this.progressStepCost = 100 / this.noOfBuckets;
+
+    // setting the staring value of the progress
+    this.progressValue = 0;
+    //............................................................................
   }
 
   ngOnDestroy(): void {}
