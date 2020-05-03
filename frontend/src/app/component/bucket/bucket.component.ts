@@ -15,6 +15,7 @@ declare var $: any;
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
+  radius: number;
   // audio: any;
 
   // getting the index of the current bucket from the parent
@@ -365,5 +366,46 @@ export class BucketComponent implements OnInit {
       throat_pain,
       taste_loss,
     };
+  }
+
+  getDiameter() {
+    let vw = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0
+    );
+    let vh = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0
+    );
+    let min = vh;
+    let vmin = (min / 100) * 23;
+    return vmin;
+  }
+
+  getSlideItemStyle(item, symptom) {
+    if (symptom !== 0 && symptom !== 1) {
+      switch (item) {
+        case 0:
+          return {
+            'background-color': '#00B944',
+          };
+          break;
+
+        case 1:
+          return {
+            'background-color': '#F18F10',
+          };
+          break;
+
+        case 2:
+          return {
+            'background-color': '#FF4848',
+          };
+          break;
+
+        default:
+          break;
+      }
+    }
   }
 }

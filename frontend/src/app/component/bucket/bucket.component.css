@@ -6,10 +6,17 @@
   border-radius: 5px;
 }
 
-.carousel-control-next-icon,
+.carousel-control-next-icon {
+  position: relative;
+  left: 30%;
+  bottom: 1%;
+  filter: invert(1);
+}
+
 .carousel-control-prev-icon {
-  position: absolute;
-  top: 5%;
+  position: relative;
+  right: 30%;
+  bottom: 1%;
   filter: invert(1);
 }
 
@@ -27,7 +34,7 @@
 
 .appearing-message-display {
   animation: scale-in-center 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #28a745;
   width: 80px;
   position: relative;
@@ -37,7 +44,7 @@
 
 .appearing-message-hide {
   animation: scale-out-center 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #28a745;
   width: 80px;
   position: relative;
@@ -67,9 +74,9 @@
 }
 
 .slide-name {
-  font-size: 4.5vmin;
+  font-size: 5vmin;
   position: absolute;
-  top: 2%;
+  top: 0;
 }
 
 .carousel-item {
@@ -82,18 +89,18 @@
 
 .slide-item {
   font-size: 2.5vmin;
-  background-color: burlywood;
+  background-color: 	#475563;
   text-align: center;
   cursor: move;
-  /* width: 20vw; */
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
-  width: 14em;
-  border-radius: 1em;
-  padding: 0.3em;
-  font-size: 1em;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  margin-bottom: 2%;
+  width: 16em;
+  height: 4.5vmax;
+  max-height: 35px !important;
+  border-radius: 5px;
+  font-size: 3vmin;
+  color: white
 }
 
 .progress {
@@ -101,17 +108,12 @@
 }
 
 .answer-chip {
-  height: 57px;
-  font-weight: bold;
+  /* height: 57px; */
+  font-weight: normal;
   text-align: center;
   /* vertical-align: middle; */
 }
 
-.slide-item {
-  vertical-align: middle;
-  display: table-cell;
-  padding-top: 14px;
-}
 .dialog-button {
   position: absolute;
   top: 0;

@@ -20,9 +20,13 @@
             [ngClass]="isFirst ? 'active' : 'true'">
             <div class="row justify-content-center container-fluid m-0 p-0" cdkDropList [attr.id]="addIDCarousel()"
               [cdkDropListConnectedTo]="bucketID" [cdkDropListData]="slide.slideItems" cdkDropListSortingDisabled>
-              <div class="row answer-chip" *ngFor="let slideItem of slide.slideItems" cdkDrag
+              <div class="row answer-chip" *ngFor="let slideItem of slide.slideItems; let j = index" cdkDrag
                 (cdkDragEnded)="dragEnded($event)" (cdkDragStarted)="dragStarted($event)">
-                <p class="col slide-item">{{ slideItem.slice(1) }}</p>
+                <div class="col slide-item d-flex align-items-center justify-content-center" [ngStyle]="getSlideItemStyle(j, i)">
+                  <div>
+                    {{ slideItem.slice(1) }}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -42,7 +46,7 @@
           </button>
         </span>
         <mat-progress-spinner class="progress-spinner" [color]="'primary'" [mode]="'determinate'"
-          [value]="bucketProgressPercentage" [strokeWidth]='5' [diameter]="120"></mat-progress-spinner>
+          [value]="bucketProgressPercentage" [strokeWidth]='5' [diameter]="getDiameter()"></mat-progress-spinner>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
