@@ -383,8 +383,9 @@ export class BucketComponent implements OnInit {
   }
 
   getSlideItemStyle(item, symptom) {
+    let itemNo = this.carouselTemplate[symptom].slideItems.indexOf(item)
     if (symptom !== 0 && symptom !== 1) {
-      switch (item) {
+      switch (itemNo) {
         case 0:
           return {
             'background-color': '#00B944',
@@ -404,6 +405,7 @@ export class BucketComponent implements OnInit {
           break;
 
         default:
+          return {}
           break;
       }
     }

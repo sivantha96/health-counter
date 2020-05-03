@@ -18,11 +18,11 @@
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let slide of carouselArray; first as isFirst; let i = index"
             [ngClass]="isFirst ? 'active' : 'true'">
-            <div class="row justify-content-center container-fluid m-0 p-0" cdkDropList [attr.id]="addIDCarousel()"
+            <div class="row justify-content-center container-fluid m-0" cdkDropList [attr.id]="addIDCarousel()"
               [cdkDropListConnectedTo]="bucketID" [cdkDropListData]="slide.slideItems" cdkDropListSortingDisabled>
-              <div class="row answer-chip" *ngFor="let slideItem of slide.slideItems; let j = index" cdkDrag
+              <div class="row answer-chip" *ngFor="let slideItem of slide.slideItems" cdkDrag
                 (cdkDragEnded)="dragEnded($event)" (cdkDragStarted)="dragStarted($event)">
-                <div class="col slide-item d-flex align-items-center justify-content-center" [ngStyle]="getSlideItemStyle(j, i)">
+                <div class="col slide-item d-flex align-items-center justify-content-center" [ngStyle]="getSlideItemStyle(slideItem, i)">
                   <div>
                     {{ slideItem.slice(1) }}
                   </div>
