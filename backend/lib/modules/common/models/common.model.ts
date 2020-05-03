@@ -12,11 +12,20 @@ export enum response_status_codes {
 
 export enum gender {
     male = 'male',
-    female = 'female'
+    female = 'female',
+    pther = 'other'
 }
 
 export enum severity {
     High = 'high',
     Moderate = 'moderate',
     Low = 'low'
+}
+
+export enum age {
+    Infant = 'infant',
+    Child = 'child',
+    Teenager = 'teenager',
+    Adult = 'adult',
+    Elderly = 'elderly'
 }
