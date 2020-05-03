@@ -28,7 +28,7 @@ export class UserController {
                         res.status(response_status_codes.success).json({
                             STATUS: 'SUCCESS',
                             MESSAGE: 'Family details added successfully',
-                            DATA: { id: family_data._id    }
+                            DATA: { id: family_data._id }
                         });
                     }
                 });
