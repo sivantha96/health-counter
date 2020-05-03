@@ -35,10 +35,10 @@
           (click)="goBack(stepper)"
           [disabled]="indexBucket === 0"
         >
-          Back
+        {{ "BUCKET-STEPPER.BACK" | translate  }}
         </button>
         <button class="bucket-name" mat-stroked-button (click)="openDialog()">
-          Bucket {{ indexBucket + 1 }} of {{ noOfBuckets }}
+          {{ "BUCKET.PERSON" | translate  }} {{ indexBucket + 1 }} of {{ noOfBuckets }}
         </button>
 
         <button
@@ -47,7 +47,7 @@
           (click)="goForward(stepper)"
           [ngClass]="{ disabledButton: !isBucketFull() }"
         >
-          Next
+        {{ "BUCKET-STEPPER.NEXT" | translate  }}
         </button>
         <button
           *ngIf="indexBucket + 1 === noOfBuckets"
@@ -55,7 +55,7 @@
           (click)="onDone()"
           [ngClass]="{ disabledButton: !isBucketFull() }"
         >
-          Done
+        {{ "BUCKET-STEPPER.DONE" | translate  }}
         </button>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { IFamilyDetails } from './../../models/data.model';
+import { IFamilyDetails, IFamilyResponse } from './../../models/data.model';
 
 import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 import {
@@ -24,6 +24,8 @@ import { MatStepper } from '@angular/material/stepper';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { fader, slider } from 'src/app/route-animations';
+import { BucketDataTransferService } from 'src/app/services/bucket.data.transfer.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 //check validity of inputs in the form
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -47,6 +49,8 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   //form validation
   matcher = new MyErrorStateMatcher();
+
+  family_response: IFamilyResponse;
 
   //options recently aboard
   booleanGroups: IBoolean[] = [
@@ -84,7 +88,8 @@ export class LandingComponent implements OnInit, OnDestroy {
     activatedRoute: ActivatedRoute,
     private renderer: Renderer2,
     private dataService: DataService,
-    private dataTransferService: DataTransferService
+    private dataTransferService: DataTransferService,
+    private bucketDataTransferService: BucketDataTransferService
   ) {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (
@@ -96,7 +101,7 @@ export class LandingComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   //transfer the data into bucketStepper after landing is destroyed
   ngOnDestroy(): void {
@@ -129,14 +134,18 @@ export class LandingComponent implements OnInit, OnDestroy {
     };
     // //------------------------Enable API POST--------------------------------------------//
     // //uncomment this out when you are ready to let the api,  connect with front end
-    // this.dataService.post_family_data(postQuery).subscribe((family_data) => {
-    //   // let familyResponse=JSON.parse(family_data)
-    //   this.transferData = {
-    //     n_family_members: postQuery.n_family_members,
-    //     id: family_data.DATA.id,
-    //   };
-    //   this.router.navigate(['./bucket']);
-    // });
+    this.dataService.post_family_data(postQuery).subscribe((family_data) => {
+      let familyResponse = JSON.parse(family_data)
+      this.family_response.STATUS = familyResponse.STATUS;
+      this.family_response.MESSAGE = familyResponse.MESSAGE;
+      this.family_response.DATA = familyResponse.DATA;
+      this.bucketDataTransferService.set_family_response(this.family_response)
+      this.transferData = {
+        n_family_members: postQuery.n_family_members,
+        id: family_data.DATA.id,
+      };
+      this.router.navigate(['./bucket']);
+    });
     // //---------------------------------------------------------------------------//
 
     // //------------------------Disable API POST-----------------------------------//

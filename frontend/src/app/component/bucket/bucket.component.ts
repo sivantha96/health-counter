@@ -6,6 +6,8 @@ import { BucketDialogComponent } from '../bucket-dialog/bucket-dialog.component'
 import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { IBucketDetails } from '../../models/data.model';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
+import { BucketDataTransferService } from './../../services/bucket.data.transfer.service';
+import { from } from 'rxjs';
 
 declare var $: any;
 
@@ -72,7 +74,8 @@ export class BucketComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private dataTransferService: DataTransferService
+    private dataTransferService: DataTransferService,
+    private bucketDataTransferService: BucketDataTransferService
   ) {
     this.doneAt = 0;
     this.indexCarousel = 0;
@@ -304,7 +307,7 @@ export class BucketComponent implements OnInit {
       //calling the alert - filled bucket
       this.BucketFilledAlert.next();
       this.formatBucketDetails();
-      this.dataTransferService.set_bucket_data(this.bucket_details);
+      this.bucketDataTransferService.set_bucket_data(this.bucket_details);
     }
   }
 
