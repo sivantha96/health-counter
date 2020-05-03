@@ -16,19 +16,19 @@ export class UserController {
         if (req.body.is_aboard !== null && req.body.is_aboard !== undefined &&
             req.body.n_family_members &&
             req.body.is_patient_contacted !== null && req.body.is_patient_contacted !== undefined) {
-                const familiy: IFamily = {
+                const family: IFamily = {
                     n_family_members: req.body.n_family_members,
                     is_aboard: req.body.is_aboard,
                     is_patient_contacted: req.body.is_patient_contacted
                 }
-                this.family_service.createFamily(familiy, (err: any, familiy_data: IGetFamily) => {
+                this.family_service.createFamily(family, (err: any, family_data: IGetFamily) => {
                     if (err) {
                         internalServerError(err, res);
                     } else {
                         res.status(response_status_codes.success).json({
                             STATUS: 'SUCCESS',
                             MESSAGE: 'Family details added successfully',
-                            DATA: { id: familiy_data._id    }
+                            DATA: { id: family_data._id    }
                         });
                     }
                 });
