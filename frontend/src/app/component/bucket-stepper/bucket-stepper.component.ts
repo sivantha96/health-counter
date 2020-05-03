@@ -75,13 +75,14 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
-    // ------------------------Deactivate Route Guard---------------------------- //
-    // 1.comment out Route Guard section below.
-    // 2. comment out Route Guard in the landing page
-    // 3.uncomment out Route Guard in the bucket path of app.routing.module
-    // ------------------------Route Guard----------------------------------------------------------------------------------//
-    // check route came from landing
+    // ------------------------Activate Route Guard---------------------------- //
+    // uncomment this out when you are ready to apply route guard for bucket.
+    //Please make sure
+    //1.comment out the Deactivate Route Guard area below.
+    //2.uncomment out activate route guard in the landing page and
+    //3.uncomment out activate route guard area the in the bucket path of app.routing.module
+
+    // check route came from landing****************
     // catch the landing id generated from landing
     this.route.params.subscribe((params) => {
       this.landingId = params.id;
@@ -120,32 +121,38 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
         this.progressValue = 0;
       }
     }
-    // ------------------------Route Guard----------------------------------------------------------------------------------//
-    
+    //-----------------------------------------------------------------------------//
 
-    if (
-      this.dataTransferService !== undefined &&
-      this.dataTransferService != null
-    ) {
-      this.postData = this.dataTransferService.get_family_data();
-    }
+    // // ------------------------Deactivate Route Guard-------------------------------- //
+    // // uncomment this out when you want to deactivate route guard for bucket.
+    // //Please make sure
+    // //1.comment out the Activate Route Guard area above.
+    // //2.uncomment out deactivate route guard in the landing page and
+    // //3.uncomment out deactivate route guard area the in the bucket path of app.routing.module
+    // if (
+    //   this.dataTransferService !== undefined &&
+    //   this.dataTransferService != null
+    // ) {
+    //   this.postData = this.dataTransferService.get_family_data();
+    // }
 
-    // Setting number of buckets according to the received number of family members
-    // this.noOfBuckets = +this.postData.family_members;
+    // // Setting number of buckets according to the received number of family members
+    // // this.noOfBuckets = +this.postData.family_members;
 
-    // api response - commented out for frontend********
+    // // api response - commented out for frontend********
 
-    this.noOfBuckets = +this.postData.n_family_members;
+    // this.noOfBuckets = +this.postData.n_family_members;
 
-    // constructing the dummy array for stepper
-    this.members = this.giveMeDummy(this.noOfBuckets);
+    // // constructing the dummy array for stepper
+    // this.members = this.giveMeDummy(this.noOfBuckets);
 
-    // calculate the value for a single step
-    this.progressStepCost = 100 / this.noOfBuckets;
+    // // calculate the value for a single step
+    // this.progressStepCost = 100 / this.noOfBuckets;
 
-    // setting the staring value of the progress
-    this.progressValue = 0;
-    //............................................................................
+    // // setting the staring value of the progress
+    // this.progressValue = 0;
+
+    // //-----------------------------------------------------------------------------------//
   }
 
   ngOnDestroy(): void {}

@@ -145,17 +145,27 @@ export class LandingComponent implements OnInit, OnDestroy {
       n_family_members: postQuery.n_family_members,
       id: '1', //dummy id
     };
+    //------------------------------------------------------------------------------//
 
-    //----------------------Deactivate Route Guard----------------------------------------//
-    // 1. comment out Route Guard section below.
-    // 2. comment out Route Guard section in the bucketStepper page
-    // 3. comment out Route Guard section in the bucket path of app.routing.module
-    //---------------------- Route Guard-----------------------------------------------//
+    //----------------------Activate Route Guard----------------------------------------//
+    // uncomment this out when you are ready to apply route guard for bucket.
+    //Please make sure
+    //1.comment out the Deactivate Route Guard area below.
+    //2.uncomment out activate route guard in the bucketStepper page and
+    //3.uncomment out activate route guard area the in the bucket path of app.routing.module
+
     this.router.navigate(['./bucket', { id: this.transferData.id }]);
-    //---------------------- Route Guard-----------------------------------------------//
+    //---------------------------------------------------------------------------------//
 
-
-    this.router.navigate(['./bucket']);
+    // //----------------------Deactivate Route Guard----------------------------------------//
+    // // uncomment this out when you want to deactivate route guard for bucket
+    // //Please make sure
+    // //1.comment out the Deactivate Route Guard area above.
+    // //2.uncomment out deactivate route guard in the bucketStepper page and
+    // //3.uncomment out deactivate route guard area the in the bucket path of app.routing.module
+    // //-------------------------------------------------------------------------------------//
+    // this.router.navigate(['./bucket']);
+    // //-------------------------------------------------------------------------------------//
   }
 
   //custom validation

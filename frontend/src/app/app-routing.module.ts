@@ -22,14 +22,15 @@ const routes: Routes = [
   },
   {
     path: 'bucket',
-    // ------------------------Deactivate Route Guard---------------------------- //
-    // 1. comment out Route Guard section below
-    // 2. comment out Route Guard section in the bucketStepper
-    // 3. comment out Route Guard section in the landing page
-    //---------------------- Route Guard-----------------------------------------------//
+    // ------------------------Activate Route Guard---------------------------- //
+    // uncomment this out when you are ready to apply route guard for bucket.
+    //Please make sure
+    //1.uncomment out the activate Route Guard in bucketStepper.
+    //2.uncomment out activate route guard in the landing page and
+
     canActivate: [RouteGuardForBucket],
-    //---------------------- Route Guard-----------------------------------------------//
-    
+    // ----------------------------------------------------------------------- //
+
     component: BucketStepperComponent,
   },
   {
