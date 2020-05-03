@@ -82,7 +82,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatIconModule,
     ServiceModule,
     RouterGuardModule,
-    ToastrModule.forRoot({ preventDuplicates: true }),
+    ToastrModule.forRoot({ preventDuplicates: true, autoDismiss:false, maxOpened:1 }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -57,8 +57,13 @@ body {
 .image-container img {
   margin-top: 1rem;
   justify-content: center;
-  height: 11rem;
-  width: 17rem;
+  /* height: 11rem;
+  width: 17rem; */
+   width: 19em;
+  height: 12em;
+  
+  /* width: 40%;
+  height: 40%; */
   z-index: -1;
 }
 
@@ -76,10 +81,15 @@ body {
 }
 
 .landing-label-container {
-  font-size: 4.8vmin;
-  line-height: 1.3em;
+  /* font-size: 4.8vmin; */
+  /* font-size: 1.5em; */
+  /* line-height: 1.3em; */
+  /* line-height: 2em; */
+  font-size: 1.3em;
+  line-height: 1.5em;
   width: 100%;
   margin-top: 0.5rem;
+  /* margin-bottom: 0.5em; */
   margin-bottom: 0.7em;
 }
 
