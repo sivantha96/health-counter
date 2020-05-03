@@ -2,14 +2,16 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as mongoose from 'mongoose';
 import * as bearerToken from 'express-bearer-token';
-import { UserRoutes } from "../routes/family.routes";
 import environment from "../environment";
+import { UserRoutes } from "../routes/family.routes";
+import { PersonRoutes } from "../routes/person.route";
 import { CommonRoutes } from "../routes/common.route";
 class App {
    public app: express.Application;
    public mongoUrl: string = 'mongodb://localhost/' + environment.getDBName();
 
    private user_route: UserRoutes = new UserRoutes();
+   private person_route: PersonRoutes = new PersonRoutes();
    private common_route: CommonRoutes = new CommonRoutes();
 
    constructor() {
@@ -17,6 +19,7 @@ class App {
       this.config();
       this.mongoSetup();
       this.user_route.route(this.app);
+      this.person_route.route(this.app);
       this.common_route.route(this.app);
    }
 

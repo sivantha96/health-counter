@@ -1,11 +1,10 @@
-import userSchems from "../schemas/family.schems";
+import familySchems from "../schemas/family.schems";
 import { IFamily } from "../models/family.model";
 
-export class UserService {
+export class FamilyService {
 
     public createFamily(user: IFamily, callback: any) {
-        const user_details = new userSchems();
-        user_details.collection.insertOne(user,callback)
-       
+        const user_details = new familySchems(user);
+        user_details.save(callback);
     }
 }
