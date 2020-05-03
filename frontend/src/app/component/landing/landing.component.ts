@@ -163,7 +163,6 @@ export class LandingComponent implements OnInit, OnDestroy {
     // //1.comment out the Deactivate Route Guard area above.
     // //2.uncomment out deactivate route guard in the bucketStepper page and
     // //3.uncomment out deactivate route guard area the in the bucket path of app.routing.module
-    // //-------------------------------------------------------------------------------------//
     // this.router.navigate(['./bucket']);
     // //-------------------------------------------------------------------------------------//
   }
@@ -175,17 +174,19 @@ export class LandingComponent implements OnInit, OnDestroy {
 
     return isNaN(inp) ? { notNumbers: true } : null;
   }
-  //Validate  noOfFamily limit(<50)
+  //Validate  noOfFamily limit(<)
   familyLimit(event: AbstractControl): { [key: string]: boolean } | null {
+    //no of family limit
+    const limit = 15;
     const inp = event.value ? event.value : event.value;
 
-    return inp > 50 ? { limitExceed: true } : null;
+    return inp > limit ? { limitExceed: true } : null;
   }
 
   //custom error messages for validations
   errorMessages: { [key: string]: string } = {
     required: 'this field is required',
     notNumbers: 'only numeric values allowed',
-    limitExceed: 'family limit is 50',
+    limitExceed: 'family limit is 15',
   };
 }

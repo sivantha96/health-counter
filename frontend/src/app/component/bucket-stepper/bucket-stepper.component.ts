@@ -123,7 +123,7 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
     }
     //-----------------------------------------------------------------------------//
 
-    // // ------------------------Deactivate Route Guard-------------------------------- //
+    // // ------------------------Deactivate Route Guard---------------------------- //
     // // uncomment this out when you want to deactivate route guard for bucket.
     // //Please make sure
     // //1.comment out the Activate Route Guard area above.
@@ -151,11 +151,13 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
 
     // // setting the staring value of the progress
     // this.progressValue = 0;
-
-    // //-----------------------------------------------------------------------------------//
+    // //............................................................................
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    //destroy instances to prevent coming back from end page
+    this.postData = null;
+  }
 
   // dummy array creator
   giveMeDummy(n: number): any[] {
@@ -238,7 +240,7 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
     if (!this.isBucketFull()) {
       this.showBucketNoFilledAlert();
     } else {
-      this.router.navigate(['./end'], {});
+      this.router.navigate(['./end'], { replaceUrl: true });
     }
   }
 
@@ -264,6 +266,7 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
     this.toastr.info('please complete the current bucket', 'Incomplete', {
       // toastClass:"ngx-toast",
       timeOut: 1500,
+      extendedTimeOut: 1000,
       // closeButton: true,
       positionClass: 'toast-center-center',
       tapToDismiss: true,
@@ -287,9 +290,8 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
         ? errorMessages[0]
         : errorMessages[1];
     this.toastr.success(errorMessage.msg, errorMessage.head, {
-      // toastClass:"ngx-toast",
-      timeOut: 2000,
-      // closeButton: true,
+      timeOut: 3000,
+      extendedTimeOut: 1000,
       positionClass: 'toast-center-center',
       tapToDismiss: true,
     });
@@ -297,9 +299,8 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
 
   showBucketFilledAlertAlready() {
     this.toastr.success('already completed bucket', 'Completed', {
-      // toastClass:"ngx-toast",
-      timeOut: 2000,
-      // closeButton: true,
+      timeOut: 1500,
+      extendedTimeOut: 1000,
       positionClass: 'toast-center-center',
       tapToDismiss: true,
     });
