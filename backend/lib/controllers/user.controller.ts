@@ -33,8 +33,10 @@ export class UserController {
                 }
             });
         } else {
+           
             insufficientParameter(res);
         }
+
     }
 
     public save_person_details(req: Request, res: Response) {

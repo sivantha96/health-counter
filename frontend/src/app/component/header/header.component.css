@@ -1,0 +1,55 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.toolbar {
+  background-color: #eeeeee;
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  display: inline-block;
+  top: 0;
+  position: fixed;
+  text-align: center;
+}
+
+.header-content,
+.mat-button-wrapper {
+  font-size: 3vmin;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+.mat-button-toggle-checked {
+  border: none;
+  background-color: cyans;
+  outline-style: none !important;
+  outline: none !important;
+}
+
+.button {
+  background-color: darkcyan;
+}
+
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.header-title {
+  padding-left: 5%;
+  font-size: 4vmin;
+}
+
+.mat-button-wrapper {
+  font-size: 3.5vmin;
+}

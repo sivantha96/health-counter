@@ -18,10 +18,10 @@
                 <!-- noOfFamily -->
                 <mat-step [stepControl]="dataForm.get('noOfFamily')">
                   <div class="image-container">
-                    <img src="../../../assets/landing/family.jpg" alt="" />
+                    <img src="../../../assets/landing/family.png" alt="Family" />
                   </div>
                   <label class="landing-label-container"
-                    >How many family members in your family?</label
+                    >{{ "FAMILY-CARD.QUESTION" | translate  }}</label
                   >
                   <mat-form-field
                     class="field-container"
@@ -36,27 +36,22 @@
                       formControlName="noOfFamily"
                       placeholder=""
                       NumberOnly
+                      [errorStateMatcher]="matcher"
                     />
-                    <mat-hint>enter a number</mat-hint>
+                    <mat-hint>{{ "FAMILY-CARD.HINT" | translate  }}</mat-hint>
+
                     <mat-error
-                      *ngIf="
-                        dataForm.get('noOfFamily').invalid &&
-                        (dataForm.get('noOfFamily').dirty ||
-                          dataForm.get('noOfFamily').touched) &&
-                        dataForm.get('noOfFamily').errors.required
-                      "
+                      *ngIf="dataForm.get('noOfFamily').hasError('required')"
                     >
-                      this field is required
+                      {{ errorMessages.required }}</mat-error
+                    >
+                    <mat-error
+                      *ngIf="dataForm.get('noOfFamily').hasError('notNumbers')"
+                      >{{ errorMessages.notNumbers }}
                     </mat-error>
                     <mat-error
-                      *ngIf="
-                        dataForm.get('noOfFamily').invalid &&
-                        (dataForm.get('noOfFamily').dirty ||
-                          dataForm.get('noOfFamily').touched) &&
-                        dataForm.get('noOfFamily').errors.numberOnly
-                      "
-                    >
-                      please enter a numeric value
+                      *ngIf="dataForm.get('noOfFamily').hasError('limitExceed')"
+                      >{{ errorMessages.limitExceed }}
                     </mat-error>
                   </mat-form-field>
                   <div class="button-container">
@@ -65,9 +60,9 @@
                         #nextButton
                         type="button"
                         (click)="goForward(stepper)"
-                        class="btn btn-dark btn-sm btn-block"
+                        class="btn btn-dark btn-md btn-block"
                       >
-                        Next
+                      {{ "FAMILY-CARD.NEXT" | translate  }}
                       </button>
                     </div>
                   </div>
@@ -76,15 +71,11 @@
                 <!-- youForeign -->
                 <mat-step [stepControl]="dataForm.get('foreignContact')">
                   <div class="image-container">
-                    <img
-                      src="../../../assets/landing/familyAbroad.jpg"
-                      alt=""
-                    />
+                    <img src="../../../assets/landing/familyAbroad.png" alt="" />
                   </div>
                   <div class="field-container">
                     <label class="landing-label-container">
-                      You or any of your family member recently travelled
-                      overseas ?
+                      {{ "OVERSEAS-CARD.QUESTION" | translate  }}
                     </label>
                   </div>
                   <div class="button-container">
@@ -104,32 +95,34 @@
                           "
                           [ngClass]="
                             ans.value == 'Yes'
-                              ? 'btn btn-dark btn-sm btn-block active'
-                              : 'btn btn-secondary btn-sm btn-block active'
+                              ? 'btn btn-dark btn-md btn-block active'
+                              : 'btn btn-secondary btn-md btn-block active'
                           "
                         >
                           {{ ans.viewValue }}
                         </button>
                       </span>
-                      <button
-                        type="button"
-                        (click)="goBack(stepper)"
-                        class="btn btn-light btn-sm btn-block"
-                      >
-                        Back
-                      </button>
+                      <span class="col-md-12 col-sm-12">
+                        <button
+                          type="button"
+                          (click)="goBack(stepper)"
+                          class="btn btn-light btn-md btn-block"
+                        >
+                        {{ "OVERSEAS-CARD.BACK" | translate  }}
+                        </button>
+                      </span>
                     </div>
                   </div>
                 </mat-step>
 
                 <!-- closContact -->
                 <mat-step [stepControl]="dataForm.get('closeContact')">
-                  <div class="image-container">
-                    <img src="../../../assets/landing/maleAbroad.jpg" alt="" />
+                  <div class="image-container text-center">
+                    <img src="../../../assets/landing/infected.png" alt="" />
                   </div>
                   <div class="field-container">
                     <label class="landing-label-container">
-                      Have you had any close contact with COVID 19 patient?
+                      {{ "CLOSE-CONTACT-CARD.QUESTION" | translate  }}
                     </label>
                   </div>
                   <div class="button-container">
@@ -152,20 +145,22 @@
                           "
                           [ngClass]="
                             ans.value == 'Yes'
-                              ? 'btn btn-dark btn-sm btn-block active'
-                              : 'btn btn-secondary btn-sm btn-block active'
+                              ? 'btn btn-dark btn-md btn-block active'
+                              : 'btn btn-secondary btn-md btn-block active'
                           "
                         >
                           {{ ans.viewValue }}
                         </button>
                       </span>
-                      <button
-                        type="button"
-                        (click)="goBack(stepper)"
-                        class="btn btn-light btn-sm btn-block"
-                      >
-                        Back
-                      </button>
+                      <span class="col-md-12 col-sm-12">
+                        <button
+                          type="button"
+                          (click)="goBack(stepper)"
+                          class="btn btn-light btn-md btn-block"
+                        >
+                        {{ "CLOSE-CONTACT-CARD.BACK" | translate  }}
+                        </button>
+                      </span>
                     </div>
                   </div>
                 </mat-step>

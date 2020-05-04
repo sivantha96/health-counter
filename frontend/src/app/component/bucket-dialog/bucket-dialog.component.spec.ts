@@ -8,9 +8,8 @@ describe('BucketDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BucketDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [BucketDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from './../../models/bucket.dialog';
-import { Islide } from 'src/app/models/bucket';
+import { ISlide } from 'src/app/models/bucket';
 
 @Component({
   selector: 'app-bucket-dialog',
@@ -10,11 +10,11 @@ import { Islide } from 'src/app/models/bucket';
 })
 export class BucketDialogComponent implements OnInit {
   bucketDisplayItems: any[];
-  originalBucketDisplayItems: any[]
-  currentBucket: string[]
-  carouselTemplate: Islide[]
+  originalBucketDisplayItems: any[];
+  currentBucket: string[];
+  carouselTemplate: ISlide[];
   isNoChange: boolean;
-  deletedItems: any[]
+  deletedItems: any[];
 
   constructor(
     public dialogRef: MatDialogRef<BucketDialogComponent>,
@@ -32,10 +32,12 @@ export class BucketDialogComponent implements OnInit {
       };
       this.bucketDisplayItems.push(newObject);
     });
-    this.originalBucketDisplayItems = JSON.parse(JSON.stringify(this.bucketDisplayItems))
-    this.currentBucket = [...data.currentBucket]
-    this.isNoChange = true
-    this.deletedItems = []
+    this.originalBucketDisplayItems = JSON.parse(
+      JSON.stringify(this.bucketDisplayItems)
+    );
+    this.currentBucket = [...data.currentBucket];
+    this.isNoChange = true;
+    this.deletedItems = [];
   }
 
   ngOnInit(): void {}
@@ -45,14 +47,16 @@ export class BucketDialogComponent implements OnInit {
       isNoChange: this.isNoChange,
       currentBucket: this.currentBucket,
       deletedItems: this.deletedItems,
-    }
+    };
     this.dialogRef.close(sendData);
   }
 
   onCancel(): void {
     if (!this.isNoChange) {
-      this.bucketDisplayItems = JSON.parse(JSON.stringify(this.originalBucketDisplayItems))
-      this.currentBucket = this.data.currentBucket
+      this.bucketDisplayItems = JSON.parse(
+        JSON.stringify(this.originalBucketDisplayItems)
+      );
+      this.currentBucket = this.data.currentBucket;
     }
     this.dialogRef.close();
   }

@@ -1,30 +1,32 @@
-<div class="text-center dialog-header">Bucket {{ data.indexBucket + 1 }}</div>
-<div mat-dialog-content>
-    <div class="bucket-container container">
-        <div class="no-item text-center" *ngIf="this.currentBucket.length === 0">
-            Bucket is empty
+<div style="touch-action: none">
+    <div class="text-center dialog-header">{{ "BUCKET.PERSON" | translate  }} {{ data.indexBucket + 1 }}</div>
+    <div mat-dialog-content>
+        <div class="bucket-container container">
+            <div class="no-item text-center" *ngIf="this.currentBucket.length === 0">
+                {{ "BUCKET-DIALOG.EMPTY" | translate  }}
+            </div>
+            <ul class="list-group">
+
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                    *ngFor="let bucketItem of this.bucketDisplayItems; let i = index;">
+                    <div>
+                        <div class="item-name">{{ this.bucketItem.name }} </div>
+                        <div class="item-value">{{ this.bucketItem.value }}</div>
+                    </div>
+                    <span class="badge">
+                        <button mat-icon-button color="warn" (click)="onDelete(i)">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </span>
+                </li>
+
+            </ul>
+
         </div>
-        <ul class="list-group">
-
-            <li class="list-group-item d-flex justify-content-between align-items-center"
-                *ngFor="let bucketItem of this.bucketDisplayItems; let i = index;">
-                <div>
-                    <div class="item-name">{{ this.bucketItem.name }} </div>
-                    <div class="item-value">{{ this.bucketItem.value }}</div>
-                </div>
-                <span class="badge">
-                    <button mat-icon-button color="warn" (click)="onDelete(i)">
-                        <mat-icon>cancel</mat-icon>
-                    </button>
-                </span>
-            </li>
-
-        </ul>
-
     </div>
-</div>
-<div mat-dialog-actions align="center" class="action-button-container">
-    <button mat-raised-button [mat-dialog-close]="data" [disabled]="this.isNoChange"
-        (click)="onSubmit()">Submit</button>
-    <button mat-raised-button (click)="onCancel()">Cancel</button>
+    <div mat-dialog-actions align="center" class="action-button-container">
+        <button mat-raised-button [mat-dialog-close]="data" [disabled]="this.isNoChange"
+            (click)="onSubmit()">{{ "BUCKET-DIALOG.SUBMIT" | translate  }}</button>
+        <button mat-raised-button (click)="onCancel()">{{ "BUCKET-DIALOG.CANCEL" | translate  }}</button>
+    </div>
 </div>

@@ -1,0 +1,64 @@
+<!-- <div>
+    <mat-card class="card">
+        <mat-card-title>
+            {{ 'WELCOME-CARD.TITLE' | translate }}
+        </mat-card-title>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="../../../favicon.ico" width="25%" alt="logo">
+                </div>
+                <div class="col-md-6">
+                    <mat-card-subtitle>
+                        {{ 'WELCOME-CARD.SUB-TITLE' | translate }}
+                    </mat-card-subtitle>
+                    <p>{{ 'WELCOME-CARD.INTRO' | translate }}</p>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="onclick()">{{ 'WELCOME-CARD.START' | translate }}</button>
+        </mat-card-actions>
+    </mat-card>
+</div> -->
+<div
+  style="padding-left: 10%; padding-right: 10%;"
+  class="container col-md-12 col-sm-12"
+>
+  <!-- <mat-grid-list cols="1" rowHeight="40vh" > -->
+  <mat-grid-list cols="1" rowHeight="17em">
+    <mat-grid-tile>
+      <img
+        style="margin-top: 5em;"
+        src="../../../assets/end.png"
+        height="200vh"
+      />
+    </mat-grid-tile>
+
+    <mat-grid-tile class="content-container text-center">
+      <div class="px-10">
+        <!-- <p style="font-size: 0.8rem;" class="end-content">{{ 'WELCOME-CARD.SUB-TITLE' | translate }}</p> -->
+
+        <p style="font-size: 0.8rem;" class="end-content">
+          {{ "WELCOME-CARD.SUB-TITLE" | translate  }}
+        </p>
+        <div style="width: 100%;">
+          <h1 style="font-size: 2rem;" class="end-title">
+            {{ "WELCOME-CARD.TITLE" | translate  }}
+          </h1>
+          <p style="font-size: 0.8rem;" class="end-content">
+            {{ "WELCOME-CARD.INTRO" | translate }}
+          </p>
+        </div>
+
+        <button
+          style="margin-top: 10%;"
+          (click)="onclick()"
+          class="btn btn-dark btn-md btn-block"
+        >
+          {{ "WELCOME-CARD.START" | translate }}
+        </button>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

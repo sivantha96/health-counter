@@ -1,0 +1,67 @@
+{
+  "HOME": {
+    "TITLE": "ஆரோக்கிய கவுண்டர்",
+    "SELECT": "தமிழ்"
+  },
+
+  "WELCOME-CARD": {
+      "TITLE": "HEALTH COUNTER",
+      "SUB-TITLE": "WELCOME TO",
+      "INTRO": "ஆய்வை ஆதரிக்க சரியான விவரங்களை நிரப்பவும்",
+      "START": "தொடங்கு"
+    },
+
+    "FAMILY-CARD":{
+      "QUESTION":"How many family members in your family?",
+      "HINT":"enter a number",
+      "NEXT":"Next",
+      "TYPE-ERROR":"please enter a numeric value",
+      "ERROR":"this field is required"
+    },
+
+    "OVERSEAS-CARD":{
+      "QUESTION":"You or any of your family member recently travelled overseas ?<",
+      "YES":"",
+      "NO":"",
+      "BACK":"Back"
+    },
+
+    "CLOSE-CONTACT-CARD":{
+      "QUESTION":"Have you had any close contact with COVID 19 patients?",
+      "YES":"",
+      "NO":"",
+      "BACK":"Back"
+    },
+    
+    "TIPS-CARD":{
+      "DRAG":"Drag and Drop",
+      "GOT": "Got it",
+      "HERE": "Drag Here"
+    },
+
+    "BUCKET":{
+      "PERSON": "Person",
+      "OF": "of"
+    },
+
+    "BUCKET-STEPPER":{
+      "BACK":"ආපසු",
+      "NEXT": "Next",
+      "DONE": "Done"
+    },
+
+    "BUCKET-DIALOG":{
+      "TITLE": "Symptoms Bucket",
+      "OK": "Ok",
+      "EMPTY": "Bucket is empty"
+    },
+
+    "END-CARD": {
+      "H1": "Thank you for the details",
+      "H3": "These information will help us getting closer to beat the coronavirus"
+    },
+
+    "NOT-FOUND":{
+      "TITLE":"Oops! Not Found"
+    }
+}
