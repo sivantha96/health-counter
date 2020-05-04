@@ -1,21 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand">
-            <img class="mr-1" src="../../../favicon.ico" width="10%" alt="">
-            Health Counter
-        </a>
-        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarToggler"
-            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse flex-row-reverse" id="navbarToggler">
-            <div class="d-flex">
-                <ul class="nav navbar-nav navbar-right ">
-                    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link">සිංහල</a></li>
-                    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link">English</a></li>
-                    <li class="btn-nav" style="cursor: pointer;"><a class="nav-link">தமிழ்</a></li>
-                </ul>
-            </div>
+    <div class="navbar-brand d-flex align-items-center">
+        <div class="d-inline-flex justify-content-end header-icon">
+            <img src="../../../favicon.ico" width="25px" height="25px" alt="">
         </div>
+        <span class="header-title">
+            {{ 'HOME.TITLE' | translate }}
+        </span>
+    </div>
+
+    <button class="navbar-toggler" mat-button data-toggle="collapse" data-target="#navbarToggler"
+        aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" (click)="collapseAuto()">
+        <span class="mat-button-wrapper">
+            {{ 'HOME.SELECT' | translate }}
+            <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color">arrow_drop_down</mat-icon>
+        </span>
+        <div matripple="" class="mat-ripple mat-button-ripple"></div>
+    </button>
+    <div class="collapse navbar-collapse flex-row-reverse" id="navbarToggler" (mouseleave)="closeMyMenu()">
+        <ul class="nav navbar-nav navbar-right d-flex align-items-end">
+            <li class="btn-nav mr-2" [ngClass]="{'active': currentLan=='සිංහල'}"><a class="nav-link"
+                    (click)="toggleLanguage('si')">සිංහල</a></li>
+            <li class="btn-nav mr-2" [ngClass]="{'active': currentLan=='English'}"><a class="nav-link"
+                    (click)="toggleLanguage('en')">English</a></li>
+            <li class="btn-nav mr-2" [ngClass]="{'active': currentLan=='தமிழ்'}"><a class="nav-link"
+                    (click)="toggleLanguage('ta')">தமிழ்</a></li>
+        </ul>
     </div>
 </nav>

@@ -3,13 +3,14 @@
 }
 
 .stepper-container {
-  padding: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 .bucket-name {
   font-size: large;
 }
 
-.disabledButton{
-  opacity: 0.4; 
+.disabledButton {
+  opacity: 0.4;
 }

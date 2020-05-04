@@ -1,0 +1,10 @@
+.drag-gif {
+    width: 100%;
+    max-width: 70vmin;
+}
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}

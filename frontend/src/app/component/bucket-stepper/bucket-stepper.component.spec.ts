@@ -8,9 +8,8 @@ describe('BucketStepperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BucketStepperComponent ]
-    })
-    .compileComponents();
+      declarations: [BucketStepperComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
