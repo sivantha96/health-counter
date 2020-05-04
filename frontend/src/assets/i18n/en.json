@@ -5,8 +5,8 @@
   },
 
   "WELCOME-CARD": {
-    "TITLE": "WELCOME TO HEALTH COUNTER",
-    "SUB-TITLE": "  Research project",
+    "TITLE": "HEALTH COUNTER",
+    "SUB-TITLE": "WELCOME TO",
     "INTRO": "Please fill the correct details to support the study",
     "START": "Start"
   },
@@ -20,17 +20,23 @@
   },
 
   "OVERSEAS-CARD": {
-    "QUESTION": "You or any of your family member recently travelled overseas ?<",
+    "QUESTION": "You or any of your family member recently travelled overseas?",
     "YES": "",
     "NO": "",
     "BACK": "Back"
   },
 
   "CLOSE-CONTACT-CARD": {
-    "QUESTION": "Have you had any close contact with COVID 19 patients?",
+    "QUESTION": "Have you any of your family member had any close contact with COVID 19 patients?",
     "YES": "",
     "NO": "",
     "BACK": "Back"
+  },
+
+  "TIPS-CARD":{
+    "DRAG":"Drag and Drop",
+    "GOT": "Got it",
+    "HERE": "Drag Here"
   },
 
   "BUCKET": {
@@ -39,12 +45,24 @@
   },
 
   "BUCKET-STEPPER": {
-    "PREVIOUS": "Previous",
-    "NEXT": "Next"
+    "BACK": "Back",
+    "NEXT": "Next",
+    "DONE": "Done"
   },
 
   "BUCKET-DIALOG": {
     "TITLE": "Symptoms Added",
-    "OK": "Ok"
+    "SUBMIT": "Submit",
+    "CANCEL": "Cancel",
+    "EMPTY": "Bucket is empty"
+  },
+
+  "END-CARD": {
+    "H1": "Thank you for the details",
+    "H3": "These information will help us getting closer to beat the coronavirus"
+  },
+
+  "NOT-FOUND":{
+    "TITLE":"Oops! Not Found"
   }
 }

@@ -1,5 +1,5 @@
 import { IPostData } from 'src/app/models/landing';
-import { IFamilyDetails, IBucketDetails } from '../models/data.model';
+import { IFamilyDetails, IBucketDetails, IFamilyResponse } from '../models/data.model';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -24,9 +24,10 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  public post_bucket_data(postData: IBucketDetails) {
+  public post_bucket_data(postData: IBucketDetails,family_id:IFamilyResponse) {
     let json = {
       id: postData.id,
+      family_id:family_id.DATA.id,
       gender: postData.gender,
       age_group: postData.age_group,
       cough: postData.cough,
@@ -37,10 +38,8 @@ export class DataService {
     };
 
     return this.http
-      .post<IBucketDetails>(
-        this.baseUrl + this.port + '/bucket/' + postData.id,
-        json
-      )
+      .post<any>(
+        this.baseUrl + this.port + '/bucket/' + postData.id, json)
       .pipe(catchError(this.handleError));
   }
 

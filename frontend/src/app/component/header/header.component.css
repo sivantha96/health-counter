@@ -47,9 +47,9 @@ button.active:focus {
 
 .header-title {
   padding-left: 5%;
-  font-size: 4vmin;
+  font-size: 3.5vmin;
 }
 
 .mat-button-wrapper {
-  font-size: 3.5vmin;
+  font-size: 3vmin;
 }

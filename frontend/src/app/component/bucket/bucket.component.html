@@ -39,7 +39,7 @@
         (cdkDropListExited)="dragExited($event)" (cdkDropListEntered)="dragEntered($event)"
         (cdkDropListDropped)="dragDropped($event)">
         <img class="progress-image" src='../../../assets/avatar.png'>
-        <div [attr.id]="addIDMessage()" class="appearing-message-initial text-center">Drag here</div>
+        <div [attr.id]="addIDMessage()" class="appearing-message-initial text-center">{{ "TIPS-CARD.HERE" | translate  }}</div>
         <span class="dialog-button">
           <button mat-icon-button (click)="openDialog()">
             <mat-icon>launch</mat-icon>

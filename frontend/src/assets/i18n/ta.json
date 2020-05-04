@@ -5,8 +5,8 @@
   },
 
   "WELCOME-CARD": {
-      "TITLE": "ஆரோக்கிய கவுண்டருக்கு வரவேற்கிறோம்",
-      "SUB-TITLE": "ஆராய்ச்சி திட்டம்",
+      "TITLE": "HEALTH COUNTER",
+      "SUB-TITLE": "WELCOME TO",
       "INTRO": "ஆய்வை ஆதரிக்க சரியான விவரங்களை நிரப்பவும்",
       "START": "தொடங்கு"
     },
@@ -32,6 +32,12 @@
       "NO":"",
       "BACK":"Back"
     },
+    
+    "TIPS-CARD":{
+      "DRAG":"Drag and Drop",
+      "GOT": "Got it",
+      "HERE": "Drag Here"
+    },
 
     "BUCKET":{
       "PERSON": "Person",
@@ -39,12 +45,23 @@
     },
 
     "BUCKET-STEPPER":{
-      "PREVIOUS": "Previous",
-      "NEXT": "Next"
+      "BACK":"ආපසු",
+      "NEXT": "Next",
+      "DONE": "Done"
     },
 
     "BUCKET-DIALOG":{
       "TITLE": "Symptoms Bucket",
-      "OK": "Ok"
+      "OK": "Ok",
+      "EMPTY": "Bucket is empty"
+    },
+
+    "END-CARD": {
+      "H1": "Thank you for the details",
+      "H3": "These information will help us getting closer to beat the coronavirus"
+    },
+
+    "NOT-FOUND":{
+      "TITLE":"Oops! Not Found"
     }
 }

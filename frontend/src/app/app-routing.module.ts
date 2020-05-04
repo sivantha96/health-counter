@@ -1,4 +1,6 @@
+import { DirectRouteGuard } from './guards/direct.route.guard';
 import { RouteGuardForBucket } from './guards/bucket.route.guard';
+
 import { LandingComponent } from './component/landing/landing.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,6 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    canActivate:[DirectRouteGuard],
     component: LandingComponent,
   },
   {
@@ -34,6 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'end',
+    canActivate:[DirectRouteGuard],
     component: EndPageComponent,
   },
   {

@@ -21,7 +21,7 @@
                     <img src="../../../assets/landing/family.png" alt="Family" />
                   </div>
                   <label class="landing-label-container"
-                    >How many family members in your family?</label
+                    >{{ "FAMILY-CARD.QUESTION" | translate  }}</label
                   >
                   <mat-form-field
                     class="field-container"
@@ -38,7 +38,7 @@
                       NumberOnly
                       [errorStateMatcher]="matcher"
                     />
-                    <mat-hint>enter a number</mat-hint>
+                    <mat-hint>{{ "FAMILY-CARD.HINT" | translate  }}</mat-hint>
 
                     <mat-error
                       *ngIf="dataForm.get('noOfFamily').hasError('required')"
@@ -62,7 +62,7 @@
                         (click)="goForward(stepper)"
                         class="btn btn-dark btn-md btn-block"
                       >
-                        Next
+                      {{ "FAMILY-CARD.NEXT" | translate  }}
                       </button>
                     </div>
                   </div>
@@ -75,8 +75,7 @@
                   </div>
                   <div class="field-container">
                     <label class="landing-label-container">
-                      You or any of your family member recently travelled
-                      overseas ?
+                      {{ "OVERSEAS-CARD.QUESTION" | translate  }}
                     </label>
                   </div>
                   <div class="button-container">
@@ -109,7 +108,7 @@
                           (click)="goBack(stepper)"
                           class="btn btn-light btn-md btn-block"
                         >
-                          Back
+                        {{ "OVERSEAS-CARD.BACK" | translate  }}
                         </button>
                       </span>
                     </div>
@@ -123,7 +122,7 @@
                   </div>
                   <div class="field-container">
                     <label class="landing-label-container">
-                      Have you had any close contact with COVID 19 patient?
+                      {{ "CLOSE-CONTACT-CARD.QUESTION" | translate  }}
                     </label>
                   </div>
                   <div class="button-container">
@@ -159,7 +158,7 @@
                           (click)="goBack(stepper)"
                           class="btn btn-light btn-md btn-block"
                         >
-                          Back
+                        {{ "CLOSE-CONTACT-CARD.BACK" | translate  }}
                         </button>
                       </span>
                     </div>

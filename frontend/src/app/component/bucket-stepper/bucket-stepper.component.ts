@@ -5,7 +5,8 @@ import {
   ViewChildren,
   OnDestroy,
 } from '@angular/core';
-import { IFamilyDetails, IBucketDetails } from './../../models/data.model';
+import { IFamilyDetails, IBucketDetails, IFamilyResponse } from './../../models/data.model';
+import { BucketDataTransferService } from './../../services/bucket.data.transfer.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
@@ -15,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DataTransferService } from 'src/app/services/data.transfer.service';
 import { DataService } from './../../services/data.service';
 import { slider } from 'src/app/route-animations';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-bucket-stepper',
@@ -60,12 +62,16 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
   //hold details of post bucket
   postBucketData: IBucketDetails;
 
+  //hold response from family post
+  family_response: IFamilyResponse;
+
   constructor(
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private router: Router,
     private toastr: ToastrService,
     private dataTransferService: DataTransferService,
+    private bucketDataTransfer: BucketDataTransferService,
     private dataService: DataService
   ) {
     this.carouselStates = [];
@@ -196,10 +202,11 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
         // ----------------------------------------------
         // //------------------------Enable API POST--------------------------------------------//
         // //uncomment this out when you are ready to let the api,  connect with front end
-        // this.postBucketData = this.dataTransferService.get_bucket_data();
-        //this.dataService.post_bucket_data(this.postBucketData).subscribe((bucket_data) => {
-
-        // });
+        this.postBucketData = this.bucketDataTransfer.get_bucket_data();
+        this.family_response = this.bucketDataTransfer.get_family_response();
+        this.dataService.post_bucket_data(this.postBucketData, this.family_response).subscribe((bucket_data) => {
+             console.log("done");
+        });
         // //---------------------------------------------------------------------------//
 
         // //------------------------Disable API POST-----------------------------------//

@@ -76,7 +76,7 @@
 .slide-name {
   font-size: 5vmin;
   position: absolute;
-  top: 0;
+  top: 1%;
 }
 
 .carousel-item {
@@ -97,7 +97,7 @@
   margin-bottom: 2%;
   width: 16em;
   height: 4.5vmax;
-  max-height: 35px !important;
+  max-height: 40px !important;
   border-radius: 5px;
   font-size: 3vmin;
   color: white
@@ -124,7 +124,7 @@
 }
 
 .progress-image {
-  width: 40px;
+  height: 8vh;
   position: relative;
   margin-bottom: 3px;
 }
