@@ -4,7 +4,7 @@ import { gender, response_status_codes } from '../modules/common/models/common.m
 import { FamilyService } from '../modules/family/services/family.service';
 import { IFamily, IGetFamily } from '../modules/family/models/family.model';
 import internalServerError from '../modules/common/services/internal-server-error';
-import { IPreson } from '../modules/person/models/person.model';
+import { IPerson } from '../modules/person/models/person.model';
 import { PersonService } from '../modules/person/services/person.service';
 
 export class UserController {
@@ -41,7 +41,7 @@ export class UserController {
 
     public save_person_details(req: Request, res: Response) {
         if (req.body.id && req.body.age && req.body.gender && req.body.symptomsList && req.body.symptomsList.length !== 0) {
-            const person: IPreson = {
+            const person: IPerson = {
                 family_id: req.body.id,
                 age: req.body.age,
                 gender: req.body.gender,

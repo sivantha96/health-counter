@@ -13,12 +13,26 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   public post_family_data(postData: IPostData): Observable<any> {
+    let is_aboard,is_patient_contacted;
+    
+    if(postData.is_aboard == "Yes"){
+       is_aboard = true ;
+    }else if(postData.is_aboard == "No"){
+      is_aboard = false ;
+    }
+
+    if(postData.is_patient_contacted == "Yes"){
+      is_patient_contacted = true ;
+   }else if(postData.is_patient_contacted == "No"){
+     is_patient_contacted = false ;
+   }
+
     let json = {
-      is_aboard: postData.is_aboard,
-      is_patient_contacted: postData.is_patient_contacted,
+      is_aboard: is_aboard,
+      is_patient_contacted: is_patient_contacted,
       n_family_members: postData.n_family_members,
     };
-
+   
     return this.http
       .post<IFamilyDetails>(this.baseUrl + this.port + '/family/details/', json)
       .pipe(catchError(this.handleError));
@@ -26,20 +40,38 @@ export class DataService {
 
   public post_bucket_data(postData: IBucketDetails,family_id:IFamilyResponse) {
     let json = {
-      id: postData.id,
-      family_id:family_id.DATA.id,
+      id: family_id.DATA.id,
+      age: postData.age_group,
       gender: postData.gender,
-      age_group: postData.age_group,
-      cough: postData.cough,
-      cold: postData.cold,
-      itchy_throat: postData.itchy_throat,
-      throat_pain: postData.throat_pain,
-      taste_loss: postData.taste_loss,
+      symptomsList: [
+              {
+                  symptom: "cough",
+                  severity: postData.cough
+              },
+              {
+                  symptom: "cold",
+                  severity: postData.cold
+              },
+              {
+                  symptom: "itchy throat",
+                  severity: postData.itchy_throat
+              },
+              {
+                  symptom: "throat pain",
+                  severity: postData.throat_pain
+              },
+              {
+                  symptom: "taste loss",
+                  severity: postData.taste_loss
+              }
+              
+             
+          ]
     };
 
     return this.http
       .post<any>(
-        this.baseUrl + this.port + '/bucket/' + postData.id, json)
+        this.baseUrl + this.port + "/person/details",json)
       .pipe(catchError(this.handleError));
   }
 

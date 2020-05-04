@@ -347,6 +347,7 @@ export class BucketComponent implements OnInit {
       itchy_throat,
       throat_pain,
       taste_loss;
+
     for (let i = 0; i < this.currentBucket.length; i++) {
       str = this.currentBucket[i];
       if (str.charAt(0) == '0') gender = str.substring(1, str.length);
