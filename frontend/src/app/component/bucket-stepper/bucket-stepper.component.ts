@@ -204,7 +204,7 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
         // //uncomment this out when you are ready to let the api,  connect with front end
         this.postBucketData = this.bucketDataTransfer.get_bucket_data();
         this.family_response = this.bucketDataTransfer.get_family_response();
-        this.dataService.post_bucket_data(this.postBucketData, this.family_response).subscribe((bucket_data) => {
+        this.dataService.post_bucket_data(this.postBucketData, this.family_response,this.indexBucket).subscribe((bucket_data) => {
          });
         // //---------------------------------------------------------------------------//
 
@@ -256,7 +256,7 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
       //console.log(this.postBucketData.gender);
         this.family_response = this.bucketDataTransfer.get_family_response();
         //console.log(this.family_response.DATA.id);
-        this.dataService.post_bucket_data(this.postBucketData, this.family_response).subscribe((bucket_data) => {
+       this.dataService.post_bucket_data(this.postBucketData, this.family_response,this.indexBucket + 1).subscribe((bucket_data) => {
         });
       this.router.navigate(['./end'], { replaceUrl: true });
     }

@@ -38,11 +38,12 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  public post_bucket_data(postData: IBucketDetails,family_id:IFamilyResponse) {
+  public post_bucket_data(postData: IBucketDetails,family_id:IFamilyResponse,bucket_index:Number) {
     let json = {
       id: family_id.DATA.id,
       age: postData.age_group,
       gender: postData.gender,
+      bucket_index:bucket_index,
       symptomsList: [
               {
                   symptom: "cough",
