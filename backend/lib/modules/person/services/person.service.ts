@@ -12,7 +12,7 @@ export class PersonService {
         personSchems.findOne(query, callback);
     }
 
-    public updatePerson(_id: string, person_params: IPreson, callback: any) {
+    public updatePerson(_id: string, person_params: IPerson, callback: any) {
         const query = { _id: _id };
         personSchems.findOneAndUpdate(query, person_params, callback);
     }
