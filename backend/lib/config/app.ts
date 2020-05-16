@@ -33,6 +33,28 @@ class App {
 
       // Add headers
       this.app.use(function (req, res, next) {
+         // websites you wish to allow to connect
+         const allowedOrigins = [
+            //'https://'
+        ];
+        const origin = req.headers.host;
+
+        if (allowedOrigins.indexOf(origin) > -1) {
+           res.setHeader('Access-Control-Allow-Origin', origin);
+         } else {
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+        }
+
+        // Requested methods you wish to allow
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+
+        // Requested headers you wish to allow
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization, XMLHttpRequest');
+
+        // Set to true if you want the website to include cookies in the requests sent
+        // to the API ( eg in case you see sessions)
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+
          // If request comes with the '/api' prefix, then have to remove it.
          if (req.url.substr(0, 4) === '/api') {
             req.url = req.url.substr(4);

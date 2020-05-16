@@ -134,17 +134,18 @@ export class LandingComponent implements OnInit, OnDestroy {
     };
     // //------------------------Enable API POST--------------------------------------------//
     // //uncomment this out when you are ready to let the api,  connect with front end
-    this.dataService.post_family_data(postQuery).subscribe((family_data) => {
-      let familyResponse = JSON.parse(family_data)
-      this.family_response.STATUS = familyResponse.STATUS;
-      this.family_response.MESSAGE = familyResponse.MESSAGE;
-      this.family_response.DATA = familyResponse.DATA;
+      this.dataService.post_family_data(postQuery).subscribe((family_data) => {
+      //console.log(family_data);
+      this.family_response = family_data;
+      this.family_response.STATUS = family_data.STATUS;
+      this.family_response.MESSAGE = family_data.MESSAGE;
+      this.family_response.DATA = family_data.DATA;
       this.bucketDataTransferService.set_family_response(this.family_response)
       this.transferData = {
         n_family_members: postQuery.n_family_members,
         id: family_data.DATA.id,
       };
-      this.router.navigate(['./bucket']);
+      //this.router.navigate(['./bucket']);
     });
     // //---------------------------------------------------------------------------//
 

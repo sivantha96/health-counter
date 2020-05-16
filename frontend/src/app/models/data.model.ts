@@ -7,7 +7,7 @@ export interface IFamilyResponse {
   STATUS: string,
   MESSAGE: String,
   DATA : {
-    id:Number
+    id: string
   }
 }
 

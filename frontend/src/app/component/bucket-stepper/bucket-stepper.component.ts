@@ -5,7 +5,7 @@ import {
   ViewChildren,
   OnDestroy,
 } from '@angular/core';
-import { IFamilyDetails, IBucketDetails, IFamilyResponse } from './../../models/data.model';
+import { IFamilyDetails, IFamilyResponse, IBucketDetails } from './../../models/data.model';
 import { BucketDataTransferService } from './../../services/bucket.data.transfer.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
@@ -204,9 +204,8 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
         // //uncomment this out when you are ready to let the api,  connect with front end
         this.postBucketData = this.bucketDataTransfer.get_bucket_data();
         this.family_response = this.bucketDataTransfer.get_family_response();
-        this.dataService.post_bucket_data(this.postBucketData, this.family_response).subscribe((bucket_data) => {
-             console.log("done");
-        });
+        this.dataService.post_bucket_data(this.postBucketData, this.family_response,this.indexBucket).subscribe((bucket_data) => {
+         });
         // //---------------------------------------------------------------------------//
 
         // //------------------------Disable API POST-----------------------------------//
@@ -235,6 +234,11 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
       // ----------------------------------------------
       // ----------------------------------------------
       // ----------------------------------------------
+      // this.postBucketData = this.bucketDataTransfer.get_bucket_data();
+      //   this.family_response = this.bucketDataTransfer.get_family_response();
+      //   this.dataService.post_bucket_data(this.postBucketData, this.family_response).subscribe((bucket_data) => {
+      //   });
+      
     }
   }
 
@@ -247,6 +251,13 @@ export class BucketStepperComponent implements OnInit, OnDestroy {
     if (!this.isBucketFull()) {
       this.showBucketNoFilledAlert();
     } else {
+      
+      this.postBucketData = this.bucketDataTransfer.get_bucket_data();
+      //console.log(this.postBucketData.gender);
+        this.family_response = this.bucketDataTransfer.get_family_response();
+        //console.log(this.family_response.DATA.id);
+       this.dataService.post_bucket_data(this.postBucketData, this.family_response,this.indexBucket + 1).subscribe((bucket_data) => {
+        });
       this.router.navigate(['./end'], { replaceUrl: true });
     }
   }

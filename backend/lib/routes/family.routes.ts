@@ -1,6 +1,6 @@
 import { Application, Request, Response } from 'express';
 import { UserController } from '../controllers/user.controller';
-import * as cors from 'cors'
+import * as cors from 'cors';
 
 export class UserRoutes {
 

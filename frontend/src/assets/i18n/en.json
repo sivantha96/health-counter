@@ -20,7 +20,7 @@
   },
 
   "OVERSEAS-CARD": {
-    "QUESTION": "You or any of your family member recently travelled overseas?",
+    "QUESTION": "You or any of your family member recently travelled overseas ?",
     "YES": "",
     "NO": "",
     "BACK": "Back"
