@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DataService {
-  baseUrl: string = 'http://localhost';
-  port: string = ':3001';
+  // baseUrl: string = 'http://localhost:3001';
+  baseUrl: string = 'covid-counter.echonlabs.com/api/';
 
   constructor(private http: HttpClient) {}
 
@@ -34,7 +34,7 @@ export class DataService {
     };
    
     return this.http
-      .post<IFamilyDetails>(this.baseUrl + this.port + '/family/details/', json)
+      .post<IFamilyDetails>(this.baseUrl + '/family/details/', json)
       .pipe(catchError(this.handleError));
   }
 
@@ -72,7 +72,7 @@ export class DataService {
 
     return this.http
       .post<any>(
-        this.baseUrl + this.port + "/person/details",json)
+        this.baseUrl + "/person/details",json)
       .pipe(catchError(this.handleError));
   }
 

@@ -15,7 +15,7 @@ class Environment {
         if (this.environment === Environments.prod_server) {
             return 9000;
         } else {
-            return 3001;
+            return 3009;
         }
     }
 
@@ -28,4 +28,4 @@ class Environment {
     }
 }
 
-export default new Environment(Environments.local_windows);
+export default new Environment(Environments.dev_server);
