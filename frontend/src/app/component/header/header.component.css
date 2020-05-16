@@ -1,6 +1,3 @@
-@import "~bootstrap/dist/css/bootstrap.css";
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
 .toolbar {
   background-color: #eeeeee;
   width: 100%;
@@ -15,7 +12,6 @@
 .header-content,
 .mat-button-wrapper {
   font-size: 3vmin;
-  font-family: "Roboto", sans-serif;
   font-weight: 500;
 }
 
