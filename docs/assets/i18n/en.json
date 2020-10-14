@@ -1,0 +1,68 @@
+{
+  "HOME": {
+    "TITLE": "Health Counter",
+    "SELECT": "ENGLISH"
+  },
+
+  "WELCOME-CARD": {
+    "TITLE": "HEALTH COUNTER",
+    "SUB-TITLE": "WELCOME TO",
+    "INTRO": "Please fill the correct details to support the study",
+    "START": "Start"
+  },
+
+  "FAMILY-CARD": {
+    "QUESTION": "How many family members in your family?",
+    "HINT": "enter a number",
+    "NEXT": "Next",
+    "TYPE-ERROR": "please enter a numeric value",
+    "ERROR": "this field is required"
+  },
+
+  "OVERSEAS-CARD": {
+    "QUESTION": "You or any of your family member recently travelled overseas ?",
+    "YES": "",
+    "NO": "",
+    "BACK": "Back"
+  },
+
+  "CLOSE-CONTACT-CARD": {
+    "QUESTION": "Have you any of your family member had any close contact with COVID 19 patients?",
+    "YES": "",
+    "NO": "",
+    "BACK": "Back"
+  },
+
+  "TIPS-CARD":{
+    "DRAG":"Drag and Drop",
+    "GOT": "Got it",
+    "HERE": "Drag Here"
+  },
+
+  "BUCKET": {
+    "PERSON": "Person",
+    "OF": "of"
+  },
+
+  "BUCKET-STEPPER": {
+    "BACK": "Back",
+    "NEXT": "Next",
+    "DONE": "Done"
+  },
+
+  "BUCKET-DIALOG": {
+    "TITLE": "Symptoms Added",
+    "SUBMIT": "Submit",
+    "CANCEL": "Cancel",
+    "EMPTY": "Bucket is empty"
+  },
+
+  "END-CARD": {
+    "H1": "Thank you for the details",
+    "H3": "These information will help us getting closer to beat the coronavirus"
+  },
+
+  "NOT-FOUND":{
+    "TITLE":"Oops! Not Found"
+  }
+}
